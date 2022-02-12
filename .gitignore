@@ -1,37 +1,21 @@
-HELP.md
-.gradle
-build/
+proyecto_IV_system/HELP.md
+proyecto_IV_system/.gradle
+proyecto_IV_system/build/
+
+## Ignore git frontend repo, is just to manage its own commits
+proyecto_IV_frontend/.git
+proyecto_IV_frontend/.gitignore
+
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
+proyecto_IV_system/.apt_generated
+proyecto_IV_system/.classpath
+proyecto_IV_system/.factorypath
+proyecto_IV_system/.project
+proyecto_IV_system/.settings
+proyecto_IV_system/.springBeans
+proyecto_IV_system/.sts4-cache
+proyecto_IV_system/bin/
