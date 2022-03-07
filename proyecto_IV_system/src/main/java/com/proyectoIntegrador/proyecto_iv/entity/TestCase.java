@@ -1,12 +1,18 @@
 package com.proyectoIntegrador.proyecto_iv.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,12 +33,8 @@ public class TestCase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // @ManyToOne(
-    //     cascade = CascadeType.ALL,
-    //     fetch = FetchType.LAZY,
-    //     optional = false
-    // )
-    // private User user;
+    @ManyToOne
+    private User user;
 
     @Column(name = "nombre_caso_uso", nullable = false, length = 100)
     private String testCaseName;
@@ -51,7 +53,7 @@ public class TestCase {
     private String systemModule;
 
     @Column(name = "description_caso_uso", nullable = false)
-    private String testCasoDescription;
+    private String testCaseDescription;
 
     @Column(name = "precondiciones", nullable = false)
     private String preconditions;
@@ -71,8 +73,11 @@ public class TestCase {
     @Column(name = "observaciones", nullable = false)
     private String observations;
 
-    // @ManyToMany
-    // private List<Tester> testers;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "testCases")
+    private List<Tester> testers = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "testCase")
+    private List<TestElement> testElements = new ArrayList<>();
 
     @Column(
         name = "fecha_creacion",

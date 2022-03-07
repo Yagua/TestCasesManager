@@ -28,8 +28,8 @@ public class TestElement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // @ManyToOne
-    // private TestCase testCase;
+    @ManyToOne
+    private TestCase testCase;
 
     @Column(name = "campo")
     private String field;
