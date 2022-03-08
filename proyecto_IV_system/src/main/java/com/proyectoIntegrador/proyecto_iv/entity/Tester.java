@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,10 +30,8 @@ public class Tester {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<TestCase> testCases = new ArrayList<>();
+    @Column(name = "probador_id")
+    private long testerId;
 
     @Column(name = "primer_nombre", nullable =  false, length = 40)
     private String firstName;

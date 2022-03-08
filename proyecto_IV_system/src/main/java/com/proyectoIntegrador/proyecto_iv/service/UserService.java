@@ -2,6 +2,9 @@ package com.proyectoIntegrador.proyecto_iv.service;
 
 import java.util.List;
 
+import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
+import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
+import com.proyectoIntegrador.proyecto_iv.entity.Tester;
 import com.proyectoIntegrador.proyecto_iv.entity.User;
 import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.repository.UserRepository;
@@ -25,6 +28,11 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        List<TestCase> testsCases = user.getTestCases();
+
+        for(TestCase testCase: testsCases) {
+            testCase.setUser(user);
+        }
         return userRepository.save(user);
     }
 
@@ -39,13 +47,14 @@ public class UserService {
                         String.format("User identify with ID::%d not found",
                             userId)));
 
-        user.setFirstName(userUpdated.getFirstName());
-        user.setSecondtName(userUpdated.getSecondtName());
-        user.setPaternalLastName(userUpdated.getPaternalLastName());
-        user.setMaternalLastName(userUpdated.getMaternalLastName());
-        user.setUserName(userUpdated.getUserName());
-        user.setPassword(userUpdated.getPassword());
-        user.setTimeStamp(userUpdated.getTimeStamp());
+        userUpdated.setFirstName(user.getFirstName());
+        userUpdated.setSecondName(user.getSecondName());
+        userUpdated.setPaternalLastName(user.getPaternalLastName());
+        userUpdated.setMaternalLastName(user.getMaternalLastName());
+        userUpdated.setUserName(user.getUserName());
+        userUpdated.setPassword(user.getPassword());
+        userUpdated.setTimeStamp(user.getTimeStamp());
+        userUpdated.setTestCases(user.getTestCases());
 
         return userRepository.save(user);
     }

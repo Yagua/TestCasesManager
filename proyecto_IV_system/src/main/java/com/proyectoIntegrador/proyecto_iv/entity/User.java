@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "usuario_id")
+    private long userId;
 
     @Column(name = "primer_nombre", nullable =  false, length = 40)
     private String firstName;
@@ -57,6 +59,11 @@ public class User {
     )
     private Date timeStamp;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        mappedBy = "user",
+        orphanRemoval = true
+    )
     private List<TestCase> testCases = new ArrayList<>();
 }

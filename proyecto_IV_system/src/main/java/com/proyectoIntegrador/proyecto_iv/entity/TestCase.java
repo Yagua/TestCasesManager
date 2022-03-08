@@ -7,13 +7,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,9 +36,16 @@ public class TestCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "caso_pruebas_id")
+    private long testCaseId;
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        optional = false
+    )
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "nombre_caso_uso", nullable = false, length = 100)
@@ -73,10 +85,24 @@ public class TestCase {
     @Column(name = "observaciones", nullable = false)
     private String observations;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "testCases")
+    //unidirectional TestCase -> Tester relationship
+    @ManyToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
+    @JoinTable(
+        joinColumns = @JoinColumn(name = "test_case_id"),
+        inverseJoinColumns = @JoinColumn(name = "tester_id")
+    )
     private List<Tester> testers = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "testCase")
+    //unidirectional TestCase -> TestElements relationship
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        orphanRemoval = true
+    )
+    @JoinColumn(name = "test_case_id")
     private List<TestElement> testElements = new ArrayList<>();
 
     @Column(

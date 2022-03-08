@@ -29,20 +29,35 @@ public class TestCaseService {
         return testCaseRepository.save(testCase);
     }
 
-    public List<TestCase> getAllTestCase() {
+    public List<TestCase> getAllTestCases() {
         return testCaseRepository.findAll();
     }
 
 
-    public TestCase updateUser(TestCase testCaseUpdated) {
-        //     throws TestCaseNotFoundException {
-        // long testCaseId = testCaseUpdated.getId();
-        // TestCase testCase = testCaseRepository.findById(testCaseId)
-        //     .orElseThrow(() -> new TestCaseNotFoundException(
-        //                 String.format(
-        //                     "Test Case identify with ID::%d not found", testCaseId)));
-        // return testCaseRepository.save(testCase);
-        return null;
+    public TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
+            throws TestCaseNotFoundException {
+        TestCase testCase = testCaseRepository.findById(testCaseId)
+            .orElseThrow(() -> new TestCaseNotFoundException(
+                        String.format(
+                            "Test Case identify with ID::%d not found", testCaseId)));
+
+        testCaseUpdated.setUser(testCase.getUser());
+        testCaseUpdated.setTestCaseName(testCase.getTestCaseName());
+        testCaseUpdated.setTestCaseVersion(testCase.getTestCaseVersion());
+        testCaseUpdated.setExecutionDate(testCase.getExecutionDate());
+        testCaseUpdated.setSystemModule(testCase.getSystemModule());
+        testCaseUpdated.setTestCaseDescription(testCase.getTestCaseDescription());
+        testCaseUpdated.setPreconditions(testCase.getPreconditions());
+        testCaseUpdated.setTestSteps(testCase.getTestSteps());
+        testCaseUpdated.setPostconditions(testCase.getPostconditions());
+        testCaseUpdated.setDefectsAndDesviations(testCase.getDefectsAndDesviations());
+        testCaseUpdated.setVeredict(testCase.getVeredict());
+        testCaseUpdated.setObservations(testCase.getObservations());
+        testCaseUpdated.setTesters(testCase.getTesters());
+        testCaseUpdated.setTestElements(testCase.getTestElements());
+        testCaseUpdated.setTimeStamp(testCase.getTimeStamp());
+
+        return testCaseRepository.save(testCase);
     }
 
     public String deleteTestCase(long id) throws TestCaseNotFoundException {
