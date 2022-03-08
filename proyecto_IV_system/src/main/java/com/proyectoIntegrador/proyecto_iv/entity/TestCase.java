@@ -45,7 +45,7 @@ public class TestCase {
         fetch = FetchType.LAZY,
         optional = false
     )
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "nombre_caso_uso", nullable = false, length = 100)
@@ -91,8 +91,8 @@ public class TestCase {
         fetch = FetchType.LAZY
     )
     @JoinTable(
-        joinColumns = @JoinColumn(name = "test_case_id"),
-        inverseJoinColumns = @JoinColumn(name = "tester_id")
+        joinColumns = @JoinColumn(name = "test_case_id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "tester_id", nullable = false)
     )
     private List<Tester> testers = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public class TestCase {
         fetch = FetchType.LAZY,
         orphanRemoval = true
     )
-    @JoinColumn(name = "test_case_id")
+    @JoinColumn(name = "test_case_id", nullable = false)
     private List<TestElement> testElements = new ArrayList<>();
 
     @Column(

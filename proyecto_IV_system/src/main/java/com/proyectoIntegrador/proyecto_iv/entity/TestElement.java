@@ -2,18 +2,12 @@ package com.proyectoIntegrador.proyecto_iv.entity;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,22 +28,22 @@ public class TestElement {
     @Column(name = "elemento_prueba_id")
     private long testElementId;
 
-    @Column(name = "campo")
+    @Column(name = "campo", nullable = false)
     private String field;
 
-    @Column(name = "valor")
+    @Column(name = "valor", nullable = false)
     private String value;
 
-    @Column(name = "tipo_escenario")
+    @Column(name = "tipo_escenario", nullable = false)
     private String scenario;
 
-    @Column(name = "repuesta_esperada")
+    @Column(name = "repuesta_esperada", nullable = false)
     private String expectedResponse;
 
-    @Column(name = "coincidencia")
+    @Column(name = "coincidencia", nullable = false)
     private boolean matching;
 
-    @Column(name = "respuesta_sistema")
+    @Column(name = "respuesta_sistema", nullable = false)
     private String systemResponse;
 
     @Column(
