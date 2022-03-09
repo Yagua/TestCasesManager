@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestCaseController {
 
     @Autowired
-    TestCaseService testCaseService;
+    private TestCaseService testCaseService;
 
     @GetMapping("/")
     public List<TestCase> getAllTestCases() {

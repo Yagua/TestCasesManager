@@ -32,7 +32,7 @@ public class Tester {
     private String firstName;
 
     @Column(name = "segundo_nombre", nullable = true, length = 40)
-    private String secondtName;
+    private String secondName;
 
     @Column(name = "apellido_paterno", nullable = false, length = 40)
     private String paternalLastName;

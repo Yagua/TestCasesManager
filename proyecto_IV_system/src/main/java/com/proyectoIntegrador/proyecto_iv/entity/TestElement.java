@@ -37,7 +37,7 @@ public class TestElement {
     @Column(name = "tipo_escenario", nullable = false)
     private String scenario;
 
-    @Column(name = "repuesta_esperada", nullable = false)
+    @Column(name = "respuesta_esperada", nullable = false)
     private String expectedResponse;
 
     @Column(name = "coincidencia", nullable = false)
