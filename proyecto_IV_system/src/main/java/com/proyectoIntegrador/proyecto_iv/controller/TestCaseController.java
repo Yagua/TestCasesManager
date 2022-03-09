@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
+import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.service.TestCaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,25 +30,29 @@ public class TestCaseController {
     }
 
     @GetMapping("/{testCaseId}")
-    public TestCase getTestCaseById(@PathVariable long testCaseId)
+    public TestCase getTestCase(@PathVariable long testCaseId)
         throws TestCaseNotFoundException {
         return testCaseService.getTestCase(testCaseId);
     }
 
-    @PostMapping("/add")
-    public TestCase addNewTestCase(@RequestBody TestCase newTestCase) {
-        return testCaseService.createTestCase(newTestCase);
+    @PostMapping("/u/{userId}/add")
+    public TestCase createTestCase(@RequestBody TestCase newTestCase,
+            @PathVariable long userId) throws UserNotFoundException {
+        return testCaseService.createTestCase(newTestCase, userId);
     }
 
-    @PutMapping("/{testCaseId}")
+    @PutMapping("/update/{testCaseId}")
     public TestCase updateTestCase(
-            @PathVariable long testCaseId, @RequestBody TestCase TestCaseUpdated)
+            @PathVariable long testCaseId,
+            @RequestBody TestCase TestCaseUpdated)
             throws TestCaseNotFoundException {
+
         return testCaseService.updateTestCase(testCaseId, TestCaseUpdated);
     }
 
     @DeleteMapping("/delete/{testCaseId}")
-    public String deleteTestCase(@PathVariable long testCaseId) throws TestCaseNotFoundException {
-        return testCaseService.deleteTestCase(testCaseId);
+    public void deleteTestCase(@PathVariable long testCaseId)
+        throws TestCaseNotFoundException {
+        testCaseService.deleteTestCase(testCaseId);
     }
 }

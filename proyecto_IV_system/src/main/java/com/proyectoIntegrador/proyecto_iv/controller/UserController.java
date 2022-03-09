@@ -32,23 +32,23 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable long userId) throws UserNotFoundException {
+    public User getUser(@PathVariable long userId) throws UserNotFoundException {
         return userService.getUser(userId);
     }
 
     @PostMapping("/add")
-    public User addNewUser(@RequestBody User newUser) {
+    public User createUser(@RequestBody User newUser) {
         return userService.createUser(newUser);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/update/{userId}")
     public User updateUser(@PathVariable long userId, @RequestBody User userUpdated)
         throws UserNotFoundException {
         return userService.updateUser(userId, userUpdated);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public String deleteUser(@PathVariable long userId) throws UserNotFoundException {
-        return userService.deleteUser(userId);
+    public void deleteUser(@PathVariable long userId) throws UserNotFoundException {
+        userService.deleteUser(userId);
     }
 }

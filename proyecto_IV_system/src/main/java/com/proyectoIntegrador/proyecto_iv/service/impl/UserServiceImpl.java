@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 /**
  * UserServiceImpl
  */
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -47,27 +48,30 @@ public class UserServiceImpl implements UserService {
             throws UserNotFoundException {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
-                        String.format("User identify with ID::%d not found",
+                        String.format("User identified with ID::%d not found",
                             userId)));
+        List<TestCase> testCases = userUpdated.getTestCases();
+        for(TestCase testCase : testCases) {
+            testCase.setUser(user);
+        }
 
-        userUpdated.setFirstName(user.getFirstName());
-        userUpdated.setSecondName(user.getSecondName());
-        userUpdated.setPaternalLastName(user.getPaternalLastName());
-        userUpdated.setMaternalLastName(user.getMaternalLastName());
-        userUpdated.setUserName(user.getUserName());
-        userUpdated.setPassword(user.getPassword());
-        userUpdated.setTimeStamp(user.getTimeStamp());
-        userUpdated.setTestCases(user.getTestCases());
+        user.setFirstName(userUpdated.getFirstName());
+        user.setSecondName(userUpdated.getSecondName());
+        user.setPaternalLastName(userUpdated.getPaternalLastName());
+        user.setMaternalLastName(userUpdated.getMaternalLastName());
+        user.setUserName(userUpdated.getUserName());
+        user.setPassword(userUpdated.getPassword());
+        user.setTimeStamp(userUpdated.getTimeStamp());
+        user.setTestCases(userUpdated.getTestCases());
 
         return userRepository.save(user);
     }
 
     @Override
-    public String deleteUser(long id) throws UserNotFoundException {
+    public void deleteUser(long id) throws UserNotFoundException {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new UserNotFoundException(
-                        String.format("User identify with ID::%d not found", id)));
+                        String.format("User identified with ID::%d not found", id)));
         userRepository.delete(user);
-        return String.format("User identify with ID::%d deleted");
     }
 }

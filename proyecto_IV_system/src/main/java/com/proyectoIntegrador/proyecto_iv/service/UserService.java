@@ -18,5 +18,5 @@ public interface UserService {
 
     User updateUser(long userId, User userUpdated) throws UserNotFoundException;
 
-    String deleteUser(long id) throws UserNotFoundException;
+    void deleteUser(long id) throws UserNotFoundException;
 }

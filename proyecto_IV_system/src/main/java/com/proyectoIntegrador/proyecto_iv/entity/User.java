@@ -62,8 +62,8 @@ public class User {
     @OneToMany(
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
-        mappedBy = "user",
-        orphanRemoval = true
+        mappedBy = "user"
+        // orphanRemoval = true
     )
     private List<TestCase> testCases = new ArrayList<>();
 }

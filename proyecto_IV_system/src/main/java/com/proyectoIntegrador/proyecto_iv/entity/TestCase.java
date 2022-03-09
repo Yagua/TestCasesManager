@@ -41,7 +41,7 @@ public class TestCase {
 
     @JsonBackReference
     @ManyToOne(
-        cascade = CascadeType.ALL,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE},
         fetch = FetchType.LAZY,
         optional = false
     )
@@ -99,10 +99,10 @@ public class TestCase {
     //unidirectional TestCase -> TestElements relationship
     @OneToMany(
         cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY,
-        orphanRemoval = true
+        fetch = FetchType.LAZY
+        // orphanRemoval = true
     )
-    @JoinColumn(name = "test_case_id", nullable = false)
+    @JoinColumn(name = "test_case_id", nullable = true)
     private List<TestElement> testElements = new ArrayList<>();
 
     @Column(
