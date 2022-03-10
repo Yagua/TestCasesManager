@@ -11,6 +11,8 @@ import com.proyectoIntegrador.proyecto_iv.repository.UserRepository;
 import com.proyectoIntegrador.proyecto_iv.service.TestCaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -83,11 +85,15 @@ public class TestCaseServiceImpl implements TestCaseService {
     }
 
     @Override
-    public void deleteTestCase(long testCaseId) throws TestCaseNotFoundException {
+    public ResponseEntity<String> deleteTestCase(long testCaseId) throws TestCaseNotFoundException {
         TestCase testCase = testCaseRepository.findById(testCaseId)
             .orElseThrow(() -> new TestCaseNotFoundException(
                         String.format(
                             "Test Case identified with ID::%d not found", testCaseId)));
         testCaseRepository.delete(testCase);
+
+        return new ResponseEntity<String>(
+                String.format("Test Case identified with ID::%d deleted successfully",
+                    testCaseId), HttpStatus.OK);
     }
 }

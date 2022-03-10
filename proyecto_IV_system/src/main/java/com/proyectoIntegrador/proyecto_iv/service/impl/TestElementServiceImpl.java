@@ -6,6 +6,7 @@ import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
 import com.proyectoIntegrador.proyecto_iv.exception.TestElementNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.service.TestElementService;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -40,8 +41,9 @@ public class TestElementServiceImpl implements TestElementService {
     }
 
     @Override
-    public void deleteTestElement(long testElementId) throws TestElementNotFoundException {
-        // TODO Auto-generated method stub
+    public ResponseEntity<String> deleteTestElement(long testElementId)
+        throws TestElementNotFoundException {
+        return null;
     }
 
 }

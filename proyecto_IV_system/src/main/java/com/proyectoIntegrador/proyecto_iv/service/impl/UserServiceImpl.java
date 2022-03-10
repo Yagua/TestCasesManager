@@ -9,6 +9,8 @@ import com.proyectoIntegrador.proyecto_iv.repository.UserRepository;
 import com.proyectoIntegrador.proyecto_iv.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -31,10 +33,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         List<TestCase> testsCases = user.getTestCases();
-
-        for(TestCase testCase: testsCases) {
+        testsCases.forEach((testCase) -> {
             testCase.setUser(user);
-        }
+        });
         return userRepository.save(user);
     }
 
@@ -50,10 +51,11 @@ public class UserServiceImpl implements UserService {
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found",
                             userId)));
+
         List<TestCase> testCases = userUpdated.getTestCases();
-        for(TestCase testCase : testCases) {
+        testCases.forEach((testCase) -> {
             testCase.setUser(user);
-        }
+        });
 
         user.setFirstName(userUpdated.getFirstName());
         user.setSecondName(userUpdated.getSecondName());
@@ -68,10 +70,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long id) throws UserNotFoundException {
+    public ResponseEntity<String> deleteUser(long id) throws UserNotFoundException {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found", id)));
         userRepository.delete(user);
+
+        return new ResponseEntity<String>(
+                String.format("User identified with ID::%d deleted successfully",
+                    id), HttpStatus.OK);
     }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import com.proyectoIntegrador.proyecto_iv.entity.User;
 import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 
+import org.springframework.http.ResponseEntity;
+
 /**
  * UserService
  */
@@ -18,5 +20,5 @@ public interface UserService {
 
     User updateUser(long userId, User userUpdated) throws UserNotFoundException;
 
-    void deleteUser(long id) throws UserNotFoundException;
+    ResponseEntity<String> deleteUser(long id) throws UserNotFoundException;
 }

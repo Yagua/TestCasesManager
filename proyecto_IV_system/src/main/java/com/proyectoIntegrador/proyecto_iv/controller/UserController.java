@@ -7,6 +7,7 @@ import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +49,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable long userId) throws UserNotFoundException {
-        userService.deleteUser(userId);
+    public ResponseEntity<String> deleteUser(@PathVariable long userId)
+        throws UserNotFoundException {
+        return userService.deleteUser(userId);
     }
 }

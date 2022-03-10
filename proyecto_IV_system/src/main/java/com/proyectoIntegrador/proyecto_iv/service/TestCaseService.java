@@ -6,6 +6,8 @@ import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 
+import org.springframework.http.ResponseEntity;
+
 /**
  * TestCaseService
  */
@@ -20,5 +22,6 @@ public interface TestCaseService {
     TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
             throws TestCaseNotFoundException;
 
-    void deleteTestCase(long testCaseId) throws TestCaseNotFoundException;
+    ResponseEntity<String> deleteTestCase(long testCaseId)
+            throws TestCaseNotFoundException;
 }

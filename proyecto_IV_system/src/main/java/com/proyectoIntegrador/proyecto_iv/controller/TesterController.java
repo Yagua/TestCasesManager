@@ -3,10 +3,13 @@ package com.proyectoIntegrador.proyecto_iv.controller;
 import java.util.List;
 
 import com.proyectoIntegrador.proyecto_iv.entity.Tester;
+import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.exception.TesterNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.service.TesterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,22 +40,22 @@ public class TesterController {
         return testerService.getTester(testerId);
     }
 
-    @PostMapping("/add")
-    public Tester createTester(@RequestBody Tester tester)
-        throws TesterNotFoundException {
-        return testerService.createTester(tester);
+    @PostMapping("/tc/{testCaseId}/add")
+    public Tester createTester(@RequestBody Tester tester,
+            @PathVariable long testCaseId) throws TestCaseNotFoundException {
+        return testerService.createTester(tester, testCaseId);
     }
 
     @PutMapping("/update/{testerId}")
-    public Tester updateTester(
-            @PathVariable long testerId,
+    public Tester updateTester( @PathVariable long testerId,
             @RequestBody Tester tester) throws TesterNotFoundException {
         return testerService.updateTester(testerId, tester);
     }
 
-    @DeleteMapping("/delete/{testerId}")
-    public void deleteTester(@PathVariable long testerId)
-        throws TesterNotFoundException {
-        testerService.deleteTester(testerId);
+    @DeleteMapping("/tc/{testCaseId}/delete/{testerId}")
+    public ResponseEntity<String> deleteTester(@PathVariable long testerId,
+            @PathVariable long testCaseId) throws TesterNotFoundException,
+            TestCaseNotFoundException {
+        return testerService.deleteTester(testerId, testCaseId);
     }
 }

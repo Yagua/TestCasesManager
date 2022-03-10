@@ -5,6 +5,8 @@ import java.util.List;
 import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
 import com.proyectoIntegrador.proyecto_iv.exception.TestElementNotFoundException;
 
+import org.springframework.http.ResponseEntity;
+
 /**
  * TestElementService
  */
@@ -19,5 +21,6 @@ public interface TestElementService {
     TestElement updateTestElement(long testElementId, TestElement testElementUpdated)
             throws TestElementNotFoundException;
 
-    void deleteTestElement(long testElementId) throws TestElementNotFoundException;
+    ResponseEntity<String> deleteTestElement(long testElementId)
+            throws TestElementNotFoundException;
 }

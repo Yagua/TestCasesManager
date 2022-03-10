@@ -8,6 +8,7 @@ import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.service.TestCaseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,8 +52,8 @@ public class TestCaseController {
     }
 
     @DeleteMapping("/delete/{testCaseId}")
-    public void deleteTestCase(@PathVariable long testCaseId)
+    public ResponseEntity<String> deleteTestCase(@PathVariable long testCaseId)
         throws TestCaseNotFoundException {
-        testCaseService.deleteTestCase(testCaseId);
+        return testCaseService.deleteTestCase(testCaseId);
     }
 }

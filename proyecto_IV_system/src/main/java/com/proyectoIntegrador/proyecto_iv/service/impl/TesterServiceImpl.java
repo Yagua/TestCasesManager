@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.entity.Tester;
+import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.exception.TesterNotFoundException;
+import com.proyectoIntegrador.proyecto_iv.repository.TestCaseRepository;
 import com.proyectoIntegrador.proyecto_iv.repository.TesterRepository;
 import com.proyectoIntegrador.proyecto_iv.service.TesterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,10 +22,13 @@ import org.springframework.stereotype.Service;
 public class TesterServiceImpl implements TesterService {
 
     private TesterRepository testerRepository;
+    private TestCaseRepository testCaseRepository;
 
     @Autowired
-    public TesterServiceImpl(TesterRepository testerRepository) {
+    public TesterServiceImpl(TesterRepository testerRepository,
+            TestCaseRepository testCaseRepository) {
         this.testerRepository = testerRepository;
+        this.testCaseRepository = testCaseRepository;
     }
 
     @Override
@@ -32,8 +39,14 @@ public class TesterServiceImpl implements TesterService {
     }
 
     @Override
-    public Tester createTester(Tester tester) {
-        return null;
+    public Tester createTester(Tester tester, long testCaseId)
+        throws TestCaseNotFoundException {
+
+        TestCase testCase = testCaseRepository.findById(testCaseId)
+            .orElseThrow(() -> new TestCaseNotFoundException(String.format(
+                        "TestCase identified with ID::%d not found", testCaseId)));
+        testCase.getTesters().add(tester);
+        return testerRepository.save(tester);
     }
 
     @Override
@@ -42,17 +55,39 @@ public class TesterServiceImpl implements TesterService {
     }
 
     @Override
-    public Tester updateTester(long testerId, Tester testerUpdated) throws TesterNotFoundException {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public Tester updateTester(long testerId, Tester testerUpdated)
+        throws TesterNotFoundException {
 
-    @Override
-    public void deleteTester(long testerId) throws TesterNotFoundException {
         Tester tester = testerRepository.findById(testerId)
             .orElseThrow(() -> new TesterNotFoundException(String.format(
                             "Tester identified with ID::%d not found", testerId)));
 
+        tester.setFirstName(testerUpdated.getFirstName());
+        tester.setSecondName(testerUpdated.getSecondName());
+        tester.setPaternalLastName(testerUpdated.getPaternalLastName());
+        tester.setMaternalLastName(testerUpdated.getMaternalLastName());
+        tester.setSing(testerUpdated.getSing());
+
+        return testerRepository.save(tester);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteTester(long testerId, long testCaseId)
+        throws TesterNotFoundException, TestCaseNotFoundException {
+
+        Tester tester = testerRepository.findById(testerId)
+            .orElseThrow(() -> new TesterNotFoundException(String.format(
+                            "Tester identified with ID::%d not found", testerId)));
+
+        TestCase testCase = testCaseRepository.findById(testCaseId)
+            .orElseThrow(() -> new TestCaseNotFoundException(String.format(
+                        "TestCase identified with ID::%d not found", testCaseId)));
+
+        testCase.getTesters().remove(tester);
         testerRepository.delete(tester);
+
+        return new ResponseEntity<String>(
+                String.format("Tester identified with ID::%d deleted successfully",
+                    testCaseId), HttpStatus.OK);
     }
 }
