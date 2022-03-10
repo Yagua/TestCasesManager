@@ -3,6 +3,7 @@ package com.proyectoIntegrador.proyecto_iv.service;
 import java.util.List;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
+import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.exception.TestElementNotFoundException;
 
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,11 @@ import org.springframework.http.ResponseEntity;
  */
 public interface TestElementService {
 
-    TestElement getTestElement(long testElementId) throws TestElementNotFoundException;
+    TestElement getTestElement(long testElementId)
+            throws TestElementNotFoundException;
 
-    TestElement createTestElement(TestElement testElement);
+    TestElement createTestElement(TestElement testElement, long testCaseId)
+            throws TestCaseNotFoundException;
 
     List<TestElement> getAllTestElements();
 
