@@ -2,6 +2,7 @@ package com.proyectoIntegrador.proyecto_iv.service.impl;
 
 import java.util.List;
 
+import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.entity.Tester;
 import com.proyectoIntegrador.proyecto_iv.exception.TesterNotFoundException;
 import com.proyectoIntegrador.proyecto_iv.repository.TesterRepository;
