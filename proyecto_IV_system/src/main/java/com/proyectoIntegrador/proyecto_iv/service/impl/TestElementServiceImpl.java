@@ -1,6 +1,8 @@
 package com.proyectoIntegrador.proyecto_iv.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * TestElementService
@@ -77,6 +80,25 @@ public class TestElementServiceImpl implements TestElementService {
         testElement.setExpectedResponse(testElementUpdated.getExpectedResponse());
         testElement.setMatching(testElementUpdated.isMatching());
         testElement.setSystemResponse(testElementUpdated.getSystemResponse());
+
+        return testElementRepository.save(testElement);
+    }
+
+    @Override
+    public TestElement partialUpdateTestElement(long testElementId,
+            Map<Object, Object> fields) throws TestElementNotFoundException {
+
+        TestElement testElement = testElementRepository.findById(testElementId)
+            .orElseThrow(() -> new TestElementNotFoundException(
+                        String.format(
+                            "Test Element identified with ID::%d not found",
+                            testElementId)));
+
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(TestElement.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, testElement, value);
+        });
 
         return testElementRepository.save(testElement);
     }

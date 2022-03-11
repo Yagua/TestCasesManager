@@ -21,6 +21,7 @@ fetch(API_BASE_URL + "/user/")
         `
 
         for (let i = 0; i < selected_user.testCases.length; i++) {
+            if (!selected_user.testCases[i].enabled) continue
             let testCase = selected_user.testCases[i]
             container.insertAdjacentHTML("afterend", `
                 <p>Caso de prueba ID: ${testCase.testCaseId}</p>

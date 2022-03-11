@@ -1,6 +1,7 @@
 package com.proyectoIntegrador.proyecto_iv.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.Tester;
 import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
@@ -21,6 +22,9 @@ public interface TesterService {
     List<Tester> getAllTesters();
 
     Tester updateTester(long testerId, Tester testerUpdated)
+            throws TesterNotFoundException;
+
+    Tester partialUpdateTester(long testerId, Map<Object, Object> fields)
             throws TesterNotFoundException;
 
     ResponseEntity<String> deleteTester(long testerId, long testCaseId)

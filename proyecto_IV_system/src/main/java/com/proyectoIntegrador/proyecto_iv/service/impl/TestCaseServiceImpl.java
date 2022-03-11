@@ -1,6 +1,8 @@
 package com.proyectoIntegrador.proyecto_iv.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.entity.User;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
 /**
  * TestCaseService
@@ -80,6 +83,23 @@ public class TestCaseServiceImpl implements TestCaseService {
         testCase.setTesters(testCaseUpdated.getTesters());
         testCase.setTestElements(testCaseUpdated.getTestElements());
         testCase.setTimeStamp(testCaseUpdated.getTimeStamp());
+
+        return testCaseRepository.save(testCase);
+    }
+
+    @Override
+    public TestCase partialUpdateTestCase(long testCaseId, Map<Object, Object> fields)
+            throws TestCaseNotFoundException {
+
+        TestCase testCase = testCaseRepository.findById(testCaseId)
+            .orElseThrow(() -> new TestCaseNotFoundException(
+                        String.format(
+                            "Test Case identified with ID::%d not found", testCaseId)));
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(TestCase.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, testCase, value);
+        });
 
         return testCaseRepository.save(testCase);
     }

@@ -1,6 +1,7 @@
 package com.proyectoIntegrador.proyecto_iv.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.User;
 import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
@@ -19,6 +20,9 @@ public interface UserService {
     List<User> getAllUsers();
 
     User updateUser(long userId, User userUpdated) throws UserNotFoundException;
+
+    User partialUpdateUser(long userId, Map<Object, Object> fields)
+            throws UserNotFoundException;
 
     ResponseEntity<String> deleteUser(long id) throws UserNotFoundException;
 }

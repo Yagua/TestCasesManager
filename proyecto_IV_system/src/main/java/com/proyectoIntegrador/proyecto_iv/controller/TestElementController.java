@@ -1,6 +1,7 @@
 package com.proyectoIntegrador.proyecto_iv.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
 import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,6 +53,12 @@ public class TestElementController {
     public TestElement updateTestElement(@PathVariable long testElementId,
             @RequestBody TestElement testElement) throws TestElementNotFoundException {
         return testElementService.updateTestElement(testElementId, testElement);
+    }
+
+    @PatchMapping("/update/{testElementId}")
+    public TestElement partialUpdateTestElement(@PathVariable long testElementId,
+            @RequestBody Map<Object, Object> fields) throws TestElementNotFoundException {
+        return testElementService.partialUpdateTestElement(testElementId, fields);
     }
 
     @DeleteMapping("/delete/{testElementId}")

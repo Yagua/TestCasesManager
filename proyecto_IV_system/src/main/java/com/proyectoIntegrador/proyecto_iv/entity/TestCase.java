@@ -105,6 +105,9 @@ public class TestCase {
     @JoinColumn(name = "test_case_id", nullable = true)
     private List<TestElement> testElements = new ArrayList<>();
 
+    @Column(name = "habilitado")
+    private boolean enabled = true;
+
     @Column(
         name = "fecha_creacion",
         nullable = true,

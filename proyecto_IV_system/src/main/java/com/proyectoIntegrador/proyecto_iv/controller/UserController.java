@@ -1,6 +1,7 @@
 package com.proyectoIntegrador.proyecto_iv.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.User;
 import com.proyectoIntegrador.proyecto_iv.exception.UserNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,6 +50,12 @@ public class UserController {
     public User updateUser(@PathVariable long userId, @RequestBody User userUpdated)
         throws UserNotFoundException {
         return userService.updateUser(userId, userUpdated);
+    }
+
+    @PatchMapping("/update/{userId}")
+    public User partialUpdateUser(@PathVariable long userId,
+            @RequestBody Map<Object, Object> fields) throws UserNotFoundException {
+        return userService.partialUpdateUser(userId, fields);
     }
 
     @DeleteMapping("/delete/{userId}")

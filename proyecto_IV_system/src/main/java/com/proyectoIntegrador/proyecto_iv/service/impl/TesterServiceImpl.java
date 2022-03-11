@@ -1,6 +1,8 @@
 package com.proyectoIntegrador.proyecto_iv.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestCase;
 import com.proyectoIntegrador.proyecto_iv.entity.Tester;
@@ -11,6 +13,7 @@ import com.proyectoIntegrador.proyecto_iv.repository.TesterRepository;
 import com.proyectoIntegrador.proyecto_iv.service.TesterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,21 @@ public class TesterServiceImpl implements TesterService {
         tester.setMaternalLastName(testerUpdated.getMaternalLastName());
         tester.setSing(testerUpdated.getSing());
 
+        return testerRepository.save(tester);
+    }
+
+    @Override
+    public Tester partialUpdateTester(long testerId, Map<Object, Object> fields)
+        throws TesterNotFoundException {
+        Tester tester = testerRepository.findById(testerId)
+            .orElseThrow(() -> new TesterNotFoundException(String.format(
+                            "Tester identified with ID::%d not found", testerId)));
+
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(Tester.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, tester, value);
+        });
         return testerRepository.save(tester);
     }
 

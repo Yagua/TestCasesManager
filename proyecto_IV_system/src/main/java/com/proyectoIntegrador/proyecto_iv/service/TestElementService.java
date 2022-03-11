@@ -1,6 +1,7 @@
 package com.proyectoIntegrador.proyecto_iv.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.proyectoIntegrador.proyecto_iv.entity.TestElement;
 import com.proyectoIntegrador.proyecto_iv.exception.TestCaseNotFoundException;
@@ -23,6 +24,9 @@ public interface TestElementService {
 
     TestElement updateTestElement(long testElementId, TestElement testElementUpdated)
             throws TestElementNotFoundException;
+
+    TestElement partialUpdateTestElement(long testElementId,
+            Map<Object, Object> fields) throws TestElementNotFoundException;
 
     ResponseEntity<String> deleteTestElement(long testElementId)
             throws TestElementNotFoundException;
