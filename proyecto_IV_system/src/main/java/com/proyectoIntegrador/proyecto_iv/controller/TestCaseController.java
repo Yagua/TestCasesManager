@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/testcase")
-@CrossOrigin("*")
+@RequestMapping("/api/v1/test-cases")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class TestCaseController {
 
     @Autowired
@@ -32,6 +32,12 @@ public class TestCaseController {
     @GetMapping("/")
     public List<TestCase> getAllTestCases() {
         return testCaseService.getAllTestCases();
+    }
+
+    @GetMapping("/u/{userId}")
+    public List<TestCase> getTestCasesByUserId(@PathVariable long userId)
+        throws UserNotFoundException {
+        return testCaseService.getTestCasesByUserId(userId);
     }
 
     @GetMapping("/{testCaseId}")

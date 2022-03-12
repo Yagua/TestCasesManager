@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
  * TesterController
  */
 @RestController
-@RequestMapping("/api/v1/tester")
-@CrossOrigin("*")
+@RequestMapping("/api/v1/testers")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class TesterController {
 
     @Autowired

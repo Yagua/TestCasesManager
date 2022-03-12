@@ -59,6 +59,15 @@ public class TestCaseServiceImpl implements TestCaseService {
     }
 
     @Override
+    public List<TestCase> getTestCasesByUserId(long userId)
+        throws UserNotFoundException {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new UserNotFoundException(
+                        String.format("User identified with ID::%d not found", userId)));
+        return user.getTestCases();
+    }
+
+    @Override
     public TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
             throws TestCaseNotFoundException {
 

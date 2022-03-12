@@ -20,6 +20,8 @@ public interface TestCaseService {
 
     List<TestCase> getAllTestCases();
 
+    List<TestCase> getTestCasesByUserId(long userId) throws UserNotFoundException;
+
     TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
             throws TestCaseNotFoundException;
 

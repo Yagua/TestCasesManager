@@ -3,8 +3,8 @@ proyecto_IV_system/.gradle
 proyecto_IV_system/build/
 
 ## Ignore git frontend repo, is just to manage its own commits
-proyecto_IV_frontend/.git
-proyecto_IV_frontend/.gitignore
+project_front/.git
+project_front/.gitignore
 
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
