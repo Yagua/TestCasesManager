@@ -1,21 +1,22 @@
-proyecto_IV_system/HELP.md
-proyecto_IV_system/.gradle
-proyecto_IV_system/build/
+tcs_manager_system/HELP.md
+tcs_manager_system/.gradle
+tcs_manager_system/build/
 
 ## Ignore git frontend repo, is just to manage its own commits
-project_front/.git
-project_front/.gitignore
+tcs_manager_frontend/.git
+tcs_manager_frontend/.gitignore
+tcs_manager_frontend/node_modules/
 
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### STS ###
-proyecto_IV_system/.apt_generated
-proyecto_IV_system/.classpath
-proyecto_IV_system/.factorypath
-proyecto_IV_system/.project
-proyecto_IV_system/.settings
-proyecto_IV_system/.springBeans
-proyecto_IV_system/.sts4-cache
-proyecto_IV_system/bin/
+tcs_manager_system/.apt_generated
+tcs_manager_system/.classpath
+tcs_manager_system/.factorypath
+tcs_manager_system/.project
+tcs_manager_system/.settings
+tcs_manager_system/.springBeans
+tcs_manager_system/.sts4-cache
+tcs_manager_system/bin/
