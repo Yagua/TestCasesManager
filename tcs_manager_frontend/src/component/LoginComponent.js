@@ -1,19 +1,27 @@
-import {useEffect, useState } from "react";
+import {useEffect, useState, useContext} from "react";
 import AuthService from '../service/AuthService'
+import {useNavigate} from 'react-router-dom'
 import {Link} from 'react-router-dom'
+
+import {UserContext} from '../helper/Context'
 
 const LoginComponent = () => {
     let [userName, setUserName] = useState('')
     let [userPassword, setUserPassword] = useState('')
-    let [userFound, setUserFound] = useState(true)
+    let [userFound, setUserFound] = useState(false)
+    let { loggedIn, setLoggedIn, userId, setUserId } = useContext(UserContext)
+    const navigate = useNavigate()
 
     const findUser = (e) => {
         e.preventDefault()
         AuthService.loginUser(userName, userPassword)
             .then(userData => {
-                localStorage.setItem("loggedUserId", userData.userId)
-                localStorage.setItem("isAthenticated", true)
+                setUserId(userData.userId)
+                setLoggedIn(true)
                 setUserFound(true)
+                navigate(`/user`)
+                // localStorage.setItem("loggedUserId", userData.userId)
+                // localStorage.setItem("isAthenticated", true)
             }).catch(error => {
                 setUserFound(false)
                 console.log(error)

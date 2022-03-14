@@ -1,12 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import UserService from "../service/UserService";
+import {UserContext} from '../helper/Context'
+import {useNavigate} from 'react-router-dom'
 
 const UserComponent = (props) => {
     let [users, setUsers] = useState([])
     let [isLoaded, setIsLoaded] = useState(false)
+    let navitage = useNavigate()
+
+    let { loggedIn, setLoggedIn, userId, setUserId } = useContext(UserContext)
+    if(!loggedIn) navitage("/login")
 
     useEffect(() => {
-        UserService.getAllUsers()
+        UserService.getUserById(userId)
             .then(users => {
                 setUsers(users);
                 setIsLoaded(true);
@@ -24,7 +30,7 @@ const UserComponent = (props) => {
         );
         return (
             <div className = "container" >
-                <h1>{users[0].firstName} {users[0].paternalLastName}</h1>
+                <h1>{users.firstName} {users.paternalLastName}</h1>
             </div>
         );
     }
