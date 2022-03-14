@@ -1,30 +1,43 @@
 import { useEffect, useState } from "react";
-import testCaseService from "../service/TestCaseService";
+import TestCaseService from "../service/TestCaseService";
 
-let TestCaseListComponent = (props) => {
+const TestCaseListComponent = (props) => {
     let [testCases, setTestCases] = useState([]);
+    let [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        testCaseService.getAllTestCases()
-            .then(testCases => setTestCases(testCases));
-    });
+        TestCaseService.getAllTestCases()
+            .then(testCases => {
+                setTestCases(testCases)
+                setIsLoaded(true);
+            }).catch(error => console.log(error));
+    }, []);
 
-    return (
-        <table border="1">
-            <thead>
-                <th>Campo</th>
-                <th>Valor</th>
-            </thead>
-            <tbody>
-                {
-                    testCases.map((testCase) => {
-                        <tr>{testCase.field}</tr>
-                        // <tr>{testCase.field}</tr>
-                    })
-                }
-            </tbody>
-        </table>
-    );
+    const renderContent = () => {
+        if(!isLoaded) return <></>
+        return (
+            <table className="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        testCases.map((testCase) => 
+                            <tr key = {testCase.testCaseId}>
+                                <td>{testCase.testCaseId}</td>
+                                <td>{testCase.testCaseName}</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+        );
+    }
+
+    return renderContent()
 }
 
 export default TestCaseListComponent;

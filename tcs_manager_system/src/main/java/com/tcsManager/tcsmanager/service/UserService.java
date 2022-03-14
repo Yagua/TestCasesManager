@@ -15,6 +15,9 @@ public interface UserService {
 
     User getUser(long id) throws UserNotFoundException;
 
+    User loginUser(String userName, String userPassword)
+                throws UserNotFoundException;
+
     User createUser(User user);
 
     List<User> getAllUsers();

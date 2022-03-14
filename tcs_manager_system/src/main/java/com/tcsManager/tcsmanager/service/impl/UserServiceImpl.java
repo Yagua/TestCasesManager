@@ -100,4 +100,13 @@ public class UserServiceImpl implements UserService {
                 String.format("User identified with ID::%d deleted successfully",
                     id), HttpStatus.OK);
     }
+
+    @Override
+    public User loginUser(String userName, String userPassword)
+        throws UserNotFoundException {
+        User user = userRepository.findByUserNameAndPassword(userName, userPassword);
+        if(user == null) throw new UserNotFoundException(
+                String.format("User Not found"));
+        return user;
+    }
 }
