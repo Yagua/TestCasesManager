@@ -46,7 +46,7 @@ const LoginComponent = () => {
             </div>
             <br/>
             <div className="card col-md-6 offset-md-3">
-                <div className = "card-body">
+                <div className = "card-body border">
                     { displayAlert() }
                     <form>
                       <div className="mb-3">
