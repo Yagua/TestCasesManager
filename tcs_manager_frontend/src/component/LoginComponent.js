@@ -3,35 +3,28 @@ import AuthService from '../service/AuthService'
 import {useNavigate} from 'react-router-dom'
 import {Link} from 'react-router-dom'
 
-import {UserContext} from '../helper/Context'
-
 const LoginComponent = () => {
     let [userName, setUserName] = useState('')
     let [userPassword, setUserPassword] = useState('')
-    let [userFound, setUserFound] = useState(false)
-    let { loggedIn, setLoggedIn, userId, setUserId } = useContext(UserContext)
+    let [userFound, setUserFound] = useState(true)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(localStorage.getItem("isAthenticated")) navigate("/home")
+    }, []);
 
     const findUser = (e) => {
         e.preventDefault()
         AuthService.loginUser(userName, userPassword)
             .then(userData => {
-                setUserId(userData.userId)
-                setLoggedIn(true)
+                localStorage.setItem("loggedUserId", userData.userId)
+                localStorage.setItem("isAthenticated", true)
                 setUserFound(true)
-                navigate(`/user`)
-                // localStorage.setItem("loggedUserId", userData.userId)
-                // localStorage.setItem("isAthenticated", true)
+                navigate(`/home`)
             }).catch(error => {
                 setUserFound(false)
                 console.log(error)
             });
-    }
-
-    const displayAlert = () => {
-        return !userFound ?
-            <div className="alert alert-danger"> Usuario No Encontrado </div>
-            : <></>
     }
 
     return (
@@ -47,7 +40,9 @@ const LoginComponent = () => {
             <br/>
             <div className="card col-md-6 offset-md-3">
                 <div className = "card-body border">
-                    { displayAlert() }
+                    {!userFound &&
+                    <div className="alert alert-danger"> Usuario No Encontrado </div>
+                    }
                     <form>
                       <div className="mb-3">
                         <label htmlFor="userName" className="form-label">Nombre de Usuario</label>

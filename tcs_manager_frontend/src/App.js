@@ -4,8 +4,6 @@ import {useState, useEffect} from 'react'
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import UserComponent from './component/UserComponent'
-import TestCaseListComponent from './component/TestCaseListComponent'
 import LoginComponent from './component/LoginComponent'
 import HomeComponent from './component/HomeComponent'
 import ProfileComponent from './component/ProfileComponent'
@@ -21,7 +19,6 @@ const App = () => {
           <Routes>
               <Route path="/home" element={<HomeComponent />}></Route>
               <Route path="/login" element={<LoginComponent />}></Route>
-              <Route path="/user" element={<UserComponent />}></Route>
               <Route path="/profile" element={<ProfileComponent />}></Route>
           </Routes>
         </Router>

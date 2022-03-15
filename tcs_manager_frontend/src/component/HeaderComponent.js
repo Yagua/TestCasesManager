@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const HeaderComponent = (props) => {
+    const navigate = useNavigate()
+
+    const logout = () => {
+        localStorage.removeItem("loggedUserId")
+        localStorage.removeItem("isAthenticated")
+        navigate("/login")
+    }
+
     return (
         <div>
             <nav className = "navbar navbar-dark bg-dark">
@@ -10,14 +19,23 @@ const HeaderComponent = (props) => {
                 <ul className="nav">
                   {props.onProfile ?
                       <li className="nav-item">
-                        <a className="active btn btn-primary" href="#">Atras</a>
+                        <a
+                            className="active btn btn-primary"
+                            onClick={() => {navigate("/home")}}
+                        >Atras</a>
                       </li> :
                       <li className="nav-item">
-                        <a className="active btn btn-primary" href="#">Perfil</a>
+                        <a
+                            className="active btn btn-primary"
+                            onClick={() => {navigate("/profile")}}
+                        >Perfil</a>
                       </li>
                   }
                   <li className="nav-item" style={{marginLeft:"10px", marginRight:"10px"}}>
-                    <a className="active btn btn-primary" href="#">Salir</a>
+                    <a
+                        className="active btn btn-primary"
+                        onClick={() => { logout() }}
+                    >Salir</a>
                   </li>
                 </ul>
             </nav>
