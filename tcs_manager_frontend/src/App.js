@@ -17,6 +17,7 @@ const App = () => {
       <UserContext.Provider value = {{userId, setUserId, loggedIn, setLoggedIn}}>
         <Router>
           <Routes>
+              <Route path="/" element={<HomeComponent />}></Route>
               <Route path="/home" element={<HomeComponent />}></Route>
               <Route path="/login" element={<LoginComponent />}></Route>
               <Route path="/profile" element={<ProfileComponent />}></Route>

@@ -1,7 +1,6 @@
 import {useEffect, useState, useContext} from "react";
 import AuthService from '../service/AuthService'
 import {useNavigate} from 'react-router-dom'
-import {Link} from 'react-router-dom'
 
 const LoginComponent = () => {
     let [userName, setUserName] = useState('')

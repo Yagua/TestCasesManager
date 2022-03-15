@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 const HeaderComponent = (props) => {
-    const navigate = useNavigate()
-
-    const logout = () => {
-        localStorage.removeItem("loggedUserId")
-        localStorage.removeItem("isAthenticated")
-        navigate("/login")
-    }
-
     return (
         <div>
             <nav className = "navbar navbar-dark bg-dark">
@@ -19,23 +11,27 @@ const HeaderComponent = (props) => {
                 <ul className="nav">
                   {props.onProfile ?
                       <li className="nav-item">
-                        <a
+                        <Link
+                            to = "/home"
                             className="active btn btn-primary"
-                            onClick={() => {navigate("/home")}}
-                        >Atras</a>
+                        >Atras</Link>
                       </li> :
                       <li className="nav-item">
-                        <a
+                        <Link
+                            to = "/profile"
                             className="active btn btn-primary"
-                            onClick={() => {navigate("/profile")}}
-                        >Perfil</a>
+                        >Perfil</Link>
                       </li>
                   }
                   <li className="nav-item" style={{marginLeft:"10px", marginRight:"10px"}}>
-                    <a
+                    <Link
+                        to = "/login"
                         className="active btn btn-primary"
-                        onClick={() => { logout() }}
-                    >Salir</a>
+                        onClick={() => {
+                            localStorage.removeItem("loggedUserId")
+                            localStorage.removeItem("isAthenticated")
+                        }}
+                    >Salir</Link>
                   </li>
                 </ul>
             </nav>
