@@ -30,6 +30,7 @@ const HeaderComponent = (props) => {
                         onClick={() => {
                             localStorage.removeItem("loggedUserId")
                             localStorage.removeItem("isAthenticated")
+                            localStorage.removeItem("userName")
                         }}
                     >Salir</Link>
                   </li>

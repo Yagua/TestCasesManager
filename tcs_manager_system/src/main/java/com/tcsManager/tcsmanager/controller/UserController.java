@@ -41,24 +41,24 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public User createUser(@RequestBody User newUser) {
         return userService.createUser(newUser);
     }
 
-    @PutMapping("/update/{userId}")
+    @PutMapping("/{userId}")
     public User updateUser(@PathVariable long userId, @RequestBody User userUpdated)
         throws UserNotFoundException {
         return userService.updateUser(userId, userUpdated);
     }
 
-    @PatchMapping("/update/{userId}")
+    @PatchMapping("/{userId}")
     public User partialUpdateUser(@PathVariable long userId,
             @RequestBody Map<Object, Object> fields) throws UserNotFoundException {
         return userService.partialUpdateUser(userId, fields);
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable long userId)
         throws UserNotFoundException {
         return userService.deleteUser(userId);

@@ -46,13 +46,13 @@ public class TestCaseController {
         return testCaseService.getTestCase(testCaseId);
     }
 
-    @PostMapping("/u/{userId}/add")
+    @PostMapping("/u/{userId}")
     public TestCase createTestCase(@RequestBody TestCase newTestCase,
             @PathVariable long userId) throws UserNotFoundException {
         return testCaseService.createTestCase(newTestCase, userId);
     }
 
-    @PutMapping("/update/{testCaseId}")
+    @PutMapping("/{testCaseId}")
     public TestCase updateTestCase(
             @PathVariable long testCaseId,
             @RequestBody TestCase TestCaseUpdated)
@@ -61,7 +61,7 @@ public class TestCaseController {
         return testCaseService.updateTestCase(testCaseId, TestCaseUpdated);
     }
 
-    @PatchMapping("/update/{testCaseId}")
+    @PatchMapping("/{testCaseId}")
     public TestCase partialUpdateTestCase(
             @PathVariable long testCaseId,
             @RequestBody Map<Object, Object> fields)
@@ -70,7 +70,7 @@ public class TestCaseController {
         return testCaseService.partialUpdateTestCase(testCaseId, fields);
     }
 
-    @DeleteMapping("/delete/{testCaseId}")
+    @DeleteMapping("/{testCaseId}")
     public ResponseEntity<String> deleteTestCase(@PathVariable long testCaseId)
         throws TestCaseNotFoundException {
         return testCaseService.deleteTestCase(testCaseId);

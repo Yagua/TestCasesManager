@@ -43,25 +43,25 @@ public class TestElementController {
         return testElementService.getTestElement(testElementId);
     }
 
-    @PostMapping("/tc/{testCaseId}/add")
+    @PostMapping("/tc/{testCaseId}")
     public TestElement createTestElement(@RequestBody TestElement testElement,
             @PathVariable long testCaseId) throws TestCaseNotFoundException {
         return testElementService.createTestElement(testElement, testCaseId);
     }
 
-    @PutMapping("/update/{testElementId}")
+    @PutMapping("/{testElementId}")
     public TestElement updateTestElement(@PathVariable long testElementId,
             @RequestBody TestElement testElement) throws TestElementNotFoundException {
         return testElementService.updateTestElement(testElementId, testElement);
     }
 
-    @PatchMapping("/update/{testElementId}")
+    @PatchMapping("/{testElementId}")
     public TestElement partialUpdateTestElement(@PathVariable long testElementId,
             @RequestBody Map<Object, Object> fields) throws TestElementNotFoundException {
         return testElementService.partialUpdateTestElement(testElementId, fields);
     }
 
-    @DeleteMapping("/delete/{testElementId}")
+    @DeleteMapping("/{testElementId}")
     public ResponseEntity<String> deleteTestElement(@PathVariable long testElementId)
         throws TestElementNotFoundException {
         return testElementService.deleteTestElement(testElementId);

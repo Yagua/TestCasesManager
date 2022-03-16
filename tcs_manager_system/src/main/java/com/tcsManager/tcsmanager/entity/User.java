@@ -46,7 +46,11 @@ public class User {
     @Column(name = "apellido_materno", nullable = true, length = 40)
     private String maternalLastName;
 
-    @Column(name = "nombre_usuario", nullable = false, length = 20)
+    @Column(
+        name = "nombre_usuario",
+        nullable = false, length = 20,
+        unique =  true
+    )
     private String userName;
 
     @Column(name = "contrasena_usuario", nullable = false)

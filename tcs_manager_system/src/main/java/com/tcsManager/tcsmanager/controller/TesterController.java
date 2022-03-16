@@ -43,19 +43,19 @@ public class TesterController {
         return testerService.getTester(testerId);
     }
 
-    @PostMapping("/tc/{testCaseId}/add")
+    @PostMapping("/tc/{testCaseId}")
     public Tester createTester(@RequestBody Tester tester,
             @PathVariable long testCaseId) throws TestCaseNotFoundException {
         return testerService.createTester(tester, testCaseId);
     }
 
-    @PutMapping("/update/{testerId}")
+    @PutMapping("/{testerId}")
     public Tester updateTester( @PathVariable long testerId,
             @RequestBody Tester tester) throws TesterNotFoundException {
         return testerService.updateTester(testerId, tester);
     }
 
-    @PatchMapping("/update/{testerId}")
+    @PatchMapping("/{testerId}")
     public Tester updateTester( @PathVariable long testerId,
             @RequestBody Map<Object, Object> fields) throws TesterNotFoundException {
         return testerService.partialUpdateTester(testerId, fields);

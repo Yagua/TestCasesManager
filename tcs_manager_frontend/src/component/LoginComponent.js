@@ -18,6 +18,7 @@ const LoginComponent = () => {
             .then(userData => {
                 localStorage.setItem("loggedUserId", userData.userId)
                 localStorage.setItem("isAthenticated", true)
+                localStorage.setItem("userName", userData.userName)
                 setUserFound(true)
                 navigate(`/home`)
             }).catch(error => {
@@ -65,7 +66,7 @@ const LoginComponent = () => {
                             onClick = {(e) => findUser(e)}
                       >Ingresar</button>
                     </form>
-                    <Link to="/restorePassword"> Olvidaste la Contraseña? </Link>
+                    <Link to="/updatepassword"> Olvidaste la Contraseña? </Link>
                 </div>
             </div>
         </div>

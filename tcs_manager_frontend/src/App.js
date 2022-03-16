@@ -7,9 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import LoginComponent from './component/LoginComponent'
 import HomeComponent from './component/HomeComponent'
 import ProfileComponent from './component/ProfileComponent'
+import UpdateInfoComponent from './component/UpdateInfoComponent'
 // import UserContext from './helper/Context'
 
-import UpdateInfoComponent from './component/UpdateInfoComponent'
+import ChangePasswordComponent from './component/ChangePasswordComponent'
 
 const App = () => {
     // let [userId, setUserId] = useState()
@@ -25,6 +26,7 @@ const App = () => {
               <Route path="/login" element={<LoginComponent />}></Route>
               <Route path="/profile" element={<ProfileComponent />}></Route>
               <Route path="/updateinfo" element={<UpdateInfoComponent />}></Route>
+              <Route path="/updatepassword" element={<ChangePasswordComponent />}></Route>
           </Routes>
         </Router>
   );

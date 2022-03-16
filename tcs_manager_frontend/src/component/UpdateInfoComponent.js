@@ -8,6 +8,7 @@ import UserService from "../service/UserService"
 const UpdateInfoComponent = () => {
     let [isLoaded, setIsLoaded] = useState(false);
     let userId = localStorage.getItem("loggedUserId");
+    let isAthenticated = localStorage.getItem("isAthenticated")
     const navigate = useNavigate()
 
     let [firstName, setFirstName] = useState('')
@@ -17,7 +18,7 @@ const UpdateInfoComponent = () => {
     let [userName, setUserName] = useState('')
 
     useEffect(() => {
-        if(!localStorage.getItem("isAthenticated")) navigate("/login")
+        if(!isAthenticated) navigate("/login")
 
         UserService.getUserById(userId)
             .then((user) => {
@@ -42,6 +43,19 @@ const UpdateInfoComponent = () => {
     }
 
     const updateInformation = () => {
+        // TODO: change this implementation
+        let isThereEmptyFields = false
+        Object.entries(updatedUser).forEach(([_, value])=> {
+            if(value.trim() === "") {
+                isThereEmptyFields = true
+            }
+        });
+
+        if(isThereEmptyFields) {
+            alert("No pueden haber campos vacios!")
+            return
+        }
+
         UserService.partialUpdate(userId, updatedUser)
             .then(data => {
                 navigate("/home")
@@ -119,7 +133,7 @@ const UpdateInfoComponent = () => {
                                             <input
                                                 type = "text"
                                                 placeholder = "Ingresa Nombre de usuario"
-                                                name = "emailId"
+                                                name = "userName"
                                                 className = "form-control"
                                                 value = {userName}
                                                 onChange = {(e) => {setUserName(e.target.value)}}
@@ -132,11 +146,10 @@ const UpdateInfoComponent = () => {
                                         > Aceptar </buttom>
                                         <Link to="/home" className="btn btn-danger m-2"> Cancelar </Link>
                                     </form>
-                                    <Link to="/restorePassword"> Cambiar Contraseña </Link>
+                                    <Link to="/updatepassword"> Cambiar Contraseña </Link>
                                 </div>
                             </div>
                         </div>
-
                    </div>
                 </div>
             </div>
