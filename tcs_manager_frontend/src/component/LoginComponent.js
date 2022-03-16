@@ -1,6 +1,6 @@
 import {useEffect, useState, useContext} from "react";
 import AuthService from '../service/AuthService'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 const LoginComponent = () => {
     let [userName, setUserName] = useState('')
@@ -61,10 +61,11 @@ const LoginComponent = () => {
                       </div>
                       <button
                             type="submit"
-                            className="btn btn-primary"
+                            className="btn btn-primary mb-2"
                             onClick = {(e) => findUser(e)}
                       >Ingresar</button>
                     </form>
+                    <Link to="/restorePassword"> Olvidaste la Contraseña? </Link>
                 </div>
             </div>
         </div>

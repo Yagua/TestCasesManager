@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import HeaderComponent from "./HeaderComponent"
 import UserService from "../service/UserService"
@@ -26,7 +26,7 @@ const ProfileComponent = (props) => {
         if(!isLoaded) return <LoadingComponent />
         return (
             <div>
-                <HeaderComponent onProfile={true}/>
+                <HeaderComponent onProfile={true} navBarBrand = "Perfil de Usuario"/>
                 <div className="m-4" >
                     <div className="card col-md-6 offset-md-3">
                         <div className="card-body border">
@@ -44,8 +44,10 @@ const ProfileComponent = (props) => {
                             <h5><strong>Cantidad de Casos de Prueba: </strong>{user.testCases.length}</h5>
                         </div>
                         <br/>
-                        <button className="btn btn-success mx-auto d-block my-2">
-                            Actualizar Datos Usuario</button>
+                        <Link
+                            className="btn btn-success mx-auto d-block my-2"
+                            to = "/updateInfo"
+                        > Actualizar Datos Usuario</Link>
                         </div>
                     </div>
                 </div>

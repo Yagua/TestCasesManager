@@ -4,10 +4,12 @@ const LOGIN_BASE_URL = "http://localhost:8080/api/v1/auth"
 
 class AuthService {
     loginUser(userName, userPassword) {
-        return axios.post(LOGIN_BASE_URL + "/login", {
+        const userCredentials = {
             userName: userName,
             userPassword: userPassword
-        }).then(user => user.data)
+        }
+        return axios.post(LOGIN_BASE_URL + "/login", userCredentials)
+            .then(user => user.data)
     }
 }
 

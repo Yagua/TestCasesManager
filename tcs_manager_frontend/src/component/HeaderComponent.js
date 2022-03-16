@@ -7,7 +7,7 @@ const HeaderComponent = (props) => {
             <nav className = "navbar navbar-dark bg-dark">
                 <h3 className="navbar-brand justify-content-start"
                     style={{marginLeft:"20px"}}
-                >{props.onProfile ? "Perfil de Usuario" : "Gestor de Casos de Pruebas"}</h3>
+                >{props.navBarBrand ? props.navBarBrand : "Gestor de Casos de Pruebas"}</h3>
                 <ul className="nav">
                   {props.onProfile ?
                       <li className="nav-item">
