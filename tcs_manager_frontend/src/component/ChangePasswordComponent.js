@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link} from 'react-router-dom'
+import { useNavigate, Link, Navigate} from 'react-router-dom'
 import LoadingComponent from './LoadingComponent'
 import UserService from '../service/UserService'
 
@@ -9,6 +9,8 @@ const ChangePasswordComponent = (props) => {
     let [password, setPassword] = useState('')
     let [confirmedPassword, setConmfirmedPassword] = useState('')
 
+    let navigate = useNavigate()
+
     const renderContent = () => {
 
         const userTemplate = {
@@ -17,10 +19,12 @@ const ChangePasswordComponent = (props) => {
             confirmedPassword: confirmedPassword
         }
         const updatePassword = () => {
+            console.log(userTemplate)
             if(password !== confirmedPassword){
                 alert("Las Contraseña no Coinciden")
                 return
             }
+            console.log(userTemplate)
             //todo  improve this implementation
             let isThereEmptyFields = false
             Object.values(userTemplate).forEach(([_, value]) => {
@@ -33,7 +37,12 @@ const ChangePasswordComponent = (props) => {
                 return
             }
 
-            //code to update password here
+            //TODO: improve password change proccess
+            UserService.updatePassword({userName: userName, userPassword: password})
+                .then(user => {
+                    navigate("/home")
+                })
+                .catch(error => console.error(error))
         }
 
         return (
@@ -54,7 +63,6 @@ const ChangePasswordComponent = (props) => {
                                             type = "text"
                                             placeholder = "Ingresa Nombre de usuario"
                                             name = "nombre_usuario"
-                                            value = {localStorage.getItem("userName")}
                                             className = "form-control"
                                             onChange = {(e) => {setUserName(e.target.value)}}
                                         >

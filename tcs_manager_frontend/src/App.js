@@ -8,9 +8,10 @@ import LoginComponent from './component/LoginComponent'
 import HomeComponent from './component/HomeComponent'
 import ProfileComponent from './component/ProfileComponent'
 import UpdateInfoComponent from './component/UpdateInfoComponent'
+import LoadingComponents from './component/LoadingComponent'
+import ChangePasswordComponent from './component/ChangePasswordComponent'
 // import UserContext from './helper/Context'
 
-import ChangePasswordComponent from './component/ChangePasswordComponent'
 
 const App = () => {
     // let [userId, setUserId] = useState()
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/profile" element={<ProfileComponent />}></Route>
               <Route path="/updateinfo" element={<UpdateInfoComponent />}></Route>
               <Route path="/updatepassword" element={<ChangePasswordComponent />}></Route>
+              <Route path="/load" element={<LoadingComponents/>}></Route>
           </Routes>
         </Router>
   );

@@ -32,6 +32,12 @@ class UserService {
         return axios.delete(USER_BASE_API_URL + `${userId}`)
             .then(response => response.data)
     }
+
+    updatePassword(userDTO) {
+        return axios.patch("http://localhost:8080/api/v1/auth/update-password",
+            userDTO)
+            .then(user => user.data)
+    }
 }
 
 export default new UserService()
