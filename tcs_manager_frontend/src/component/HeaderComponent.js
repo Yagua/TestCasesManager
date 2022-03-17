@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const HeaderComponent = (props) => {
     return (
-        <div>
+        <div className="sticky-top">
             <nav className = "navbar navbar-dark bg-dark">
                 <h3 className="navbar-brand justify-content-start"
                     style={{marginLeft:"20px"}}

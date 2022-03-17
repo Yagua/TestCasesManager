@@ -25,20 +25,22 @@ const HomeComponent = () => {
         if(!isLoaded) return <LoadingComponent />
         return (
             <div>
-                <HeaderComponent />
-                <div className="alert alert-secondary mt-2 d-flex justify-content-between" role="alert">
-                    <div className="h5">
-                        @{user.userName}
+                <div className = "sticky-top bg-light">
+                    <HeaderComponent />
+                    <div className="alert alert-secondary mt-2 d-flex justify-content-between" role="alert">
+                        <div className="h5">
+                            @{user.userName}
+                        </div>
+                        <Link
+                            type="button"
+                            className="btn btn-primary position-relative"
+                            to = "/disabled-testcases"
+                          > Inhabilitados
+                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {user.testCases.filter((element) => !element.enabled).length}
+                          </span>
+                        </Link>
                     </div>
-                    <Link
-                        type="button"
-                        className="btn btn-primary position-relative"
-                        to = "/disabled-testcases"
-                      > Inhabilitados
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {user.testCases.filter((element) => !element.enabled).length}
-                      </span>
-                    </Link>
                 </div>
                 <TestCasesListComponent testCases={
                     user.testCases.filter((element) => element.enabled)
