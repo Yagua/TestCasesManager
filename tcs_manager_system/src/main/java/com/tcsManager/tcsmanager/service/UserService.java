@@ -28,4 +28,8 @@ public interface UserService {
             throws UserNotFoundException;
 
     ResponseEntity<String> deleteUser(long id) throws UserNotFoundException;
+
+    // temporal, just for testing
+    User updatePassword(String userName, String userPassword)
+            throws UserNotFoundException;
 }

@@ -109,4 +109,17 @@ public class UserServiceImpl implements UserService {
                 String.format("User Not found"));
         return user;
     }
+
+    @Override
+    public User updatePassword(String userName, String userPassword)
+            throws UserNotFoundException {
+            User user = userRepository.findByUserName(userName);
+            if(user == null) {
+                throw new UserNotFoundException(String.format(
+                            "User indentified with user name %s does not exists",
+                            userName));
+            }
+            user.setPassword(userPassword);
+            return userRepository.save(user);
+    }
 }
