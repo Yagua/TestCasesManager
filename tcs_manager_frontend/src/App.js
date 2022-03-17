@@ -10,6 +10,7 @@ import ProfileComponent from './component/ProfileComponent'
 import UpdateInfoComponent from './component/UpdateInfoComponent'
 import LoadingComponents from './component/LoadingComponent'
 import ChangePasswordComponent from './component/ChangePasswordComponent'
+import DisabledTestCasesComponent from './component/DisabledTestCasesComponent'
 // import UserContext from './helper/Context'
 
 
@@ -29,6 +30,7 @@ const App = () => {
               <Route path="/updateinfo" element={<UpdateInfoComponent />}></Route>
               <Route path="/updatepassword" element={<ChangePasswordComponent />}></Route>
               <Route path="/load" element={<LoadingComponents/>}></Route>
+              <Route path="/disabled-testcases" element={<DisabledTestCasesComponent/>}></Route>
           </Routes>
         </Router>
   );
