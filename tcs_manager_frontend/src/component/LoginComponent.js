@@ -62,9 +62,14 @@ const LoginComponent = () => {
                       </div>
                       <button
                             type="submit"
-                            className="btn btn-primary mb-2"
+                            className="btn btn-primary mb-3"
                             onClick = {(e) => findUser(e)}
                       >Ingresar</button>
+                      <Link
+                            to="/user-register"
+                            type="submit"a
+                            className="btn btn-success mb-3 mx-2"
+                      >Crear Usuario</Link>
                     </form>
                     <Link to="/updatepassword"> Olvidaste la Contraseña? </Link>
                 </div>

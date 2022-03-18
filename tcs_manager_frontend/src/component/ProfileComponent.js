@@ -22,6 +22,17 @@ const ProfileComponent = (props) => {
             })
     }, [])
 
+    const deleteUser = () => {
+        //TODO: implemente user validation before delete the user
+        UserService.deleteUser(userId)
+            .then(response => console.log(response))
+
+        localStorage.removeItem("loggedUserId")
+        localStorage.removeItem("isAthenticated")
+        localStorage.removeItem("userName")
+        navigate("/login")
+    }
+
     const renderContent = () => {
         if(!isLoaded) return <LoadingComponent />
         return (
@@ -48,6 +59,10 @@ const ProfileComponent = (props) => {
                             className="btn btn-success mx-auto d-block my-2"
                             to = "/updateInfo"
                         > Actualizar Datos Usuario</Link>
+                        <buttom
+                            className="btn btn-danger mx-auto d-block my-2"
+                            onClick = {() => deleteUser()}
+                        > Eliminar Usuario</buttom>
                         </div>
                     </div>
                 </div>

@@ -49,6 +49,8 @@
   padding-bottom: 20px;
   padding-top: 20px;
   font-weight: 300;
+  word-wrap: break-word;
+  max-width: 150px;
 }
 
 .custom-table tbody th small, .custom-table tbody td small {
