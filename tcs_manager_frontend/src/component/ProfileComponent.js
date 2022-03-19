@@ -1,14 +1,19 @@
 import {useState, useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import {Modal} from 'bootstrap'
 
 import HeaderComponent from "./HeaderComponent"
 import UserService from "../service/UserService"
 import userImg from "../img/user.png"
 import LoadingComponent from "./LoadingComponent"
+import ModalMessageComponent from './ModalMessageComponent'
+
 
 const ProfileComponent = (props) => {
     let [user, setUser] = useState({});
     let [isLoaded, setIsLoaded] = useState(false);
+    let [modalObject, setModalObject] = useState({});
+
     let userId = localStorage.getItem("loggedUserId");
     const navigate = useNavigate()
 
@@ -19,18 +24,23 @@ const ProfileComponent = (props) => {
             .then((user) => {
                 setUser(user);
                 setIsLoaded(true);
+                setModalObject(new Modal(document.getElementById("modal-window")))
             })
     }, [])
 
     const deleteUser = () => {
         //TODO: implemente user validation before delete the user
         UserService.deleteUser(userId)
-            .then(response => console.log(response))
-
-        localStorage.removeItem("loggedUserId")
-        localStorage.removeItem("isAthenticated")
-        localStorage.removeItem("userName")
-        navigate("/login")
+            .then(response => {
+                localStorage.removeItem("loggedUserId")
+                localStorage.removeItem("isAthenticated")
+                localStorage.removeItem("userName")
+                modalObject.hide()
+                navigate("/login")
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     const renderContent = () => {
@@ -38,6 +48,16 @@ const ProfileComponent = (props) => {
         return (
             <div>
                 <HeaderComponent onProfile={true} navBarBrand = "Perfil de Usuario"/>
+                <ModalMessageComponent
+                    modalObject={modalObject}
+                    modalTitle={`Esta seguro de borrar el usuario "${user.userName}"`}
+                    modalBody="Si elimina el usuario, todos sus datos se perderán también."
+                    closeButtonTitle = "Cancelar"
+                    acceptButtonProperties = {{
+                        callbackAction: deleteUser,
+                        buttonTitle: "Eliminar"
+                    }}
+                />
                 <div className="m-4" >
                     <div className="card col-md-6 offset-md-3">
                         <div className="card-body border">
@@ -57,11 +77,11 @@ const ProfileComponent = (props) => {
                         <br/>
                         <Link
                             className="btn btn-success mx-auto d-block my-2"
-                            to = "/updateInfo"
+                            to = "/updateinfo"
                         > Actualizar Datos Usuario</Link>
                         <buttom
                             className="btn btn-danger mx-auto d-block my-2"
-                            onClick = {() => deleteUser()}
+                            onClick = {() => modalObject.show()}
                         > Eliminar Usuario</buttom>
                         </div>
                     </div>

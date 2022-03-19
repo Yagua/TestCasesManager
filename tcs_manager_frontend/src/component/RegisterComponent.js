@@ -1,6 +1,8 @@
+import { Modal } from 'bootstrap'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import UserService from '../service/UserService'
+import ModalMessageComponent from './ModalMessageComponent'
 
 const RegisterCompenent = () => {
     let [userName, setUserName] = useState('')
@@ -10,6 +12,9 @@ const RegisterCompenent = () => {
     let [maternalLastName, setMaternalLastName] = useState('')
     let [password, setPassword] = useState('')
     let [confirmPassword, setConfirmPassword] = useState('')
+
+    let [modalObject, setModalObject] = useState({})
+    let [modalBody, setModalBody] = useState('')
 
     let navigate = useNavigate()
 
@@ -22,6 +27,10 @@ const RegisterCompenent = () => {
         password: password
     }
 
+    useEffect(() => {
+        setModalObject(new Modal(document.getElementById("modal-window")))
+    }, [])
+
     const registerUser = () => {
         let thereIsEmptyField = false
 
@@ -32,21 +41,23 @@ const RegisterCompenent = () => {
         });
 
         if(thereIsEmptyField) {
-            alert("No pueden haber campos vacios")
+            setModalBody("No pueden haber campos vacios")
+            modalObject.show()
             return
         }
         if(password !== confirmPassword) {
-            alert("Las Contrasenas no Coinciden")
+            setModalBody("Las Contrasenas no Coinciden")
+            modalObject.show()
             return
         }
 
         UserService.createUser(userTemplate)
             .then(response => {
-                console.log(response)
                 navigate("/login")
             })
             .catch(error => {
-                alert(`El user name "${userName}" ya esta en uso`)
+                setModalBody(`El user name "${userName}" ya esta en uso`)
+                modalObject.show()
                 console.error(error)
             })
 
@@ -54,6 +65,12 @@ const RegisterCompenent = () => {
 
     return (
         <div>
+            <ModalMessageComponent
+                isAlert = {true}
+                modalTitle = "Registro de Usuario"
+                modalBody = {modalBody}
+                modalObject = {modalObject}
+            />
            <div className="sticky-top">
                <nav className = "navbar navbar-dark bg-dark">
                    <h3 className="navbar-brand justify-content-start"

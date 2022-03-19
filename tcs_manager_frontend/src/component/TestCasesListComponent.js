@@ -51,7 +51,7 @@ const TestCasesListComponent = (props) => {
                             props.testCases.map(testCase => {
                                 return (
                                     <>
-                                        <tr key="fs-01" className="spacer"><td colspan="100"></td></tr>
+                                        <tr key="fs-01" className="spacer"><td colSpan="100"></td></tr>
                                         <tr key={testCase.testCaseId} scope="row" onClick={(e)=>console.log(e)}>
                                             <td className="text-center">{testCase.testCaseId}</td>
                                             <td>{testCase.testCaseName}</td>
@@ -74,7 +74,7 @@ const TestCasesListComponent = (props) => {
                                                 </td>
                                             }
                                         </tr>
-                                        <tr key="fs-02" className="spacer"><td colspan="100"></td></tr>
+                                        <tr key="fs-02" className="spacer"><td colSpan="100"></td></tr>
                                     </>
                                 );
                             })

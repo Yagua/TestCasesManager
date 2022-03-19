@@ -2,10 +2,11 @@ import {useEffect, useState, useContext} from "react";
 import AuthService from '../service/AuthService'
 import {useNavigate, Link} from 'react-router-dom'
 
-const LoginComponent = () => {
+const LoginComponent = (props) => {
     let [userName, setUserName] = useState('')
     let [userPassword, setUserPassword] = useState('')
     let [userFound, setUserFound] = useState(true)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -67,7 +68,7 @@ const LoginComponent = () => {
                       >Ingresar</button>
                       <Link
                             to="/user-register"
-                            type="submit"a
+                            type="submit"
                             className="btn btn-success mb-3 mx-2"
                       >Crear Usuario</Link>
                     </form>
