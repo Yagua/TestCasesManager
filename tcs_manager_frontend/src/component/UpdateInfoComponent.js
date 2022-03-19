@@ -5,7 +5,6 @@ import { Modal } from 'bootstrap'
 import HeaderComponent from "./HeaderComponent"
 import LoadingComponent from "./LoadingComponent.js"
 import UserService from "../service/UserService"
-import ModalMessageComponent from './ModalMessageComponent'
 
 const UpdateInfoComponent = () => {
     let [isLoaded, setIsLoaded] = useState(false);
@@ -18,8 +17,6 @@ const UpdateInfoComponent = () => {
     let [paternalLastName, setPaternalLastName] = useState('')
     let [maternalLastName, setMaternalLastName] = useState('')
     let [userName, setUserName] = useState('')
-    let [modalObject, setModalObject] = useState({})
-    let [modalBody, setModalBody] = useState('')
 
     useEffect(() => {
         if(!isAthenticated) navigate("/login")
@@ -32,7 +29,6 @@ const UpdateInfoComponent = () => {
                 setMaternalLastName(user.maternalLastName)
                 setUserName(user.userName)
                 setIsLoaded(true);
-                setModalObject(new Modal(document.getElementById("modal-window")))
             })
             .catch(error => {
                 console.error(error);
@@ -57,8 +53,7 @@ const UpdateInfoComponent = () => {
         });
 
         if(isThereEmptyFields) {
-            setModalBody("No pueden haber campos vacios!")
-            modalObject.show()
+            alert("No pueden haber campos vacios!")
             return
         }
 
@@ -67,8 +62,7 @@ const UpdateInfoComponent = () => {
                 navigate("/home")
             })
             .catch(error => {
-                setModalBody(`Un usuario con el user name "${userName}" ya existe!`)
-                modalObject.show()
+                alert(`Un usuario con el user name "${userName}" ya existe!`)
                 console.error(error)
             })
     }
@@ -80,12 +74,6 @@ const UpdateInfoComponent = () => {
                 <HeaderComponent
                     navBarBrand="Actualización de Información"
                     onProfile={true}
-                />
-                <ModalMessageComponent
-                    isAlert = {true}
-                    modalTitle = "Actualización de Información"
-                    modalBody = {modalBody}
-                    modalObject = {modalObject}
                 />
                 <div>
                    <div className = "container my-3">

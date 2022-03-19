@@ -5,13 +5,10 @@ import { Modal } from 'bootstrap';
 import UserService from '../service/UserService';
 import TestCaseService from '../service/TestCaseService'
 import LoadingComponent from './LoadingComponent';
-import ModalMessageComponent from './ModalMessageComponent'
 
 const TestCasesListComponent = (props) => {
     let [user, setUser] = useState({});
     let [isLoaded, setIsLoaded] = useState(false);
-    let [modalObject, setModalObject] = useState({})
-    let [deleteAnswer, setDeleteAnswer] = useState(false)
     let [testCases, setTestCases] = useState([])
     let userId = localStorage.getItem("loggedUserId");
     let navigate = useNavigate()
@@ -23,7 +20,7 @@ const TestCasesListComponent = (props) => {
                 setUser(user);
                 setIsLoaded(true);
                 updateTestCases(user)
-                setModalObject(new Modal(document.getElementById("modal-window")))
+                // setModalObject(new Modal(document.getElementById("modal-window")))
             })
     }, [testCases])
 
@@ -44,34 +41,32 @@ const TestCasesListComponent = (props) => {
     }
 
     const deleteTestCase = (testCaseId) => {
-        console.log(testCaseId)
-        modalObject.show()
-        // if(deleteAnswer) {
-        //     TestCaseService.deleteTestCase(testCaseId)
-        //         .then(_ => {
-        //             // window.location.reload()
-        //         })
-        //         .catch(error => console.error(error))
-        // }
+        TestCaseService.deleteTestCase(testCaseId)
+            .then(_ => { updateTestCases()})
+            .catch(error => console.error(error))
     }
 
     const renderContent = () => {
         if(!isLoaded) return <LoadingComponent />
         return (
               <div className="content">
-                <ModalMessageComponent
-                    modalObject = {modalObject}
-                    modalTitle = "Eliminar Caso de Uso"
-                    modalBody = "Si elimina el caso de uso, toda la información relacionada a el se borrara también."
-                    acceptButtonProperties = {{
-                        buttonTitle: "Eliminar Definitivamente",
-                        callbackAction: () => console.log("holamunn")
-                    }}
-                />
                 <div className="m-4">
                   <h2 className = "text-center display-5 my-3"> {props.title ? props.title : "Lista de Casos de Prueba"} </h2>
                   { !props.disabledTestCases &&
-                      <Link to = "/add-testcase" className = "btn btn-primary mb-3" > Agregar Caso de Prueba </Link>
+                      <>
+                          <div className="alert alert-success mt-2 d-flex justify-content-between" role="alert">
+                              <Link to = "/add-testcase" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
+                              <Link
+                                  type="button"
+                                  className="btn btn-primary position-relative"
+                                  to = "/disabled-testcases"
+                                ><i className="bi bi-trash h4"></i>
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                  {user.testCases.filter((element) => !element.enabled).length}
+                                </span>
+                              </Link>
+                          </div>
+                      </>
                   }
                   <div className="table-responsive custom-table-responsive">
                     <table className="table custom-table">
@@ -103,7 +98,7 @@ const TestCasesListComponent = (props) => {
                                                     <button
                                                         className = "btn btn-success"
                                                         onClick = {() =>{
-                                                            enableOrDisableTestCase(testCase.testCaseId, true)
+                                                            // enableOrDisableTestCase(testCase.testCaseId, true)
                                                         }}
                                                         style = {{marginLeft:"10px"}}
                                                     >Habilitar</button>

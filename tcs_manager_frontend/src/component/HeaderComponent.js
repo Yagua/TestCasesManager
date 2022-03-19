@@ -16,12 +16,17 @@ const HeaderComponent = (props) => {
                             className="active btn btn-primary"
                         >Atras</Link>
                       </li> :
-                      <li className="nav-item">
-                        <Link
-                            to = "/profile"
-                            className="active btn btn-primary"
-                        >Perfil</Link>
-                      </li>
+                      <>
+                          <li className="nav-item text-white m-2 h5">
+                            @{props.userName}
+                          </li>
+                          <li className="nav-item">
+                            <Link
+                                to = "/profile"
+                                className="active btn btn-primary"
+                            >Perfil</Link>
+                          </li>
+                      </>
                   }
                   <li className="nav-item" style={{marginLeft:"10px", marginRight:"10px"}}>
                     <Link

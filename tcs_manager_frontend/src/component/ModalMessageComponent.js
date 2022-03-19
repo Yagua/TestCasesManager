@@ -1,36 +1,24 @@
-const ModalMessageComponent = (props) => {
-    return (
-        <div className="modal" id="modal-window" tabIndex="-1">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">
-                {
-                    props.modalTitle ? props.modalTitle : "Modal Title"
-                }
-                </h5>
-              </div>
-              <div className="modal-body">
-                <p>
-                {
-                    props.modalBody ? props.modalBody : "Modal body here"
-                }
-                </p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary"
-                    onClick = {() => { props.modalObject.hide() }}
-                >{props.closeButtonTitle ? props.closeButtonTitle : "Cerrar"}</button>
+import { useState } from "react";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 
-                {!props.isAlert &&
-                <button type="button" className="btn btn-primary"
-                    onClick = {() => props.acceptButtonProperties.callbackAction() }
-                >{props.acceptButtonProperties.buttonTitle}</button>
-                }
-              </div>
-            </div>
-          </div>
-        </div>
+const ModalMessageComponent = (props) => {
+    let [isOpen, setIsOpen] = useState(true)
+    const {modalTitle, modalBody, modalFooter } = props
+
+    const toggleModal = () => setIsOpen(!isOpen)
+
+    return (
+        <Modal show = {isOpen} onHide={toggleModal}>
+            <ModalHeader>{modalTitle}</ModalHeader>
+            <ModalBody>{modalBody}</ModalBody>
+            <ModalFooter>
+                <button
+                    className="btn btn-secondary"
+                    onClick = {toggleModal}
+                >Cerrar</button>
+                <button className="btn btn-primary">Aceptar</button>
+            </ModalFooter>
+        </Modal>
     );
 }
 

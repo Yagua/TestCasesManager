@@ -6,13 +6,11 @@ import HeaderComponent from "./HeaderComponent"
 import UserService from "../service/UserService"
 import userImg from "../img/user.png"
 import LoadingComponent from "./LoadingComponent"
-import ModalMessageComponent from './ModalMessageComponent'
 
 
 const ProfileComponent = (props) => {
     let [user, setUser] = useState({});
     let [isLoaded, setIsLoaded] = useState(false);
-    let [modalObject, setModalObject] = useState({});
 
     let userId = localStorage.getItem("loggedUserId");
     const navigate = useNavigate()
@@ -24,7 +22,6 @@ const ProfileComponent = (props) => {
             .then((user) => {
                 setUser(user);
                 setIsLoaded(true);
-                setModalObject(new Modal(document.getElementById("modal-window")))
             })
     }, [])
 
@@ -35,7 +32,6 @@ const ProfileComponent = (props) => {
                 localStorage.removeItem("loggedUserId")
                 localStorage.removeItem("isAthenticated")
                 localStorage.removeItem("userName")
-                modalObject.hide()
                 navigate("/login")
             })
             .catch(error => {
@@ -48,16 +44,6 @@ const ProfileComponent = (props) => {
         return (
             <div>
                 <HeaderComponent onProfile={true} navBarBrand = "Perfil de Usuario"/>
-                <ModalMessageComponent
-                    modalObject={modalObject}
-                    modalTitle={`Esta seguro de borrar el usuario "${user.userName}"`}
-                    modalBody="Si elimina el usuario, todos sus datos se perderán también."
-                    closeButtonTitle = "Cancelar"
-                    acceptButtonProperties = {{
-                        callbackAction: deleteUser,
-                        buttonTitle: "Eliminar"
-                    }}
-                />
                 <div className="m-4" >
                     <div className="card col-md-6 offset-md-3">
                         <div className="card-body border">
@@ -80,7 +66,7 @@ const ProfileComponent = (props) => {
                         > Actualizar Datos Usuario</Link>
                         <buttom
                             className="btn btn-danger mx-auto d-block my-2"
-                            onClick = {() => modalObject.show()}
+                            onClick = {() => deleteUser()}
                         > Eliminar Usuario</buttom>
                         </div>
                     </div>

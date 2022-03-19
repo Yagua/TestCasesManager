@@ -2,21 +2,14 @@ import { Modal } from 'bootstrap'
 import { useState, useEffect } from 'react'
 import { useNavigate, Link} from 'react-router-dom'
 import UserService from '../service/UserService'
-import ModalMessageComponent from './ModalMessageComponent'
 
 const ChangePasswordComponent = (props) => {
     let userId = localStorage.getItem("loggedUserId");
     let [userName, setUserName] = useState('')
     let [password, setPassword] = useState('')
-    let [confirmedPassword, setConmfirmedPassword] = useState('')
-    let [modalObject, setModalObject] = useState({})
-    let [modalBody, setModalBody] = useState('')
+    let [confirmedPassword, setConfirmedPassword] = useState('')
 
     let navigate = useNavigate()
-
-    useEffect(() => {
-        setModalObject(new Modal(document.getElementById("modal-window")))
-    }, [])
 
     const userTemplate = {
         userName: userName,
@@ -24,23 +17,22 @@ const ChangePasswordComponent = (props) => {
     }
 
     const updatePassword = () => {
+        console.log(userName, password, confirmedPassword)
+        console.log(userTemplate)
 
         //TODO:  improve this implementation
         let thereAreEmptyFields = false
         Object.values(userTemplate).forEach(([_, value]) => {
-            value = value ? value : ""
             if(value.trim() === "") thereAreEmptyFields = true
         })
 
         if(thereAreEmptyFields) {
-            setModalBody("No pueden haber Campos Vacios")
-            modalObject.show()
+            alert("No pueden haber Campos Vacios")
             return
         }
 
         if(password !== confirmedPassword){
-            setModalBody("Las Contraseña no Coinciden")
-            modalObject.show()
+            alert("Las Contraseña no Coinciden")
             return
         }
 
@@ -59,12 +51,6 @@ const ChangePasswordComponent = (props) => {
                     style={{marginLeft:"20px"}}
                 >Restablecimiento de Contraseña</h3>
             </nav>
-           <ModalMessageComponent
-                isAlert = {true}
-                modalTitle = "Cambio de Contraseña"
-                modalBody = {modalBody}
-                modalObject = {modalObject}
-           />
            <div className = "container my-5">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3 offset-md-3 border">
@@ -99,7 +85,7 @@ const ChangePasswordComponent = (props) => {
                                         placeholder = "Ingresa Contraseña"
                                         name = "confirm_new_password"
                                         className = "form-control"
-                                        onChange = {(e) => {setConmfirmedPassword(e.target.value)}}
+                                        onChange = {(e) => {setConfirmedPassword(e.target.value)}}
                                     >
                                     </input>
                                 </div>
