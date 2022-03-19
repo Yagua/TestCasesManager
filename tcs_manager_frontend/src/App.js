@@ -1,8 +1,8 @@
 import './App.css';
 
-import {useState, useEffect} from 'react'
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import LoginComponent from './component/LoginComponent'
 import HomeComponent from './component/HomeComponent'
@@ -12,15 +12,8 @@ import LoadingComponents from './component/LoadingComponent'
 import ChangePasswordComponent from './component/ChangePasswordComponent'
 import DisabledTestCasesComponent from './component/DisabledTestCasesComponent'
 import RegisterComponent from './component/RegisterComponent'
-// import UserContext from './helper/Context'
-
 
 const App = () => {
-    // let [userId, setUserId] = useState()
-    // let [loggedIn, setLoggedIn] = useState(false)
-    // <UserContext.Provider value = {{userId, setUserId, loggedIn, setLoggedIn}}>
-    // </UserContext.Provider>
-
   return (
         <Router>
           <Routes>

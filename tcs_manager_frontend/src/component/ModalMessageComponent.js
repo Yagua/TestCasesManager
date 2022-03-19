@@ -19,7 +19,7 @@ const ModalMessageComponent = (props) => {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary"
-                    onClick = {() => {props.modalObject.hide()}}
+                    onClick = {() => { props.modalObject.hide() }}
                 >{props.closeButtonTitle ? props.closeButtonTitle : "Cerrar"}</button>
 
                 {!props.isAlert &&

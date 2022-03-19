@@ -32,15 +32,14 @@ const RegisterCompenent = () => {
     }, [])
 
     const registerUser = () => {
-        let thereIsEmptyField = false
+        let thereAreEmptyField = false
 
         Object.values(userTemplate).forEach(value => {
-            if(value.trim() === '') {
-                thereIsEmptyField = true
-            }
+            value = value ? value : "";
+            if(value.trim() === "") thereAreEmptyField = true;
         });
 
-        if(thereIsEmptyField) {
+        if(thereAreEmptyField) {
             setModalBody("No pueden haber campos vacios")
             modalObject.show()
             return

@@ -26,13 +26,13 @@ const ChangePasswordComponent = (props) => {
     const updatePassword = () => {
 
         //TODO:  improve this implementation
-        let thereIsEmptyFields = false
+        let thereAreEmptyFields = false
         Object.values(userTemplate).forEach(([_, value]) => {
             value = value ? value : ""
-            if(value.trim() === "") thereIsEmptyFields = true
+            if(value.trim() === "") thereAreEmptyFields = true
         })
 
-        if(thereIsEmptyFields) {
+        if(thereAreEmptyFields) {
             setModalBody("No pueden haber Campos Vacios")
             modalObject.show()
             return

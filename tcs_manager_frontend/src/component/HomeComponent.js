@@ -19,7 +19,7 @@ const HomeComponent = () => {
                 setUser(user);
                 setIsLoaded(true);
             })
-    }, [])
+    }, [user.testCases])
 
     const renderContent = () => {
         if(!isLoaded) return <LoadingComponent />
@@ -35,7 +35,7 @@ const HomeComponent = () => {
                             type="button"
                             className="btn btn-primary position-relative"
                             to = "/disabled-testcases"
-                          > Inhabilitados
+                          ><i className="bi bi-trash h4"></i>
                           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {user.testCases.filter((element) => !element.enabled).length}
                           </span>

@@ -62,9 +62,8 @@ const ProfileComponent = (props) => {
                     <div className="card col-md-6 offset-md-3">
                         <div className="card-body border">
                             <img src={userImg}
-                                 className="rounded-circle img-thumbnail mx-auto d-block userImg"
+                                 className="rounded-circle img-thumbnail mx-auto d-block user-img"
                                  alt="userImg.png"
-                                 id = "userImg"
                             />
                         <hr className="mx-5"/>
                         <div className="mx-5">
