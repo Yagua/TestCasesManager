@@ -1,10 +1,8 @@
 import {useState, useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import { Modal } from 'bootstrap';
 
 import UserService from '../service/UserService';
 import TestCaseService from '../service/TestCaseService'
-import LoadingComponent from './LoadingComponent';
 import ModalComponent from './ModalComponent'
 
 const TestCasesListComponent = (props) => {
@@ -55,7 +53,7 @@ const TestCasesListComponent = (props) => {
     }
 
     const renderContent = () => {
-        if(!isLoaded) return <LoadingComponent />
+        if(!isLoaded) return <></>
         return (
               <div className="content">
                 <div className="m-4">

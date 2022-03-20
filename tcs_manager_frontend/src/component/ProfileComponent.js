@@ -1,16 +1,17 @@
 import {useState, useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import {Modal} from 'bootstrap'
 
 import HeaderComponent from "./HeaderComponent"
 import UserService from "../service/UserService"
 import userImg from "../img/user.png"
 import LoadingComponent from "./LoadingComponent"
+import ModalComponent from './ModalComponent'
 
 
 const ProfileComponent = (props) => {
     let [user, setUser] = useState({});
     let [isLoaded, setIsLoaded] = useState(false);
+    let [modalShow, setModalShow] = useState(false)
 
     let userId = localStorage.getItem("loggedUserId");
     const navigate = useNavigate()
@@ -38,13 +39,26 @@ const ProfileComponent = (props) => {
                 console.error(error)
             })
     }
+    const handleModalClose = () => setModalShow(false)
+    const handleModalOpen = () => setModalShow(true)
 
     const renderContent = () => {
         if(!isLoaded) return <LoadingComponent />
         return (
             <div>
                 <HeaderComponent onProfile={true} navBarBrand = "Perfil de Usuario"/>
-                <div className="m-4" >
+                <ModalComponent
+                    modalTitle={<h4>Esta seguro de borrar el usuario "{user.userName}"</h4>}
+                    modalBody="Si elimina el usuario, todos sus datos se perderán también."
+                    show = {modalShow}
+                    closeAction = {() => handleModalClose}
+                    onConfirm = {() => {
+                        deleteUser(userId)
+                        handleModalClose()
+                    }}
+                    onHide = {() => handleModalClose()} //allow hide the modal with clicks without it
+                />
+                <div className="m-2" >
                     <div className="card col-md-6 offset-md-3">
                         <div className="card-body border">
                             <img src={userImg}
@@ -66,7 +80,7 @@ const ProfileComponent = (props) => {
                         > Actualizar Datos Usuario</Link>
                         <buttom
                             className="btn btn-danger mx-auto d-block my-2"
-                            onClick = {() => deleteUser()}
+                            onClick = {() => handleModalOpen()}
                         > Eliminar Usuario</buttom>
                         </div>
                     </div>

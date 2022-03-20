@@ -1,7 +1,9 @@
-import { Modal } from 'bootstrap'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
+
 import UserService from '../service/UserService'
+import { checkValidInput } from '../lib/util'
 
 const RegisterCompenent = () => {
     let [userName, setUserName] = useState('')
@@ -10,7 +12,28 @@ const RegisterCompenent = () => {
     let [paternalLastName, setPaternalLastName] = useState('')
     let [maternalLastName, setMaternalLastName] = useState('')
     let [password, setPassword] = useState('')
-    let [confirmPassword, setConfirmPassword] = useState('')
+    let [confirmedPassword, setConfirmedPassword] = useState('')
+    let [errorMessage, setErrorMessage] = useState('')
+    let [modalBody, setModalBody] = useState('')
+    let [showModal, setShowModal] = useState(false)
+
+    let [validUserName, setValidUserName] = useState(false)
+    let [validFirstName, setValidFirstName] = useState(false)
+    let [validSecondName, setValidSecondName] = useState(false)
+    let [validPaternalLastName, setValidPaternalLastName] = useState(false)
+    let [validMaternalLastName, setValidMaternalLastName] = useState(false)
+    let [validPassword, setValidPassword] = useState(false)
+    let [validConfirmedPassword, setValidConfirmedPassword] = useState(false)
+
+    let isValidRequest = (
+        validFirstName &&
+        validSecondName &&
+        validPaternalLastName &&
+        validMaternalLastName &&
+        validUserName &&
+        validPassword &&
+        validConfirmedPassword
+    )
 
     let navigate = useNavigate()
 
@@ -24,28 +47,21 @@ const RegisterCompenent = () => {
     }
 
     const registerUser = () => {
-        let thereAreEmptyField = false
-
-        Object.values(userTemplate).forEach(value => {
-            value = value ? value : "";
-            if(value.trim() === "") thereAreEmptyField = true;
-        });
-
-        if(thereAreEmptyField) {
-            alert("No pueden haber campos vacios")
-            return
-        }
-        if(password !== confirmPassword) {
-            alert("Las Contrasenas no Coinciden")
+        if(password !== confirmedPassword) {
+            setErrorMessage("Las Contrasenas no Coinciden")
+            setValidPassword(false)
+            setValidConfirmedPassword(false)
             return
         }
 
         UserService.createUser(userTemplate)
-            .then(response => {
+            .then(_ => {
                 navigate("/login")
             })
             .catch(error => {
-                alert(`El user name "${userName}" ya esta en uso`)
+                setModalBody(`El user name "${userName}" ya esta en uso`)
+                setShowModal(true)
+                setValidUserName(false)
                 console.error(error)
             })
 
@@ -60,6 +76,20 @@ const RegisterCompenent = () => {
                    >Registro de Usuario</h3>
                </nav>
            </div>
+           <Modal
+               show = {showModal}
+               aria-labelledby="contained-modal-title-vcenter"
+               centered
+           >
+               <ModalHeader>Registro de Usuario</ModalHeader>
+               <ModalBody>{modalBody}</ModalBody>
+               <ModalFooter>
+                   <button
+                       className="btn btn-secondary"
+                       onClick = {() => setShowModal(false)}
+                   >Cerrar</button>
+               </ModalFooter>
+           </Modal>
            <div className = "container my-4">
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3 offset-md-3 border">
@@ -70,8 +100,12 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "text"
                                         placeholder = "Ingresa Nombre de usuario"
-                                        className = "form-control"
-                                        onChange = {(e) => {setUserName(e.target.value)}}
+                                        className = {`form-control ${validUserName ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidUserName(checkValidInput(value))
+                                            setUserName(value)
+                                        }}
                                     >
                                     </input>
                                 </div>
@@ -80,8 +114,11 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "text"
                                         placeholder = "Ingresa Primer Nombre"
-                                        className = "form-control"
-                                        onChange = {(e) => {setFirstName(e.target.value)}}
+                                        className = {`form-control ${validFirstName ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidFirstName(checkValidInput(value))
+                                            setFirstName(value)}}
                                     >
                                     </input>
                                 </div>
@@ -90,8 +127,12 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "text"
                                         placeholder = "Ingrese Segundo Nombre"
-                                        className = "form-control"
-                                        onChange = {(e) => {setSecondName(e.target.value)}}
+                                        className = {`form-control ${validSecondName ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidSecondName(checkValidInput(value))
+                                            setSecondName(value)
+                                        }}
                                     >
                                     </input>
                                 </div>
@@ -100,8 +141,12 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "text"
                                         placeholder = "Ingresa Apellido Paterno"
-                                        className = "form-control"
-                                        onChange = {(e) => {setPaternalLastName(e.target.value)}}
+                                        className = {`form-control ${validPaternalLastName ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidPaternalLastName(checkValidInput(value))
+                                            setPaternalLastName(value)
+                                        }}
                                     >
                                     </input>
                                 </div>
@@ -110,8 +155,12 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "text"
                                         placeholder = "Ingrese Apellido Materno"
-                                        className = "form-control"
-                                        onChange = {(e) => {setMaternalLastName(e.target.value)}}
+                                        className = {`form-control ${validMaternalLastName ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidMaternalLastName(checkValidInput(value))
+                                            setMaternalLastName(value)
+                                        }}
                                     >
                                     </input>
                                 </div>
@@ -120,8 +169,12 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "password"
                                         placeholder = "Ingresa Contraseña"
-                                        className = "form-control"
-                                        onChange = {(e) => {setPassword(e.target.value)}}
+                                        className = {`form-control ${validPassword ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidPassword(checkValidInput(value))
+                                            setPassword(value)
+                                        }}
                                     >
                                     </input>
                                 </div>
@@ -130,14 +183,21 @@ const RegisterCompenent = () => {
                                     <input
                                         type = "password"
                                         placeholder = "Ingresa Contraseña"
-                                        className = "form-control"
-                                        onChange = {(e) => {setConfirmPassword(e.target.value)}}
+                                        className = {`form-control ${validConfirmedPassword ? "is-valid" : "is-invalid"}`}
+                                        onChange = {(e) => {
+                                            let value = e.target.value
+                                            setValidConfirmedPassword(checkValidInput(value))
+                                            setConfirmedPassword(value)
+                                        }}
                                     >
                                     </input>
+                                    { !isValidRequest &&
+                                        <p className="invalid-feedback"> {errorMessage}</p>
+                                    }
                                 </div>
                                 <buttom
-                                    className="btn btn-success"
-                                    onClick = {() => {registerUser()}}
+                                    className={`btn ${isValidRequest ? "btn-success" : "btn-secondary"}`}
+                                    onClick = {isValidRequest ? () => {registerUser()} : null}
                                 > Registrar</buttom>
                                 <Link to="/login" className="btn btn-danger m-2"> Cancelar </Link>
                             </form>

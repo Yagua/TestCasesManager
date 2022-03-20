@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import UserService from '../service/UserService'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 
+import UserService from '../service/UserService'
+import { checkValidInput } from '../lib/util'
 
 const ChangePasswordComponent = () => {
     let [userName, setUserName] = useState('')
@@ -17,11 +18,6 @@ const ChangePasswordComponent = () => {
 
     let isValidRequest = validUserName && validPassword && validConfirmedPassword
     let navigate = useNavigate()
-
-    const checkValidInput = (value, callback) => {
-        let isFieldEmpty = !/^(?!\s*$).+/.test(value)
-        callback(isFieldEmpty ? false : true)
-    }
 
     const updatePassword = () => {
         let userTemplate = {
@@ -42,13 +38,10 @@ const ChangePasswordComponent = () => {
             .catch(error => {
                 setModalBody(`El usuario "${userName}" no existe.`)
                 setValidUserName(false)
-                handleOpenModal()
+                setShowModal(true)
                 console.error(error)
             })
     }
-
-    const handleOpenModal = () => setShowModal(true)
-    const handleCloseModal = () => setShowModal(false)
 
     return (
         <div>
@@ -67,7 +60,7 @@ const ChangePasswordComponent = () => {
                 <ModalFooter>
                     <button
                         className="btn btn-secondary"
-                        onClick = {() => handleCloseModal()}
+                        onClick = {() => setShowModal(false)}
                     >Cerrar</button>
                 </ModalFooter>
             </Modal>
@@ -85,7 +78,7 @@ const ChangePasswordComponent = () => {
                                         className = {`form-control ${validUserName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
-                                            checkValidInput(value, setValidUserName)
+                                            setValidUserName(checkValidInput(value))
                                             setUserName(value)
                                         }}
                                         required
@@ -101,7 +94,7 @@ const ChangePasswordComponent = () => {
                                         className = {`form-control ${validPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
-                                            checkValidInput(value, setValidPassword)
+                                            setValidPassword(checkValidInput(value))
                                             setPassword(value)
                                         }}
                                         required
@@ -117,7 +110,7 @@ const ChangePasswordComponent = () => {
                                         className = {`form-control ${validConfirmedPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
-                                            checkValidInput(value, setValidConfirmedPassword)
+                                            setValidConfirmedPassword(checkValidInput(value))
                                             setConfirmedPassword(value)
                                         }}
                                         required
@@ -131,7 +124,10 @@ const ChangePasswordComponent = () => {
                                     className={`btn ${isValidRequest ? "btn-success" : "btn-secondary"}`}
                                     onClick = {isValidRequest ? () => {updatePassword()} : null}
                                 > Aceptar </buttom>
-                                <Link to="/home" className="btn btn-danger m-2"> Cancelar </Link>
+                                <Link
+                                    to={localStorage.getItem("isAthenticated") ? "/home" : "/login"}
+                                    className="btn btn-danger m-2"
+                                > Cancelar </Link>
                             </form>
                         </div>
                     </div>
