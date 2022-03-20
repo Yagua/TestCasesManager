@@ -4,7 +4,6 @@ import HeaderComponent from './HeaderComponent'
 import LoadingComponent from './LoadingComponent'
 import TestCasesListComponent from './TestCasesListComponent'
 import UserService from '../service/UserService'
-import ModalMessageComponent from './ModalMessageComponent'
 
 const HomeComponent = () => {
     let [user, setUser] = useState({});
@@ -32,10 +31,6 @@ const HomeComponent = () => {
                 <TestCasesListComponent testCases={
                     user.testCases.filter((element) => element.enabled)
                   }
-                />
-                <ModalMessageComponent
-                    modalTitle  = {<h4>hola</h4>}
-                    modalBody = {"hola mundo"}
                 />
             </div>
         );

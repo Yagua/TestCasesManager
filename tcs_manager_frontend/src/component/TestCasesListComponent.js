@@ -5,11 +5,14 @@ import { Modal } from 'bootstrap';
 import UserService from '../service/UserService';
 import TestCaseService from '../service/TestCaseService'
 import LoadingComponent from './LoadingComponent';
+import ModalComponent from './ModalComponent'
 
 const TestCasesListComponent = (props) => {
     let [user, setUser] = useState({});
     let [isLoaded, setIsLoaded] = useState(false);
     let [testCases, setTestCases] = useState([])
+    let [modalShow, setModalShow] = useState(false)
+    let [testCaseId, setTestCaseId] = useState()
     let userId = localStorage.getItem("loggedUserId");
     let navigate = useNavigate()
 
@@ -20,7 +23,6 @@ const TestCasesListComponent = (props) => {
                 setUser(user);
                 setIsLoaded(true);
                 updateTestCases(user)
-                // setModalObject(new Modal(document.getElementById("modal-window")))
             })
     }, [testCases])
 
@@ -44,6 +46,12 @@ const TestCasesListComponent = (props) => {
         TestCaseService.deleteTestCase(testCaseId)
             .then(_ => { updateTestCases()})
             .catch(error => console.error(error))
+    }
+
+    const handleModalClose = () => setModalShow(false)
+    const handleModalOpen = (testCaseId) => {
+        setTestCaseId(testCaseId)
+        setModalShow(true)
     }
 
     const renderContent = () => {
@@ -98,14 +106,14 @@ const TestCasesListComponent = (props) => {
                                                     <button
                                                         className = "btn btn-success"
                                                         onClick = {() =>{
-                                                            // enableOrDisableTestCase(testCase.testCaseId, true)
+                                                            enableOrDisableTestCase(testCase.testCaseId, true)
                                                         }}
                                                         style = {{marginLeft:"10px"}}
                                                     >Habilitar</button>
                                                     <button
                                                         className = "btn btn-danger"
                                                         onClick = {() =>{
-                                                            deleteTestCase(testCase.testCaseId)
+                                                            handleModalOpen(testCase.testCaseId)
                                                         }}
                                                         style = {{marginLeft:"10px"}}
                                                     >Eliminar</button>
@@ -137,6 +145,17 @@ const TestCasesListComponent = (props) => {
                             No hay Casos de Uso para Mostrar
                         </div>
                     }
+                  <ModalComponent
+                      modalTitle  = {<h4>Eliminar Caso de Prueba</h4>}
+                      modalBody = "Si elimina el caso de uso, toda la información relacionada a el se borrara también."
+                      show = {modalShow}
+                      closeAction = {() => handleModalClose}
+                      onConfirm = {() => {
+                          deleteTestCase(testCaseId)
+                          handleModalClose()
+                      }}
+                      onHide = {() => handleModalClose()} //allow hide the modal with clicks without it
+                  />
                 </div>
               </div>
         );
