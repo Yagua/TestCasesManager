@@ -3,6 +3,7 @@ package com.tcsManager.tcsmanager.exception;
 /**
  * TesterNotFoundException
  */
+
 public class TesterNotFoundException extends Exception {
 
     public TesterNotFoundException() {

@@ -8,7 +8,6 @@ import com.tcsManager.tcsmanager.exception.TestCaseNotFoundException;
 import com.tcsManager.tcsmanager.exception.TestElementNotFoundException;
 import com.tcsManager.tcsmanager.service.TestElementService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,13 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * TestElementController
  */
+
 @RestController
 @RequestMapping("/api/v1/test-elements")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class TestElementController {
 
-    @Autowired
     private TestElementService testElementService;
+
+    public TestElementController(TestElementService testElementService) {
+        this.testElementService = testElementService;
+    }
 
     @GetMapping
     public List<TestElement> getAllTestElements() {

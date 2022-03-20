@@ -1,5 +1,9 @@
 package com.tcsManager.tcsmanager.exception;
 
+/**
+ * ResourceNotFoundException
+ */
+
 public class ResourceNotFoundException extends Exception {
 
     public ResourceNotFoundException() {

@@ -7,7 +7,6 @@ import com.tcsManager.tcsmanager.entity.User;
 import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,13 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * UserController
  */
+
 @RestController
 @RequestMapping("/api/v1/users")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<User> getAllUsers() {

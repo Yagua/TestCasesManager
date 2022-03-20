@@ -5,7 +5,6 @@ import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.playload.UserDTO;
 import com.tcsManager.tcsmanager.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * AuthController
+ */
+
 @RequestMapping("/api/v1/auth")
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class AuthController {
-    @Autowired
+
     private UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/login")
     public User loginUser(@RequestBody UserDTO loginDTO)

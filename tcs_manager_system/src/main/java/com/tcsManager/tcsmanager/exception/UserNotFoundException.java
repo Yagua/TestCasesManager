@@ -1,5 +1,9 @@
 package com.tcsManager.tcsmanager.exception;
 
+/**
+ * UserNotFoundException
+ */
+
 public class UserNotFoundException extends Exception {
 
     public UserNotFoundException() {

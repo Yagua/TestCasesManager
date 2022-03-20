@@ -10,7 +10,6 @@ import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.repository.UserRepository;
 import com.tcsManager.tcsmanager.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,11 @@ import org.springframework.util.ReflectionUtils;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User getUser(long id) throws UserNotFoundException {

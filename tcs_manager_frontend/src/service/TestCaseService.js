@@ -3,10 +3,12 @@ import axios from "axios";
 const TEST_CASE_BASE_API_URL = "http://localhost:8080/api/v1/test-cases/";
 
 class TestCaseService {
+
     getAllTestCases() {
         return axios.get(TEST_CASE_BASE_API_URL)
             .then(response => response.data)
     }
+
     getTestCase(testCaseId) {
         return axios.get(TEST_CASE_BASE_API_URL + `${testCaseId}`)
             .then(response => response.data)

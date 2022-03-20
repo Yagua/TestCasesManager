@@ -8,7 +8,6 @@ import com.tcsManager.tcsmanager.exception.TestCaseNotFoundException;
 import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.service.TestCaseService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,13 +20,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * TestCaseController
+ */
+
 @RestController
 @RequestMapping("/api/v1/test-cases")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class TestCaseController {
 
-    @Autowired
     private TestCaseService testCaseService;
+
+    public TestCaseController(TestCaseService testCaseService) {
+        this.testCaseService = testCaseService;
+    }
 
     @GetMapping
     public List<TestCase> getAllTestCases() {

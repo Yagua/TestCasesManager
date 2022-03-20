@@ -24,13 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * TesterController
  */
+
 @RestController
 @RequestMapping("/api/v1/testers")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class TesterController {
 
-    @Autowired
-    TesterService testerService;
+    private TesterService testerService;
+
+    public TesterController(TesterService testerService) {
+        this.testerService = testerService;
+    }
 
     @GetMapping
     public List<Tester> getAllTesters() {
@@ -56,12 +60,12 @@ public class TesterController {
     }
 
     @PatchMapping("/{testerId}")
-    public Tester updateTester( @PathVariable long testerId,
+    public Tester partialUpdateTester( @PathVariable long testerId,
             @RequestBody Map<Object, Object> fields) throws TesterNotFoundException {
         return testerService.partialUpdateTester(testerId, fields);
     }
 
-    @DeleteMapping("/tc/{testCaseId}/delete/{testerId}")
+    @DeleteMapping("/{testerId}/tc/{testCaseId}")
     public ResponseEntity<String> deleteTester(@PathVariable long testerId,
             @PathVariable long testCaseId) throws TesterNotFoundException,
             TestCaseNotFoundException {

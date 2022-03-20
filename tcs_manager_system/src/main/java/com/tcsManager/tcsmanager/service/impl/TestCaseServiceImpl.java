@@ -12,7 +12,6 @@ import com.tcsManager.tcsmanager.repository.TestCaseRepository;
 import com.tcsManager.tcsmanager.repository.UserRepository;
 import com.tcsManager.tcsmanager.service.TestCaseService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ public class TestCaseServiceImpl implements TestCaseService {
     private TestCaseRepository testCaseRepository;
     private UserRepository userRepository;
 
-    @Autowired
     public TestCaseServiceImpl(TestCaseRepository testCaseRepository,
             UserRepository userRepository){
         this.testCaseRepository = testCaseRepository;
