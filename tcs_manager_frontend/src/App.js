@@ -12,7 +12,7 @@ import LoadingComponents from './component/LoadingComponent'
 import ChangePasswordComponent from './component/ChangePasswordComponent'
 import DisabledTestCasesComponent from './component/DisabledTestCasesComponent'
 import RegisterComponent from './component/RegisterComponent'
-import AddTestCaseComponent from './component/AddTestCaseComponent'
+import TestCaseComponent from './component/TestCaseComponent'
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ const App = () => {
               <Route path="/load" element={<LoadingComponents />}></Route>
               <Route path="/disabled-testcases" element={<DisabledTestCasesComponent />}></Route>
               <Route path="/user-register" element={<RegisterComponent />}></Route>
-              <Route path="/add-testcase" element={<AddTestCaseComponent />}></Route>
+              <Route path="/add-testcase" element={<TestCaseComponent />}></Route>
           </Routes>
         </Router>
   );

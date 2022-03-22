@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import HeaderComponent from '../component/HeaderComponent'
 import TestCaseService from '../service/TestCaseService'
 import ModalComponent from './ModalComponent'
 
-const AddTestCaseComponent = () => {
+const TestCaseComponent = () => {
     let [testCaseName, setTestCaseName] = useState('');
     let [testCaseVersion, setTestCaseVersion] = useState('');
     let [executionDate, setExecutionDate] = useState('');
@@ -175,24 +175,35 @@ const AddTestCaseComponent = () => {
 
                     <p className = "text-center h5 mt-4 alert alert-secondary"> Elementos de Prueba</p>
                     <div className = "mx-5">
-                        <table class="table table-bordered border-secondary">
+                        <table className="table">
                             <thead>
                                 <tr>
-                                    <th className = "text-center">
-                                        <span> Datos de Entrada </span>
-                                        <hr className = "m-1"/>
-                                        <div className = "row">
-                                            <th className = "col text-center border-right">Campo</th>
-                                            <th className = "col text-center">Valor</th>
-                                            <th className = "col text-center">Escenario</th>
-                                        </div>
-                                    </th>
-                                    <th className = "text-center">Respuesta Esperada</th>
-                                    <th className = "text-center">Coincide</th>
-                                    <th className = "text-center">Respuesta del Sistema</th>
+                                    <th className = "border-top border-start"></th>
+                                    <th className = "border-top text-end"> Datos de Entrada </th>
+                                    <th className = "border-top "></th>
+                                    <th className = "border"></th>
+                                    <th className = "border"></th>
+                                    <th className = "border"></th>
+                                </tr>
+                                <tr>
+                                    <th className = "border text-center">Campo</th>
+                                    <th className = "border text-center">Valor</th>
+                                    <th className = "border text-center">Tipo de Esecenario</th>
+                                    <th className = "border text-center">Respuesta Esperada de la Aplicación</th>
+                                    <th className = "border text-center">Coincide</th>
+                                    <th className = "border text-center">Respuesta del Sistema</th>
                                 </tr>
                             </thead>
-                            <tbody> </tbody>
+                            <tbody>
+                                <tr>
+                                    <td> hola </td>
+                                    <td> hola </td>
+                                    <td> hola </td>
+                                    <td> hola </td>
+                                    <td> hola </td>
+                                    <td> hola </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
 
@@ -271,4 +282,4 @@ const AddTestCaseComponent = () => {
     );
 }
 
-export default AddTestCaseComponent
+export default TestCaseComponent
