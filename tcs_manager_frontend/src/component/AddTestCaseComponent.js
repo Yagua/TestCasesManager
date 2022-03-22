@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import HeaderComponent from '../component/HeaderComponent'
 import TestCaseService from '../service/TestCaseService'
+import ModalComponent from './ModalComponent'
 
 const AddTestCaseComponent = () => {
     let [testCaseName, setTestCaseName] = useState('');
@@ -18,6 +19,7 @@ const AddTestCaseComponent = () => {
     let [observations, setObservations] = useState('');
     let [testElements, setTestElements] = useState([]);
     let [testers, setTesters] = useState([]);
+    let [modalShow, setModalShow] = useState(false)
 
     let userId = localStorage.getItem("loggedUserId")
     let navigate = useNavigate()
@@ -49,6 +51,9 @@ const AddTestCaseComponent = () => {
             })
             .catch(error => console.error(error))
     }
+
+    const handleModalClose = () => setModalShow(false)
+    const handleModalOpen = () => setModalShow(true)
 
     return (
         <div>
@@ -212,7 +217,7 @@ const AddTestCaseComponent = () => {
                                     <textarea
                                         type = "text"
                                         rows = {2}
-                                        maxLength = {150}
+                                        maxLength = {100}
                                         placeholder = "Ingresa Veredicto"
                                         name = "test-case-veredict"
                                         className = {`form-control`}
@@ -228,7 +233,7 @@ const AddTestCaseComponent = () => {
                                         placeholder = "Ingresa Observaciones"
                                         name = "test-case-observations"
                                         className = {`form-control`}
-                                        onChange = {(e) => {setTestCaseDescription(e.target.value)}}
+                                        onChange = {(e) => {setObservations(e.target.value)}}
                                     />
                                 </div>
                             </div>
@@ -244,12 +249,23 @@ const AddTestCaseComponent = () => {
                             className = "btn btn-success mx-3"
                             onClick = {() => {createTestCase()}}
                         >Confirmar</button>
-                        <Link
-                            to = "/home"
+                        <button
                             className = "btn btn-danger"
-                        >Cancelar</Link>
+                            onClick = {() => handleModalOpen()}
+                        >Cancelar</button>
                     </div>
                 </div>
+              <ModalComponent
+                  modalTitle  = {<h4>Cancelar Creación de Caso de Prueba</h4>}
+                  modalBody = "Si cancela la creación del caso de prueba, la información consignada hasta ahora se perderá."
+                  show = {modalShow}
+                  closeAction = {() => handleModalClose}
+                  onConfirm = {() => {
+                      navigate("/home")
+                      handleModalClose()
+                  }}
+                  onHide = {() => handleModalClose()} //allow hide the modal with clicks without it
+              />
             </div>
         </div>
     );

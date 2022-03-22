@@ -57,7 +57,7 @@ public class TestCase {
     @Column(
         name = "fecha_ejecucion",
         nullable = true,
-        columnDefinition = "DATE DEFAULT CURRENT_DATE"
+        columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
     )
     private Date executionDate;
 

@@ -79,12 +79,12 @@ const TestCasesListComponent = (props) => {
 
                       <thead>
                         <tr>
-                          <th scope="col"> Caso De Uso Id </th>
+                          <th className = "text-center" scope="col"> Caso De Uso Id </th>
                           <th scope="col"> Nombre </th>
                           <th scope="col"> Modulo del Systema </th>
                           <th scope="col"> Version </th>
                           <th scope="col"> Fecha de Ejecicion</th>
-                          <th scope="col"> Acciones</th>
+                          <th className = "text-center" scope="col"> Acciones Disponibles</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -98,35 +98,33 @@ const TestCasesListComponent = (props) => {
                                             <td>{testCase.testCaseName}</td>
                                             <td>{testCase.systemModule}</td>
                                             <td>{testCase.testCaseVersion}</td>
-                                            <td >{testCase.executionDate}</td>
+                                            <td>{testCase.executionDate}</td>
                                             { props.disabledTestCases ?
-                                                <td>
+                                                <td className = "text-center">
                                                     <button
-                                                        className = "btn btn-success"
+                                                        className = "btn btn-success m-1"
                                                         onClick = {() =>{
                                                             enableOrDisableTestCase(testCase.testCaseId, true)
                                                         }}
-                                                        style = {{marginLeft:"10px"}}
                                                     >Habilitar</button>
                                                     <button
-                                                        className = "btn btn-danger"
+                                                        className = "btn btn-danger m-1"
                                                         onClick = {() =>{
                                                             handleModalOpen(testCase.testCaseId)
                                                         }}
-                                                        style = {{marginLeft:"10px"}}
                                                     >Eliminar</button>
                                                 </td>
                                                  :
-                                                <td>
-                                                    <Link className="btn btn-primary"
+                                                <td className = "text-center">
+                                                    <Link className="btn btn-primary m-1"
                                                           to={`/view-test-case/${testCase.testCaseId}`}
                                                     > Visualizar</Link>
                                                     <button
-                                                        className = "btn btn-danger"
+                                                        className = "btn btn-danger m-1"
                                                         onClick = {() => {
                                                             enableOrDisableTestCase(testCase.testCaseId, false)
                                                         }}
-                                                    style = {{marginLeft:"10px"}}>Suprimir</button>
+                                                    >Suprimir</button>
                                                 </td>
                                             }
                                         </tr>
