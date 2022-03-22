@@ -9,7 +9,7 @@ const HeaderComponent = (props) => {
                     style={{marginLeft:"20px"}}
                 >{props.navBarBrand ? props.navBarBrand : "Gestor de Casos de Pruebas"}</h3>
                 <ul className="nav">
-                  {props.onProfile ?
+                  {!props.onHome ?
                       <li className="nav-item">
                         <Link
                             to = "/home"

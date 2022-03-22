@@ -28,25 +28,26 @@ public class Tester {
     @Column(name = "probador_id")
     private long testerId;
 
-    @Column(name = "primer_nombre", nullable =  false, length = 40)
+    @Column(name = "primer_nombre", nullable =  false, length = 20)
     private String firstName;
 
-    @Column(name = "segundo_nombre", nullable = true, length = 40)
+    @Column(name = "segundo_nombre", nullable = true, length = 20)
     private String secondName;
 
-    @Column(name = "apellido_paterno", nullable = false, length = 40)
+    @Column(name = "apellido_paterno", nullable = false, length = 20)
     private String paternalLastName;
 
-    @Column(name = "apellido_materno", nullable = true, length = 40)
+    @Column(name = "apellido_materno", nullable = true, length = 20)
     private String maternalLastName;
 
-    @Column(name = "firma", nullable = true, length = 40)
+    @Column(name = "firma", nullable = true, length = 20)
     private String sing;
 
     @Column(
         name = "fecha_creacion",
         nullable = true,
         columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+
     )
     private Date timeStamp;
 

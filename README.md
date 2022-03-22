@@ -3,4 +3,4 @@
 ### TODOS
 
 - Mejorar la seguridad de la API (implementar JWT para autenticacion)
-- Cambiar los mensajes de alerta del frontend por ventanas modales
+- Mojorar la validacion de campos de todos los forms de la app

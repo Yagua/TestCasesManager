@@ -99,6 +99,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Nombre de Usuario</label>
                                     <input
                                         type = "text"
+                                        maxLength = {20}
                                         placeholder = "Ingresa Nombre de usuario"
                                         className = {`form-control ${validUserName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -113,6 +114,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Primer Nombre</label>
                                     <input
                                         type = "text"
+                                        maxLength = {20}
                                         placeholder = "Ingresa Primer Nombre"
                                         className = {`form-control ${validFirstName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -126,6 +128,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Segundo Nombre</label>
                                     <input
                                         type = "text"
+                                        maxLength = {20}
                                         placeholder = "Ingrese Segundo Nombre"
                                         className = {`form-control ${validSecondName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -140,6 +143,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Apellido Paterno</label>
                                     <input
                                         type = "text"
+                                        maxLength = {20}
                                         placeholder = "Ingresa Apellido Paterno"
                                         className = {`form-control ${validPaternalLastName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -154,6 +158,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Apellido Materno</label>
                                     <input
                                         type = "text"
+                                        maxLength = {20}
                                         placeholder = "Ingrese Apellido Materno"
                                         className = {`form-control ${validMaternalLastName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -168,6 +173,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Nueva Contraseña</label>
                                     <input
                                         type = "password"
+                                        maxLength = {50}
                                         placeholder = "Ingresa Contraseña"
                                         className = {`form-control ${validPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -182,6 +188,7 @@ const RegisterCompenent = () => {
                                     <label className = "form-label"> Confirmar Contraseña</label>
                                     <input
                                         type = "password"
+                                        maxLength = {50}
                                         placeholder = "Ingresa Contraseña"
                                         className = {`form-control ${validConfirmedPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {

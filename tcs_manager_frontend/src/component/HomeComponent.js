@@ -26,7 +26,7 @@ const HomeComponent = () => {
         return (
             <div>
                 <div className = "sticky-top bg-light">
-                    <HeaderComponent userName = {user.userName}/>
+                    <HeaderComponent userName = {user.userName} onHome = {true}/>
                 </div>
                 <TestCasesListComponent testCases={
                     user.testCases.filter((element) => element.enabled)

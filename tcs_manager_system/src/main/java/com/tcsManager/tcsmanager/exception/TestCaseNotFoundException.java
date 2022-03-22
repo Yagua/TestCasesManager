@@ -4,6 +4,7 @@ package com.tcsManager.tcsmanager.exception;
  * TestCaseNotFoundException
  */
 
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class TestCaseNotFoundException extends Exception {
 
     public TestCaseNotFoundException() {

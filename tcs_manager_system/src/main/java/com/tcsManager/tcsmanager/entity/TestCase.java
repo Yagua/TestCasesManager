@@ -48,41 +48,41 @@ public class TestCase {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "nombre_caso_uso", nullable = false, length = 100)
+    @Column(name = "nombre_caso_uso", nullable = false, length = 40)
     private String testCaseName;
 
-    @Column(name = "version_caso_uso", nullable = false, length = 80)
+    @Column(name = "version_caso_uso", nullable = false, length = 20)
     private String testCaseVersion;
 
     @Column(
         name = "fecha_ejecucion",
         nullable = true,
-        columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        columnDefinition = "DATE DEFAULT CURRENT_DATE"
     )
     private Date executionDate;
 
-    @Column(name = "modulo_sistema", nullable = false)
+    @Column(name = "modulo_sistema", nullable = false, length = 80)
     private String systemModule;
 
-    @Column(name = "description_caso_uso", nullable = false)
+    @Column(name = "description_caso_uso", nullable = false, length = 150)
     private String testCaseDescription;
 
-    @Column(name = "precondiciones", nullable = false)
+    @Column(name = "precondiciones", nullable = false, length = 150)
     private String preconditions;
 
-    @Column(name = "pasos_prueba", nullable = false)
+    @Column(name = "pasos_prueba", nullable = false, length = 150)
     private String testSteps;
 
-    @Column(name = "postcondiciones", nullable = false)
+    @Column(name = "postcondiciones", nullable = false, length = 150)
     private String postconditions;
 
-    @Column(name = "defectos_desviaciones", nullable = false)
+    @Column(name = "defectos_desviaciones", nullable = false, length = 150)
     private String defectsAndDesviations;
 
-    @Column(name = "veredicto", nullable = false)
+    @Column(name = "veredicto", nullable = false, length = 100)
     private String veredict;
 
-    @Column(name = "observaciones", nullable = false)
+    @Column(name = "observaciones", nullable = false, length = 150)
     private String observations;
 
     //unidirectional TestCase -> Tester relationship

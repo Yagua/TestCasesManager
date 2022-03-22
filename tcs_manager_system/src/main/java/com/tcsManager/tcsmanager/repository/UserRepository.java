@@ -1,5 +1,7 @@
 package com.tcsManager.tcsmanager.repository;
 
+import java.util.Optional;
+
 import com.tcsManager.tcsmanager.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * UserRepository
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUserNameAndPassword(String userName, String password);
-    User findByUserName(String userName);
+    Optional<User> findByUserNameAndPassword(String userName, String password);
+    Optional<User> findByUserName(String userName);
 }

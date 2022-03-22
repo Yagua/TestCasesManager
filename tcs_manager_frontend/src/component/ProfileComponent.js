@@ -46,7 +46,7 @@ const ProfileComponent = (props) => {
         if(!isLoaded) return <LoadingComponent />
         return (
             <div>
-                <HeaderComponent onProfile={true} navBarBrand = "Perfil de Usuario"/>
+                <HeaderComponent onHome={false} navBarBrand = "Perfil de Usuario"/>
                 <ModalComponent
                     modalTitle={<h4>Esta seguro de borrar el usuario "{user.userName}"</h4>}
                     modalBody="Si elimina el usuario, todos sus datos se perderán también."

@@ -34,16 +34,16 @@ public class User {
     @Column(name = "usuario_id")
     private long userId;
 
-    @Column(name = "primer_nombre", nullable =  false, length = 40)
+    @Column(name = "primer_nombre", nullable =  false, length = 20)
     private String firstName;
 
-    @Column(name = "segundo_nombre", nullable = true, length = 40)
+    @Column(name = "segundo_nombre", nullable = true, length = 20)
     private String secondName;
 
-    @Column(name = "apellido_paterno", nullable = false, length = 40)
+    @Column(name = "apellido_paterno", nullable = false, length = 20)
     private String paternalLastName;
 
-    @Column(name = "apellido_materno", nullable = true, length = 40)
+    @Column(name = "apellido_materno", nullable = true, length = 20)
     private String maternalLastName;
 
     @Column(
@@ -53,7 +53,7 @@ public class User {
     )
     private String userName;
 
-    @Column(name = "contrasena_usuario", nullable = false)
+    @Column(name = "contrasena_usuario", nullable = false, length = 50)
     private String password;
 
     @Column(

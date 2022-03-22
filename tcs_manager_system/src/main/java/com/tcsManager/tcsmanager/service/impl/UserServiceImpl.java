@@ -106,21 +106,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginUser(String userName, String userPassword)
         throws UserNotFoundException {
-        User user = userRepository.findByUserNameAndPassword(userName, userPassword);
-        if(user == null) throw new UserNotFoundException(
-                String.format("User Not found"));
+        User user = userRepository.findByUserNameAndPassword(userName, userPassword)
+            .orElseThrow(() -> new UserNotFoundException(
+                String.format("User Not found")));
         return user;
     }
 
     @Override
     public User updatePassword(String userName, String userPassword)
             throws UserNotFoundException {
-            User user = userRepository.findByUserName(userName);
-            if(user == null) {
-                throw new UserNotFoundException(String.format(
+            User user = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new UserNotFoundException(String.format(
                             "User indentified with user name %s does not exists",
-                            userName));
-            }
+                            userName)));
             user.setPassword(userPassword);
             return userRepository.save(user);
     }

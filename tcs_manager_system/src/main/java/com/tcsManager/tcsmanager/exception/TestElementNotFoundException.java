@@ -4,6 +4,7 @@ package com.tcsManager.tcsmanager.exception;
  * TestElementNotFoundException
  */
 
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class TestElementNotFoundException extends Exception {
 
     public TestElementNotFoundException() {

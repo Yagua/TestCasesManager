@@ -28,22 +28,22 @@ public class TestElement {
     @Column(name = "elemento_prueba_id")
     private long testElementId;
 
-    @Column(name = "campo", nullable = false)
+    @Column(name = "campo", nullable = false, length = 150)
     private String field;
 
-    @Column(name = "valor", nullable = false)
+    @Column(name = "valor", nullable = false, length = 150)
     private String value;
 
-    @Column(name = "tipo_escenario", nullable = false)
+    @Column(name = "tipo_escenario", nullable = false, length = 150)
     private String scenario;
 
-    @Column(name = "respuesta_esperada", nullable = false)
+    @Column(name = "respuesta_esperada", nullable = false, length = 150)
     private String expectedResponse;
 
-    @Column(name = "coincidencia", nullable = false)
+    @Column(name = "coincidencia", nullable = false, length = 150)
     private boolean matching;
 
-    @Column(name = "respuesta_sistema", nullable = false)
+    @Column(name = "respuesta_sistema", nullable = false, length = 150)
     private String systemResponse;
 
     @Column(

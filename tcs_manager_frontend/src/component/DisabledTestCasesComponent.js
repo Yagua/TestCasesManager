@@ -10,7 +10,7 @@ const DisabledTestCasesComponent = () => {
         if(!localStorage.getItem("isAthenticated")) navigate("/login")
         return (
             <div>
-                <HeaderComponent onProfile={true}/>
+                <HeaderComponent onHome={false}/>
                 <TestCasesListComponent
                     disabledTestCases={true}
                     title = "Casos de Prueba Inhabilitados"

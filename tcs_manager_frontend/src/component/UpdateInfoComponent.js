@@ -73,7 +73,7 @@ const UpdateInfoComponent = () => {
             <div>
                 <HeaderComponent
                     navBarBrand="Actualización de Información"
-                    onProfile={true}
+                    onHome={false}
                 />
                 <div>
                    <div className = "container my-3">
@@ -85,6 +85,7 @@ const UpdateInfoComponent = () => {
                                             <label className = "form-label"> Primer Nombre</label>
                                             <input
                                                 type = "text"
+                                                maxLength = {20}
                                                 placeholder = "Ingresa Primer Nombre"
                                                 name = "firstName"
                                                 className = "form-control"
@@ -97,6 +98,7 @@ const UpdateInfoComponent = () => {
                                             <label className = "form-label"> Segundo Nombre</label>
                                             <input
                                                 type = "text"
+                                                maxLength = {20}
                                                 placeholder = "Ingresa Segundo Nombre"
                                                 name = "firstName"
                                                 className = "form-control"
@@ -109,6 +111,7 @@ const UpdateInfoComponent = () => {
                                             <label className = "form-label"> Apellido Paterno</label>
                                             <input
                                                 type = "text"
+                                                maxLength = {20}
                                                 placeholder = "Ingresa Apellido Paterno"
                                                 name = "lastName"
                                                 className = "form-control"
@@ -121,6 +124,7 @@ const UpdateInfoComponent = () => {
                                             <label className = "form-label"> Apellido Materno</label>
                                             <input
                                                 type = "text"
+                                                maxLength = {20}
                                                 placeholder = "Ingresa Apellido Materno"
                                                 name = "lastName"
                                                 className = "form-control"
@@ -133,6 +137,7 @@ const UpdateInfoComponent = () => {
                                             <label className = "form-label"> Nombre de Usuario</label>
                                             <input
                                                 type = "text"
+                                                maxLength = {20}
                                                 placeholder = "Ingresa Nombre de usuario"
                                                 name = "userName"
                                                 className = "form-control"
