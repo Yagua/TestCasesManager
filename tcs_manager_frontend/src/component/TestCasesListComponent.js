@@ -61,7 +61,7 @@ const TestCasesListComponent = (props) => {
                   { !props.disabledTestCases &&
                       <>
                           <div className="alert alert-success mt-2 d-flex justify-content-between" role="alert">
-                              <Link to = "/add-testcase" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
+                              <Link to = "/testcase/tc=none/view=false" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
                               <Link
                                   type="button"
                                   className="btn btn-primary position-relative"
@@ -89,10 +89,10 @@ const TestCasesListComponent = (props) => {
                       </thead>
                       <tbody>
                         {
-                            testCases.map(testCase => {
+                            testCases.map((testCase, index) => {
                                 return (
                                     <>
-                                        <tr key="fs-01" className="spacer"><td colSpan="100"></td></tr>
+                                        <tr key={`ft-${index}`} className="spacer"><td colSpan="100"></td></tr>
                                         <tr key={testCase.testCaseId} scope="row">
                                             <td className="text-center">{testCase.testCaseId}</td>
                                             <td>{testCase.testCaseName}</td>
@@ -117,7 +117,7 @@ const TestCasesListComponent = (props) => {
                                                  :
                                                 <td className = "text-center">
                                                     <Link className="btn btn-primary m-1"
-                                                          to={`/view-test-case/${testCase.testCaseId}`}
+                                                          to={`/testcase/tc=${testCase.testCaseId}/view=${true}`}
                                                     > Visualizar</Link>
                                                     <button
                                                         className = "btn btn-danger m-1"
@@ -128,7 +128,7 @@ const TestCasesListComponent = (props) => {
                                                 </td>
                                             }
                                         </tr>
-                                        <tr key="fs-02" className="spacer"><td colSpan="100"></td></tr>
+                                        <tr key={`fb-${index}`} className="spacer"><td colSpan="100"></td></tr>
                                     </>
                                 );
                             })
