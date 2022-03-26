@@ -61,7 +61,7 @@ const TestCasesListComponent = (props) => {
                   { !props.disabledTestCases &&
                       <>
                           <div className="alert alert-success mt-2 d-flex justify-content-between" role="alert">
-                              <Link to = "/testcase/tc=none/view=false" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
+                              <Link to = "/testcase/?tcId=none&view=false" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
                               <Link
                                   type="button"
                                   className="btn btn-primary position-relative"
@@ -117,7 +117,7 @@ const TestCasesListComponent = (props) => {
                                                  :
                                                 <td className = "text-center">
                                                     <Link className="btn btn-primary m-1"
-                                                          to={`/testcase/tc=${testCase.testCaseId}/view=${true}`}
+                                                          to={`/testcase/?tcId=${testCase.testCaseId}&view=true`}
                                                     > Visualizar</Link>
                                                     <button
                                                         className = "btn btn-danger m-1"

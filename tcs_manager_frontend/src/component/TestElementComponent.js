@@ -11,18 +11,18 @@ const TestElementComponent = (props) => {
     let [systemResponse, setSystemResponse] = useState('')
     let [matching, setMatching] = useState(false)
     let [rows, setRows] = useState(props.testElements)
+    let [testElementId, setTestElementId] = useState()
     let [modifying, setModifying] = useState(false)
     let [rowIndex, setRowIndex] = useState()
 
     useEffect(() => {
         props.setTestElements(rows)
     }, [rows])
-    console.log("hol")
+    console.log(rows)
 
     const deleteTestCase = (testElementId) => {
         TestElementService.deleteTestElement(testElementId)
             .then(response => {
-                console.log(response)
                 console.log(`testElement ${testElementId} deleted`)
             })
             .catch(error => console.error(error))
@@ -37,6 +37,7 @@ const TestElementComponent = (props) => {
     }
 
     let newRow = {
+        testElementId: testElementId,
         field: field,
         value: value,
         scenario: scenario,
@@ -63,6 +64,7 @@ const TestElementComponent = (props) => {
 
     return (
         <>
+           {!props.view &&
             <div className = "card mb-3">
                 <div className = "card-body border">
                     <h5 className = "text-center mb-3">Datos de Entrada</h5>
@@ -163,7 +165,6 @@ const TestElementComponent = (props) => {
                                     } else {
                                         rows[rowIndex] = newRow
                                         setModifying(false)
-                                        console.log(rows[rowIndex])
                                         cleanInputFields()
                                     }
                                 }
@@ -179,6 +180,7 @@ const TestElementComponent = (props) => {
                     </div>
                 </div>
             </div>
+            }
 
             <div className="table-responsive custom-table-responsive">
                 <table className="table custom-table">
@@ -190,7 +192,9 @@ const TestElementComponent = (props) => {
                             <th className = "text-center">Respuesta Esperada de la Aplicación</th>
                             <th className = "text-center">Coincide</th>
                             <th className = "text-center">Respuesta del Sistema</th>
+                            {!props.view &&
                             <th className = "text-center">Acciones</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -205,6 +209,8 @@ const TestElementComponent = (props) => {
                                     <td>{row.expectedResponse}</td>
                                     <td>{row.matching ? "Si" : "No" }</td>
                                     <td>{row.systemResponse}</td>
+                                    {!props.view &&
+                                        <>
                                     <td className = "text-center">
                                         <button
                                             className = "btn btn-primary m-1"
@@ -228,6 +234,8 @@ const TestElementComponent = (props) => {
                                             }}
                                         >Eliminar</button>
                                     </td>
+                                    </>
+                                    }
                                 </tr>
                                 <tr key={`fb-${index}`} className="spacer"><td colSpan="100"></td></tr>
                             </>

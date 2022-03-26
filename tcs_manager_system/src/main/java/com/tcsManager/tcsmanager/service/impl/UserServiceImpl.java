@@ -3,6 +3,7 @@ package com.tcsManager.tcsmanager.service.impl;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.tcsManager.tcsmanager.entity.TestCase;
 import com.tcsManager.tcsmanager.entity.User;
@@ -29,10 +30,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(long id) throws UserNotFoundException {
-        return userRepository.findById(id)
+    public User getUserById(long userId) throws UserNotFoundException {
+        return userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
-                        String.format("User identified with ID::%d not found", id)));
+                        String.format("User identified with ID::%d not found", userId)));
     }
 
     @Override

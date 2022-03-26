@@ -40,8 +40,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable long userId) throws UserNotFoundException {
-        return userService.getUser(userId);
+    public User getUserById(@PathVariable long userId) throws UserNotFoundException {
+        return userService.getUserById(userId);
     }
 
     @PostMapping("/")

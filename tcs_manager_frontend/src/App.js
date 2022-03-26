@@ -18,16 +18,16 @@ const App = () => {
   return (
     <Router>
       <Routes>
-          <Route path="/" element={<HomeComponent />}></Route>
-          <Route path="/home" element={<HomeComponent />}></Route>
-          <Route path="/login" element={<LoginComponent />}></Route>
+          <Route exact path="/" element={<HomeComponent />}></Route>
+          <Route exact path="/home" element={<HomeComponent />}></Route>
+          <Route exact path="/login" element={<LoginComponent />}></Route>
           <Route path="/profile" element={<ProfileComponent />}></Route>
           <Route path="/updateinfo" element={<UpdateInfoComponent />}></Route>
           <Route path="/updatepassword" element={<ChangePasswordComponent />}></Route>
           <Route path="/load" element={<LoadingComponents />}></Route>
           <Route path="/disabled-testcases" element={<DisabledTestCasesComponent />}></Route>
           <Route path="/user-register" element={<RegisterComponent />}></Route>
-          <Route path="/testcase/tc=:tcId/view=:view" element={<TestCaseComponent />}></Route>
+          <Route path="/testcase" element={<TestCaseComponent />}></Route>
       </Routes>
     </Router>
   );

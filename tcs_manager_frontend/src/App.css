@@ -79,3 +79,7 @@
   border-radius: 0 !important;
   background: transparent !important;
 }
+
+.overlay{
+    pointer-events: none;
+}

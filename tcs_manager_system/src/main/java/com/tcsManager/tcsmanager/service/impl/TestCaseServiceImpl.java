@@ -1,6 +1,7 @@
 package com.tcsManager.tcsmanager.service.impl;
 
 import java.lang.reflect.Field;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,7 @@ public class TestCaseServiceImpl implements TestCaseService {
     public TestCase partialUpdateTestCase(long testCaseId, Map<Object, Object> fields)
             throws TestCaseNotFoundException {
 
+        // TODO: improve the parcial change implementation
         TestCase testCase = testCaseRepository.findById(testCaseId)
             .orElseThrow(() -> new TestCaseNotFoundException(
                         String.format(
@@ -105,6 +107,7 @@ public class TestCaseServiceImpl implements TestCaseService {
         fields.forEach((key, value) -> {
             Field field = ReflectionUtils.findField(TestCase.class, (String) key);
             field.setAccessible(true);
+            if(key.equals("executionDate")) value = Date.valueOf((String) value);
             ReflectionUtils.setField(field, testCase, value);
         });
 

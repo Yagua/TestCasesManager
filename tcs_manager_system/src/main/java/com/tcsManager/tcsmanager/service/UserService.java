@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
  */
 public interface UserService {
 
-    User getUser(long id) throws UserNotFoundException;
+    User getUserById(long id) throws UserNotFoundException;
 
     User loginUser(String userName, String userPassword)
                 throws UserNotFoundException;
