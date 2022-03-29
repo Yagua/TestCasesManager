@@ -22,6 +22,9 @@ public interface TestElementService {
 
     List<TestElement> getAllTestElements();
 
+    List<TestElement> getTestElementsByTestCaseId(long testCaseId)
+            throws TestCaseNotFoundException;
+
     TestElement updateTestElement(long testElementId, TestElement testElementUpdated)
             throws TestElementNotFoundException;
 

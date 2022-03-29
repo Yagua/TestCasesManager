@@ -2,12 +2,17 @@ package com.tcsManager.tcsmanager.entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +32,13 @@ public class TestElement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "elemento_prueba_id")
     private long testElementId;
+
+    @JsonBackReference
+    @ManyToOne(
+        cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+        fetch = FetchType.LAZY
+    )
+    private TestCase testCase;
 
     @Column(name = "campo", nullable = false, length = 150)
     private String field;

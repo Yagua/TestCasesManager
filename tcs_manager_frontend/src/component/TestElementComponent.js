@@ -1,39 +1,52 @@
 import { useEffect, useState } from "react";
 
 import TestElementService from '../service/TestElementService'
+import ModalComponent from "./ModalComponent";
 
 const TestElementComponent = (props) => {
 
+    let [testElementId, setTestElementId] = useState()
+    let [testCaseId] = useState(props.testCaseId)
     let [field, setField] = useState('')
     let [value, setValue] = useState('')
     let [scenario, setScenario] = useState('')
     let [expectedResponse, setExpectedResponse] = useState('')
     let [systemResponse, setSystemResponse] = useState('')
     let [matching, setMatching] = useState(false)
-    let [rows, setRows] = useState(props.testElements)
-    let [testElementId, setTestElementId] = useState()
+    let [modalShow, setModalShow] = useState(false)
+    let [rows, setRows] = useState([])
     let [modifying, setModifying] = useState(false)
-    let [rowIndex, setRowIndex] = useState()
 
     useEffect(() => {
-        props.setTestElements(rows)
-    }, [rows])
-    console.log(rows)
-
-    const deleteTestCase = (testElementId) => {
-        TestElementService.deleteTestElement(testElementId)
-            .then(response => {
-                console.log(`testElement ${testElementId} deleted`)
-            })
+        let testCaseId = props.testCaseId;
+        if(testCaseId === "none") {
+            props.setTestElements(rows);
+            return
+        };
+        TestElementService.getTestElementsByTestCaseId(testCaseId)
+            .then(response => setRows(response))
             .catch(error => console.error(error))
+    }, [rows])
+
+    const createTestElement = (testCaseId, testElement) => {
+        TestElementService.createTestElement(testCaseId, testElement)
+            .then(_ => {}).catch(error => console.error(error))
     }
 
-    const updateTestCase = (testCaseId, testCase ) => {
-        TestElementService.partialUpdateTestElement()
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => console.error(error))
+    const deleteTestElement = (testElementId) => {
+        TestElementService.deleteTestElement(testElementId)
+            .then(_ => {}).catch(error => console.error(error))
+    }
+
+    const updateTestElement = (testElementId, testCase) => {
+        TestElementService.partialUpdateTestElement(testElementId, testCase)
+            .then(_ => {}).catch(error => console.error(error))
+    }
+
+    const handleModalClose = () => setModalShow(false)
+    const handleModalOpen = (testElementId) => {
+        setTestElementId(testElementId);
+        setModalShow(true)
     }
 
     let newRow = {
@@ -47,6 +60,7 @@ const TestElementComponent = (props) => {
     }
 
     let field_map = {
+        testElementId: document.getElementById("idElemento"),
         field: document.getElementById("campo"),
         value: document.getElementById("valor"),
         scenario: document.getElementById("escenario"),
@@ -70,6 +84,18 @@ const TestElementComponent = (props) => {
                     <h5 className = "text-center mb-3">Datos de Entrada</h5>
                     <form>
                         <div className = "row">
+                            <div className = "col-sm-1">
+                                <p className = "form-label text-center">ID</p>
+                                <input
+                                    id = "idElemento"
+                                    type = "text"
+                                    disabled = {true}
+                                    placeholder = "Auto"
+                                    name = "test-case-id"
+                                    className = {`form-control text-muted fst-italic text-center`}
+                                    onChange = {(e) => {setTestElementId(e.target.value)}}
+                                />
+                            </div>
                             <div className = "col">
                                 <p className = "form-label text-center">Campo</p>
                                 <textarea
@@ -160,10 +186,17 @@ const TestElementComponent = (props) => {
                             className = {`btn ${!modifying ? "btn-success" : "btn-primary"} mx-3`}
                             onClick = {() => {
                                     if(!modifying) {
-                                        rows.push(newRow)
-                                        setRows([...rows])
+                                        testCaseId !== "none"
+                                            ? createTestElement(props.testCaseId, newRow)
+                                            : rows.push(newRow);
+                                              setRows([... rows])
+                                        cleanInputFields()
                                     } else {
-                                        rows[rowIndex] = newRow
+                                        testCaseId !== "none"
+                                            ? updateTestElement(testElementId, newRow)
+                                            : rows[testElementId] = newRow;
+                                              setRows([... rows])
+                                        console.log(rows[testCaseId])
                                         setModifying(false)
                                         cleanInputFields()
                                     }
@@ -176,7 +209,7 @@ const TestElementComponent = (props) => {
                                 cleanInputFields()
                                 setModifying(false)
                             }}
-                        >Limpiar</button>
+                        >{modifying ? "Cancelar" : "Limpiar" }</button>
                     </div>
                 </div>
             </div>
@@ -186,6 +219,7 @@ const TestElementComponent = (props) => {
                 <table className="table custom-table">
                     <thead>
                         <tr>
+                            <th className = "text-center">Id</th>
                             <th className = "text-center">Campo</th>
                             <th className = "text-center">Valor</th>
                             <th className = "text-center">Tipo de Esecenario</th>
@@ -203,6 +237,7 @@ const TestElementComponent = (props) => {
                             <>
                                 <tr key={`ft-${index}`} className="spacer"><td colSpan="100"></td></tr>
                                 <tr key = {index} >
+                                    <td>{row.testElementId ? row.testElementId : `tmp-${index}`}</td>
                                     <td>{row.field}</td>
                                     <td>{row.value}</td>
                                     <td>{row.scenario}</td>
@@ -215,7 +250,10 @@ const TestElementComponent = (props) => {
                                         <button
                                             className = "btn btn-primary m-1"
                                             onClick = {() => {
-                                                setRowIndex(index)
+                                                let teId = row.testElementId ? row.testElementId : index
+
+                                                setTestElementId(teId);
+                                                field_map.testElementId.value = teId;
                                                 field_map.field.value = row.field;
                                                 field_map.value.value = row.value;
                                                 field_map.scenario.value = row.scenario;
@@ -228,9 +266,13 @@ const TestElementComponent = (props) => {
                                         <button
                                             className = "btn btn-danger m-1"
                                             onClick = {() => {
-                                                setRows(rows.filter((row) => {
-                                                    return row !== rows[index]
-                                                }))
+                                                if(testCaseId !== "none") {
+                                                    handleModalOpen(row.testElementId)
+                                                } else {
+                                                    setRows(rows.filter((item) => {
+                                                        return item !== rows[testElementId]
+                                                    }))
+                                                }
                                             }}
                                         >Eliminar</button>
                                     </td>
@@ -248,6 +290,17 @@ const TestElementComponent = (props) => {
             {rows.length === 0 &&
             <p className = "text-center text-muted fst-italic">No Hay Elementos Para Mostrar</p>
             }
+            <ModalComponent
+                modalTitle  = {<h4>Eliminar Elemento de Prueba</h4>}
+                modalBody = "Si elimina el elemento de prueba, toda la información relacionada a el se borrara también."
+                show = {modalShow}
+                closeAction = {() => handleModalClose}
+                onConfirm = {() => {
+                    deleteTestElement(testElementId)
+                    handleModalClose()
+                }}
+                onHide = {() => handleModalClose()}
+            />
         </>
     );
 }

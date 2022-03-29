@@ -96,13 +96,13 @@ public class TestCase {
     )
     private List<Tester> testers = new ArrayList<>();
 
-    //unidirectional TestCase -> TestElements relationship
+    //bidirectional TestCase -> TestElements relationship
     @OneToMany(
         cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
+        fetch = FetchType.LAZY,
+        mappedBy = "testCase"
         // orphanRemoval = true
     )
-    @JoinColumn(name = "test_case_id", nullable = true)
     private List<TestElement> testElements = new ArrayList<>();
 
     @Column(name = "habilitado")

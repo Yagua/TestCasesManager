@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * TestElementService
+ * TestElementServiceImpl
  */
 @Service
 public class TestElementServiceImpl implements TestElementService {
@@ -44,7 +44,7 @@ public class TestElementServiceImpl implements TestElementService {
     }
 
     @Override
-    public TestElement createTestElement(TestElement testElement, long testCaseId) 
+    public TestElement createTestElement(TestElement testElement, long testCaseId)
         throws TestCaseNotFoundException {
 
         TestCase testCase = testCaseRepository.findById(testCaseId)
@@ -53,13 +53,25 @@ public class TestElementServiceImpl implements TestElementService {
                             "Test Case identified with ID::%d not found",
                             testCaseId)));
 
+        testElement.setTestCase(testCase);
         testCase.getTestElements().add(testElement);
+
         return testElementRepository.save(testElement);
     }
 
     @Override
     public List<TestElement> getAllTestElements() {
         return testElementRepository.findAll();
+    }
+
+    @Override
+    public List<TestElement> getTestElementsByTestCaseId(long testCaseId)
+        throws TestCaseNotFoundException {
+        TestCase testCase = testCaseRepository.findById(testCaseId)
+            .orElseThrow(() -> new TestCaseNotFoundException(String.format(
+                            "Test Case identified with ID::%d not found",
+                            testCaseId)));
+        return testCase.getTestElements();
     }
 
     @Override

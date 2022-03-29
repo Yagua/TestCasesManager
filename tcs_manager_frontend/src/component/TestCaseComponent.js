@@ -1,10 +1,8 @@
-import { useState, useEffect, useMemo } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useState, useEffect} from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import HeaderComponent from '../component/HeaderComponent'
 import TestCaseService from '../service/TestCaseService'
-import TesterService from '../service/TesterService'
-import TestElementService from '../service/TestElementService'
 import LoadingComponent from './LoadingComponent'
 import ModalComponent from './ModalComponent'
 import TestElementCompenent from './TestElementComponent'
@@ -44,11 +42,12 @@ const TestCaseComponent = () => {
         defectsAndDesviations: defectsAndDesviations,
         veredict: veredict,
         observations: observations,
-        // testElements: testElements,
-        // testers: testers
+        testElements: testElements,
+        testers: testers
     }
 
     useEffect(() => {
+        if(!localStorage.getItem("isAthenticated")) navigate("/login")
         if(tcId === "none") { setIsLoded(true); return }
         TestCaseService.getTestCase(tcId)
             .then(response => {
@@ -71,8 +70,6 @@ const TestCaseComponent = () => {
     }, [tcId, view])
 
     const createTestCase = () => {
-        testCaseTemplate.testElements = testElements
-        testCaseTemplate.testers = testers
         TestCaseService.createTestCase(userId, testCaseTemplate)
             .then(_ => {
                 navigate("/home")
@@ -224,7 +221,7 @@ const TestCaseComponent = () => {
                             <p className = "text-center h5 mt-4 alert alert-secondary"> Elementos de Prueba</p>
                             <div className = "mx-5">
                                 <TestElementCompenent
-                                    testElements = {testElements}
+                                    testCaseId = {tcId}
                                     setTestElements = {setTestElements}
                                     view = {view}
                                 />
@@ -288,10 +285,13 @@ const TestCaseComponent = () => {
                                 <button
                                     className = "btn btn-success mx-3"
                                     onClick = {() => { readyToUpdate ? updateTestCase() : createTestCase()}}
-                                >{readyToUpdate ? "Actualizar" : "Crear"}</button>
+                                >{readyToUpdate ? "Finalizar" : "Crear"}</button>
                                 <button
                                     className = "btn btn-danger"
-                                    onClick = {() => handleModalOpen()}
+                                    onClick = {() => {
+                                        view ? handleModalOpen()
+                                             : setView(true)
+                                    }}
                                 >Cancelar</button>
                             </>
                                 :

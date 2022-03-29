@@ -46,6 +46,12 @@ public class TestElementController {
         return testElementService.getTestElement(testElementId);
     }
 
+    @GetMapping("/tc/{testCaseId}")
+    public List<TestElement> getTestElementsByTestCaseId(
+            @PathVariable long testCaseId) throws TestCaseNotFoundException {
+        return testElementService.getTestElementsByTestCaseId(testCaseId);
+    }
+
     @PostMapping("/tc/{testCaseId}")
     public TestElement createTestElement(@RequestBody TestElement testElement,
             @PathVariable long testCaseId) throws TestCaseNotFoundException {

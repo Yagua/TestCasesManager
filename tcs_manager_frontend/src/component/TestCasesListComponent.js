@@ -20,12 +20,13 @@ const TestCasesListComponent = (props) => {
             .then((user) => {
                 setUser(user);
                 setIsLoaded(true);
-                updateTestCases(user)
+                updateTestCases(user.testCases)
             })
     }, [testCases])
 
-    const updateTestCases = (user) => {
-        setTestCases(user.testCases.filter(testCase => {
+
+    const updateTestCases = (testCases) => {
+        setTestCases(testCases.filter(testCase => {
             return props.disabledTestCases
                 ? !testCase.enabled
                 : testCase.enabled;
@@ -36,7 +37,7 @@ const TestCasesListComponent = (props) => {
         let partialChange = { enabled: true }
         if(!enable) partialChange.enabled = false
         TestCaseService.partialUpdateTestCase(testCaseId, partialChange)
-            .then(_ => { updateTestCases(user) })
+            .then(_ => { updateTestCases(user.testCases) })
             .catch(error => console.error(error))
     }
 

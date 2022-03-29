@@ -8,7 +8,6 @@ import LoginComponent from './component/LoginComponent'
 import HomeComponent from './component/HomeComponent'
 import ProfileComponent from './component/ProfileComponent'
 import UpdateInfoComponent from './component/UpdateInfoComponent'
-import LoadingComponents from './component/LoadingComponent'
 import ChangePasswordComponent from './component/ChangePasswordComponent'
 import DisabledTestCasesComponent from './component/DisabledTestCasesComponent'
 import RegisterComponent from './component/RegisterComponent'
@@ -24,7 +23,6 @@ const App = () => {
           <Route path="/profile" element={<ProfileComponent />}></Route>
           <Route path="/updateinfo" element={<UpdateInfoComponent />}></Route>
           <Route path="/updatepassword" element={<ChangePasswordComponent />}></Route>
-          <Route path="/load" element={<LoadingComponents />}></Route>
           <Route path="/disabled-testcases" element={<DisabledTestCasesComponent />}></Route>
           <Route path="/user-register" element={<RegisterComponent />}></Route>
           <Route path="/testcase" element={<TestCaseComponent />}></Route>

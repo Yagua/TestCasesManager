@@ -14,6 +14,11 @@ class TestElementService {
             .then(response => response.data)
     }
 
+    getTestElementsByTestCaseId(testCaseId) {
+        return axios.get(TEST_ELEMENT_BASE_API_URL + `tc/${testCaseId}`)
+            .then(response => response.data)
+    }
+
     createTestElement(testCaseId, testElement) {
         return axios.post(TEST_ELEMENT_BASE_API_URL + `tc/${testCaseId}`, testElement)
             .then(response => response.data)

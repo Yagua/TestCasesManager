@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tcsManager.tcsmanager.entity.TestCase;
+import com.tcsManager.tcsmanager.entity.TestElement;
 import com.tcsManager.tcsmanager.entity.User;
 import com.tcsManager.tcsmanager.exception.TestCaseNotFoundException;
 import com.tcsManager.tcsmanager.exception.UserNotFoundException;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * TestCaseService
+ * TestCaseServiceImpl
  */
 @Service
 public class TestCaseServiceImpl implements TestCaseService {
@@ -47,6 +48,10 @@ public class TestCaseServiceImpl implements TestCaseService {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found", userId)));
+
+        List<TestElement> testElements = testCase.getTestElements();
+        testElements.forEach((element) -> element.setTestCase(testCase));
+
         testCase.setUser(user);
         user.getTestCases().add(testCase);
         return testCaseRepository.save(testCase);
