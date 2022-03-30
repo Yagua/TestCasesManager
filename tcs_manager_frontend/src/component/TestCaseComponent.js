@@ -78,8 +78,7 @@ const TestCaseComponent = () => {
     }
 
     const updateTestCase = () => {
-        console.log(testCaseTemplate)
-        TestCaseService.partialUpdateTestCase(tcId, testCaseTemplate)
+        TestCaseService.updateTestCase(tcId, testCaseTemplate)
             .then(_ => {
                 navigate("/home")
             })
@@ -123,7 +122,7 @@ const TestCaseComponent = () => {
                                                 type = "text"
                                                 defaultValue = {testCaseVersion}
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Módulo del Sistema"
+                                                placeholder = "Ingresa Version"
                                                 name = "test-case-version"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestCaseVersion(e.target.value)}}
@@ -148,7 +147,7 @@ const TestCaseComponent = () => {
                                                 type = "text"
                                                 defaultValue = {systemModule}
                                                 maxLength = {80}
-                                                placeholder = "Ingresa Nombre de Caso de Prueba"
+                                                placeholder = "Ingresa Módulo del Sistema"
                                                 name = "test-system-module"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setSystemModule(e.target.value)}}
@@ -161,7 +160,7 @@ const TestCaseComponent = () => {
                                                 defaultValue = {testCaseDescription}
                                                 rows = {1}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Nombre de Caso de Prueba"
+                                                placeholder = "Ingresa Descripción"
                                                 name = "test-case-name"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestCaseDescription(e.target.value)}}

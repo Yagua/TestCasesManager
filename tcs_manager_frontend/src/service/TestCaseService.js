@@ -24,8 +24,8 @@ class TestCaseService {
             .then(response => response.data)
     }
 
-    updateTestCase(testCaseId) {
-        return axios.put(TEST_CASE_BASE_API_URL + `${testCaseId}`)
+    updateTestCase(testCaseId, testCase) {
+        return axios.put(TEST_CASE_BASE_API_URL + `${testCaseId}`, testCase)
             .then(response => response.data)
     }
 

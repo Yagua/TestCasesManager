@@ -26,6 +26,7 @@ const TestElementComponent = (props) => {
         TestElementService.getTestElementsByTestCaseId(testCaseId)
             .then(response => setRows(response))
             .catch(error => console.error(error))
+        props.setTestElements(rows)
     }, [rows])
 
     const createTestElement = (testCaseId, testElement) => {
@@ -195,8 +196,7 @@ const TestElementComponent = (props) => {
                                         testCaseId !== "none"
                                             ? updateTestElement(testElementId, newRow)
                                             : rows[testElementId] = newRow;
-                                              setRows([... rows])
-                                        console.log(rows[testCaseId])
+                                              setRows([... rows]);
                                         setModifying(false)
                                         cleanInputFields()
                                     }

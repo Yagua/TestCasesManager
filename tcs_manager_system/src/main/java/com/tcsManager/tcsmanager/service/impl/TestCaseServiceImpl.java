@@ -80,8 +80,11 @@ public class TestCaseServiceImpl implements TestCaseService {
                         String.format(
                             "Test Case identified with ID::%d not found", testCaseId)));
 
-        // is not necessary to reasing the user
-        // testCase.setUser(testCaseUpdated.getUser());
+        List<TestElement> testElements = testCaseUpdated.getTestElements();
+        testElements.forEach((testElement) -> {
+            testElement.setTestCase(testCase);
+        });
+
         testCase.setTestCaseName(testCaseUpdated.getTestCaseName());
         testCase.setTestCaseVersion(testCaseUpdated.getTestCaseVersion());
         testCase.setExecutionDate(testCaseUpdated.getExecutionDate());
