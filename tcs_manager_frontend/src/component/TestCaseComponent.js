@@ -6,6 +6,7 @@ import TestCaseService from '../service/TestCaseService'
 import LoadingComponent from './LoadingComponent'
 import ModalComponent from './ModalComponent'
 import TestElementCompenent from './TestElementComponent'
+import TesterComponent from './TesterComponent'
 
 const TestCaseComponent = () => {
     let [testCaseName, setTestCaseName] = useState('');
@@ -219,11 +220,24 @@ const TestCaseComponent = () => {
 
                             <p className = "text-center h5 mt-4 alert alert-secondary"> Elementos de Prueba</p>
                             <div className = "mx-5">
-                                <TestElementCompenent
-                                    testCaseId = {tcId}
-                                    setTestElements = {setTestElements}
-                                    view = {view}
-                                />
+                                <div class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                       <h2 class="accordion-header" id="headingOne">
+                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Desplegar Contenido
+                                         </button>
+                                       </h2>
+                                       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                         <div class="accordion-body">
+                                            <TestElementCompenent
+                                                testCaseId = {tcId}
+                                                setTestElements = {setTestElements}
+                                                view = {view}
+                                            />
+                                         </div>
+                                       </div>
+                                     </div>
+                                </div>
                             </div>
 
                             <p className = "text-center h5 mt-4 alert alert-secondary">Resultados</p>
@@ -275,6 +289,22 @@ const TestCaseComponent = () => {
 
                             <p className = "text-center h5 mt-4 alert alert-secondary">Probadores</p>
                             <div className = "mx-5">
+                                <div class="accordion mb-3" id="testersAcorddion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                            Registro Rapido
+                                          </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                          <div class="accordion-body">
+                                                <TesterComponent
+                                                    testers = {testers}
+                                                />
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -288,8 +318,7 @@ const TestCaseComponent = () => {
                                 <button
                                     className = "btn btn-danger"
                                     onClick = {() => {
-                                        view ? handleModalOpen()
-                                             : setView(true)
+                                        handleModalOpen()
                                     }}
                                 >Cancelar</button>
                             </>
@@ -312,8 +341,8 @@ const TestCaseComponent = () => {
                         </div>
                     </div>
                   <ModalComponent
-                      modalTitle  = {<h4>Cancelar Creación de Caso de Prueba</h4>}
-                      modalBody = "Si cancela la creación del caso de prueba, la información consignada hasta ahora se perderá."
+                      modalTitle  = {<h4>Cancelar Operación sobre Caso de Prueba</h4>}
+                      modalBody = "Si cancela el proceso, la información consignada hasta ahora se perderá."
                       show = {modalShow}
                       closeAction = {() => handleModalClose}
                       onConfirm = {() => {

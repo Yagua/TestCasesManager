@@ -5,7 +5,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "react-bootstrap";
 import UserService from '../service/UserService'
 import { checkValidInput } from '../lib/util'
 
-const RegisterCompenent = () => {
+const RegisterCompenent = (props) => {
     let [userName, setUserName] = useState('')
     let [firstName, setFirstName] = useState('')
     let [secondName, setSecondName] = useState('')
@@ -70,11 +70,13 @@ const RegisterCompenent = () => {
     return (
         <div>
            <div className="sticky-top">
+               {!props.disableNavBar &&
                <nav className = "navbar navbar-dark bg-dark">
                    <h3 className="navbar-brand justify-content-start"
                        style={{marginLeft:"20px"}}
                    >Registro de Usuario</h3>
                </nav>
+               }
            </div>
            <Modal
                show = {showModal}

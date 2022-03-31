@@ -232,7 +232,7 @@ const TestElementComponent = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {rows.map((row, index)=> {
+                        {rows.map((row, index) => {
                             return (
                             <>
                                 <tr key={`ft-${index}`} className="spacer"><td colSpan="100"></td></tr>
