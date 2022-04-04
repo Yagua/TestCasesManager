@@ -24,7 +24,7 @@ const LoginComponent = (props) => {
                 navigate(`/home`)
             }).catch(error => {
                 setUserFound(false)
-                console.log(error)
+                console.error(error)
             });
     }
 

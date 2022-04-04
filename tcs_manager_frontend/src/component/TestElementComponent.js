@@ -188,7 +188,7 @@ const TestElementComponent = (props) => {
                             onClick = {() => {
                                     if(!modifying) {
                                         testCaseId !== "none"
-                                            ? createTestElement(props.testCaseId, newRow)
+                                            ? createTestElement(testCaseId, newRow)
                                             : rows.push(newRow);
                                               setRows([... rows])
                                         cleanInputFields()

@@ -8,7 +8,6 @@ import com.tcsManager.tcsmanager.exception.TestCaseNotFoundException;
 import com.tcsManager.tcsmanager.exception.TesterNotFoundException;
 import com.tcsManager.tcsmanager.service.TesterService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -293,13 +293,16 @@ const TestCaseComponent = () => {
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
                                           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                            Registro Rapido
+                                            Desplegar Contenido
                                           </button>
                                         </h2>
                                         <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                           <div class="accordion-body">
                                                 <TesterComponent
+                                                    testCaseId = {tcId}
                                                     testers = {testers}
+                                                    setTesters = {setTesters}
+                                                    view = {view}
                                                 />
                                           </div>
                                         </div>
