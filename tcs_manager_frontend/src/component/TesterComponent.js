@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import TesterService from '../service/TesterService'
+import ModalComponent from './ModalComponent'
 
 const TesterComponent = (props) => {
     let [testerId, setTesterId] = useState()
@@ -13,19 +15,22 @@ const TesterComponent = (props) => {
     let [rows, setRows] = useState(props.testers)
     let [modifying, setModifying] = useState(false)
     let [modalShow, setModalShow] = useState(false)
+    let navigate = useNavigate()
 
     useEffect(() => {
-        let testCaseId = props.testCaseId;
-        if(testCaseId === "none") {
-            props.setTesters(rows);
-            return
-        };
+        // let testCaseId = props.testCaseId;
+        // if(testCaseId === "none") {
+        //     props.setTesters(rows);
+        //     return
+        // };
         // props.setTesters(rows)
     }, [rows])
 
     const createTester = (testCaseId, tester) => {
         TesterService.createTester(testCaseId, tester)
-            .then(_ => {})
+            .then(_ => {
+                props.setTesterChanged(!props.testersChanged);
+            })
             .catch(error => console.error(error))
     }
 
@@ -35,8 +40,8 @@ const TesterComponent = (props) => {
             .catch(error => console.error(error))
     }
 
-    const deleteTester = (testerId) => {
-        TesterService.deleteTester(testerId)
+    const deleteTester = (testerId, testCaseId) => {
+        TesterService.deleteTester(testerId, testCaseId)
             .then(_ => {})
             .catch(error => console.error(error))
     }
@@ -260,6 +265,17 @@ const TesterComponent = (props) => {
             {rows.length === 0 &&
             <p className = "text-center text-muted fst-italic">No Hay Elementos Para Mostrar</p>
             }
+            <ModalComponent
+                modalTitle  = {<h4>Eliminar Probador</h4>}
+                modalBody = "Si elimina el probador, toda la información relacionada a el se borrara también."
+                show = {modalShow}
+                closeAction = {() => handleModalClose}
+                onConfirm = {() => {
+                    deleteTester(testerId, testCaseId)
+                    handleModalClose()
+                }}
+                onHide = {() => handleModalClose()} //allow hide the modal with clicks without it
+            />
         </div>
     );
 }
