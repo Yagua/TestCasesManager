@@ -233,6 +233,9 @@ const TestElementComponent = (props) => {
                     </thead>
                     <tbody>
                         {rows.map((row, index) => {
+                            let teId = row.testElementId
+                                ? row.testElementId
+                                : index
                             return (
                             <>
                                 <tr key={`ft-${index}`} className="spacer"><td colSpan="100"></td></tr>
@@ -250,8 +253,6 @@ const TestElementComponent = (props) => {
                                         <button
                                             className = "btn btn-primary m-1"
                                             onClick = {() => {
-                                                let teId = row.testElementId ? row.testElementId : index
-
                                                 setTestElementId(teId);
                                                 field_map.testElementId.value = teId;
                                                 field_map.field.value = row.field;
@@ -267,10 +268,10 @@ const TestElementComponent = (props) => {
                                             className = "btn btn-danger m-1"
                                             onClick = {() => {
                                                 if(testCaseId !== "none") {
-                                                    handleModalOpen(row.testElementId)
+                                                    handleModalOpen(teId)
                                                 } else {
                                                     setRows(rows.filter((item) => {
-                                                        return item !== rows[testElementId]
+                                                        return item !== rows[teId]
                                                     }))
                                                 }
                                             }}

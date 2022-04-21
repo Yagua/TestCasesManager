@@ -62,3 +62,5 @@ dicho servicio estara expuesto en `http://localhost:3000`
 ### TODOS
 
 - Mejorar la seguridad de la API (implementar JWT para autenticacion and Spring-Security)
+- Mejorar la validaciones de todos los campos de los formularios de la app
+- arreglar el re-renderizado del TesterCompenent al realizar operaciones CRUD en este componente

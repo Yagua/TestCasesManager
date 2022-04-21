@@ -7,6 +7,7 @@ import com.tcsManager.tcsmanager.entity.User;
 import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.service.UserService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -45,6 +47,7 @@ public class UserController {
     }
 
     @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User newUser) {
         return userService.createUser(newUser);
     }

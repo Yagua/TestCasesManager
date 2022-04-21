@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.tcsManager.tcsmanager.entity.TestCase;
-import com.tcsManager.tcsmanager.entity.TestElement;
 import com.tcsManager.tcsmanager.entity.User;
 import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.repository.UserRepository;

@@ -18,12 +18,12 @@ const TesterComponent = (props) => {
     let navigate = useNavigate()
 
     useEffect(() => {
-        // let testCaseId = props.testCaseId;
-        // if(testCaseId === "none") {
-        //     props.setTesters(rows);
-        //     return
-        // };
-        // props.setTesters(rows)
+        let testCaseId = props.testCaseId;
+        if(testCaseId === "none") {
+            props.setTesters(rows);
+            return
+        };
+        props.setTesters(rows)
     }, [rows])
 
     const createTester = (testCaseId, tester) => {
@@ -211,6 +211,9 @@ const TesterComponent = (props) => {
                     </thead>
                     <tbody>
                         {rows.map((row, index) => {
+                            let teId = row.testerId
+                                ? row.testerId
+                                : index
                             return (
                                 <>
                                     <tr key={`ft-${index}`} className="spacer"><td colSpan="100"></td></tr>
@@ -227,8 +230,6 @@ const TesterComponent = (props) => {
                                             <button
                                                 className = "btn btn-primary m-1"
                                                 onClick = {() => {
-                                                    let teId = row.testerId ? row.testerId : index
-
                                                     setTesterId(teId);
                                                     field_map.testerId.value = teId
                                                     field_map.firstName.value = row.firstName
@@ -243,10 +244,10 @@ const TesterComponent = (props) => {
                                                 className = "btn btn-danger m-1"
                                                 onClick = {() => {
                                                     if(testCaseId !== "none") {
-                                                        handleModalOpen(row.testerId)
+                                                        handleModalOpen(teId)
                                                     } else {
                                                         setRows(rows.filter((item) => {
-                                                            return item !== rows[testerId]
+                                                            return item !== rows[teId]
                                                         }))
                                                     }
                                                 }}
