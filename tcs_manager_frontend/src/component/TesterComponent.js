@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import TestCaseService from '../service/TestCaseService'
 
 import TesterService from '../service/TesterService'
 import ModalComponent from './ModalComponent'
@@ -19,18 +20,22 @@ const TesterComponent = (props) => {
 
     useEffect(() => {
         let testCaseId = props.testCaseId;
-        if(testCaseId === "none") {
-            props.setTesters(rows);
+        console.log("foobar")
+        if(testCaseId !== "none") {
+            TestCaseService.getTestCase(testCaseId)
+                .then(response => {
+                    // setRows(response.testers)
+                })
+                .catch(error => console.error(error))
             return
-        };
+        }
         props.setTesters(rows)
     }, [rows])
 
     const createTester = (testCaseId, tester) => {
+        tester.testerId = null;
         TesterService.createTester(testCaseId, tester)
-            .then(_ => {
-                props.setTesterChanged(!props.testersChanged);
-            })
+            .then(_ => {})
             .catch(error => console.error(error))
     }
 
@@ -166,21 +171,20 @@ const TesterComponent = (props) => {
                         <button
                             className = {`btn ${!modifying ? "btn-success" : "btn-primary"} mx-3`}
                             onClick = {() => {
-                                    if(!modifying) {
-                                        testCaseId !== "none"
-                                            ? createTester(testCaseId, newRow)
-                                            : rows.push(newRow);
-                                              setRows([... rows])
-                                        cleanInputFields()
-                                    } else {
-                                        testCaseId !== "none"
-                                            ? updateTester(testerId, newRow)
-                                            : rows[testerId] = newRow;
-                                              setRows([... rows]);
-                                        setModifying(false)
-                                        cleanInputFields()
-                                    }
+                                if(!modifying) {
+                                    testCaseId !== "none"
+                                        ? createTester(testCaseId, newRow)
+                                        : rows.push(newRow);
+                                    cleanInputFields()
+                                } else {
+                                    testCaseId !== "none"
+                                        ? updateTester(testerId, newRow)
+                                        : rows[testerId] = newRow;
+                                    setModifying(false)
+                                    cleanInputFields()
                                 }
+                              setRows([... rows])
+                            }
                             }
                         >{modifying ? "Modificar": "Agregar"}</button>
                         <button
@@ -273,6 +277,7 @@ const TesterComponent = (props) => {
                 closeAction = {() => handleModalClose}
                 onConfirm = {() => {
                     deleteTester(testerId, testCaseId)
+                    setRows([... rows])
                     handleModalClose()
                 }}
                 onHide = {() => handleModalClose()} //allow hide the modal with clicks without it

@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 
 const HeaderComponent = (props) => {
     return (
         <div className="sticky-top">
             <nav className = "navbar navbar-dark bg-dark">
-                <h3 className="navbar-brand justify-content-start"
-                    style={{marginLeft:"20px"}}
+                <h3 className="navbar-brand justify-content-start mx-3"
                 >{props.navBarBrand ? props.navBarBrand : "Gestor de Casos de Pruebas"}</h3>
 
                 <ul className="nav mx-3">
@@ -36,12 +34,6 @@ const HeaderComponent = (props) => {
                                     to = "/profile"
                                     className="dropdown-item"
                                 >Perfil</Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to = "/home"
-                                    className="dropdown-item"
-                                >Probadores</Link>
                             </li>
                           </>
                       }

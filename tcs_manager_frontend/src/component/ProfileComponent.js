@@ -56,7 +56,7 @@ const ProfileComponent = (props) => {
                         deleteUser(userId)
                         handleModalClose()
                     }}
-                    onHide = {() => handleModalClose()} //allow hide the modal with clicks without it
+                    onHide = {() => handleModalClose()}
                 />
                 <div className="m-2" >
                     <div className="card col-md-6 offset-md-3">

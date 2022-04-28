@@ -41,16 +41,16 @@ public class UserServiceTest {
                        .build();
     }
 
-    @Test
-    public void givenUserObject_whenSaveUser_thenReturnsSavedUser() throws UserNotFoundException {
-        //given
-        given(userService.getUserById(0))
-            .willThrow(UserNotFoundException.class)
-            .willReturn(null);
-
-        //when
-        when(userService.createUser(userTest)).thenReturn(userTest);
-
-        //then
-    }
+    // @Test
+    // public void givenUserObject_whenSaveUser_thenReturnsSavedUser() throws UserNotFoundException {
+    //     //given
+    //     given(userService.getUserById(0))
+    //         .willThrow(UserNotFoundException.class)
+    //         .willReturn(null);
+    //
+    //     //when
+    //     when(userService.createUser(userTest)).thenReturn(userTest);
+    //
+    //     //then
+    // }
 }
