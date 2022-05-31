@@ -20,11 +20,10 @@ const TesterComponent = (props) => {
 
     useEffect(() => {
         let testCaseId = props.testCaseId;
-        console.log("foobar")
         if(testCaseId !== "none") {
             TestCaseService.getTestCase(testCaseId)
                 .then(response => {
-                    // setRows(response.testers)
+                    setRows(response.testers)
                 })
                 .catch(error => console.error(error))
             return

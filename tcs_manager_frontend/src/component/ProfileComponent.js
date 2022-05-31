@@ -78,10 +78,12 @@ const ProfileComponent = (props) => {
                             className="btn btn-success mx-auto d-block my-2"
                             to = "/updateinfo"
                         > Actualizar Datos Usuario</Link>
+                        {/*
                         <buttom
                             className="btn btn-danger mx-auto d-block my-2"
                             onClick = {() => handleModalOpen()}
                         > Eliminar Usuario</buttom>
+                        */}
                         </div>
                     </div>
                 </div>
