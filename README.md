@@ -1,14 +1,14 @@
 # Test Cases Manager
 
-Fullstack Aplicacion para gestion de casos de uso.
+Fullstack Application for Test Cases Management.
 
-## Tecnologias Usadas
+## Technologies Used
 
 - Spring-Boot (Java 11)
 - React 17
 - Mysql
 
-## Dependencias
+## Dependencies
 
 - Backend
     - Lombok
@@ -21,9 +21,9 @@ Fullstack Aplicacion para gestion de casos de uso.
     - Axios
     - Bootstrap
 
-## Como Ejecutar
+## How to run
 
-En primer lugar hay que clonar el presente repositorio
+First of all you have to clone the present repository
 
 ```
 git clone https://github.com/Yagua/TestCasesManager
@@ -32,35 +32,35 @@ cd TestCasesManager
 
 ##### Frontend
 
-Una vez el repositorio clonado, para poder ejecutar la aplicacion frontend es
-necesario tener `nodejs` y `npm` tanto para resolver las dependencias del la misma
-como para levantar el servidor para usarla.
+Once the repository is cloned, to be able to execute the frontend application
+it is necessary to have `nodejs` and `npm` both to resolve the dependencies of
+the same one and to raise the server to use it.
 
 ```bash
     cd tcs_manager_frontend
     npm start
 ```
 
-Las instrucciones anteriormente expuestas levantaran un servidor donde estara
-la aplicacion disponible para su uso en `http://localhost:3000`
+The above instructions will raise a server where the application will be
+available for use at `http://localhost:3000`.
 
 ##### Backend
 
-Con el repositorio clonado, hay que tener instalado `jdk11` en nustras maquinas
-para poder correr la aplicacion backend. Teniendo en cuenta esto, hay que realizar
-lo siguiente.
+With the cloned repository, you must have `jdk11` installed on our machines to
+be able to run the backend application. With this in mind, you have to do the
+following.
 
 ```bash
 cd tcs_manager_system
 ./gradlew bootRun
 ```
 
-Las instrucciones anteriormente ejecutara la aplicacion backend, la cual nos expondra
-una RESTful API que nos permitira interactuar con el root de la aplicacion en general.
-dicho servicio estara expuesto en `http://localhost:3000`
+The above instructions will execute the backend application, which will expose
+a RESTful API that will allow us to interact with the root of the application
+in general. This service will be exposed at `http://localhost:3000`.
 
 ### TODOS
 
-- Mejorar la seguridad de la API (implementar JWT para autenticacion and Spring-Security)
-- Mejorar la validaciones de todos los campos de los formularios de la app
-- arreglar el re-renderizado del TesterCompenent al realizar operaciones CRUD en este componente
+- Improve API security (implement JWT for authentication and Spring-Security)
+- Improve authentication mechanism (the current one is simple and created for
+  testing purposes).
