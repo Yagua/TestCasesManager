@@ -1,4 +1,4 @@
-package com.tcsManager.tcsmanager.playload;
+package com.tcsManager.tcsmanager.payload;
 
 import lombok.Data;
 

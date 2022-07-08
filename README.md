@@ -57,7 +57,7 @@ cd tcs_manager_system
 
 The above instructions will execute the backend application, which will expose
 a RESTful API that will allow us to interact with the root of the application
-in general. This service will be exposed at `http://localhost:3000`.
+in general. This service will be exposed at `http://localhost:8080`.
 
 ### TODOS
 

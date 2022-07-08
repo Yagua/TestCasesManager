@@ -13,7 +13,7 @@ const DisabledTestCasesComponent = () => {
                 <HeaderComponent onHome={false}/>
                 <TestCasesListComponent
                     disabledTestCases={true}
-                    title = "Casos de Prueba Inhabilitados"
+                    title = "Disabled Test Cases"
                 />
             </div>
         );

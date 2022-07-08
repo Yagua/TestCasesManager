@@ -58,11 +58,11 @@ const TestCasesListComponent = (props) => {
         return (
               <div className="content">
                 <div className="m-4">
-                  <h2 className = "text-center display-5 my-3"> {props.title ? props.title : "Lista de Casos de Prueba"} </h2>
+                  <h2 className = "text-center display-5 my-3"> {props.title ? props.title : "Test Cases List"} </h2>
                   { !props.disabledTestCases &&
                       <>
                           <div className="alert alert-success mt-2 d-flex justify-content-between" role="alert">
-                              <Link to = "/testcase/?tcId=none&view=false" className = "btn btn-primary" > Agregar Caso de Prueba </Link>
+                              <Link to = "/testcase/?tcId=none&view=false" className = "btn btn-primary" > Add Test Case </Link>
                               <Link
                                   type="button"
                                   className="btn btn-primary position-relative"
@@ -80,12 +80,12 @@ const TestCasesListComponent = (props) => {
 
                       <thead>
                         <tr>
-                          <th className = "text-center" scope="col"> Caso De Uso Id </th>
-                          <th scope="col"> Nombre </th>
-                          <th scope="col"> Modulo del Systema </th>
+                          <th className = "text-center" scope="col"> Test Case Id </th>
+                          <th scope="col"> Name </th>
+                          <th scope="col"> System Module </th>
                           <th scope="col"> Version </th>
-                          <th scope="col"> Fecha de Ejecicion</th>
-                          <th className = "text-center" scope="col"> Acciones Disponibles</th>
+                          <th scope="col"> Execution Date</th>
+                          <th className = "text-center" scope="col"> Available Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -107,25 +107,25 @@ const TestCasesListComponent = (props) => {
                                                         onClick = {() =>{
                                                             enableOrDisableTestCase(testCase.testCaseId, true)
                                                         }}
-                                                    >Habilitar</button>
+                                                    >Enable</button>
                                                     <button
                                                         className = "btn btn-danger m-1"
                                                         onClick = {() =>{
                                                             handleModalOpen(testCase.testCaseId)
                                                         }}
-                                                    >Eliminar</button>
+                                                    >Delete</button>
                                                 </td>
                                                  :
                                                 <td className = "text-center">
                                                     <Link className="btn btn-primary m-1"
                                                           to={`/testcase/?tcId=${testCase.testCaseId}&view=true`}
-                                                    > Visualizar</Link>
+                                                    > View </Link>
                                                     <button
                                                         className = "btn btn-danger m-1"
                                                         onClick = {() => {
                                                             enableOrDisableTestCase(testCase.testCaseId, false)
                                                         }}
-                                                    >Suprimir</button>
+                                                    >Suppress</button>
                                                 </td>
                                             }
                                         </tr>
@@ -139,12 +139,12 @@ const TestCasesListComponent = (props) => {
                   </div>
                     { testCases.length < 1 &&
                         <div className="text-center m-3 text-muted fst-italic">
-                            No hay Casos de Uso para Mostrar
+                            There is nothing to show
                         </div>
                     }
                   <ModalComponent
-                      modalTitle  = {<h4>Eliminar Caso de Prueba</h4>}
-                      modalBody = "Si elimina el caso de uso, toda la información relacionada a el se borrara también."
+                      modalTitle  = {<h4>Delete Test Case</h4>}
+                      modalBody = "If you delete the use case, all information related to it will be deleted as well."
                       show = {modalShow}
                       closeAction = {() => handleModalClose}
                       onConfirm = {() => {

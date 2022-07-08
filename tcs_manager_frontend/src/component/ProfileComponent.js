@@ -46,10 +46,10 @@ const ProfileComponent = (props) => {
         if(!isLoaded) return <LoadingComponent />
         return (
             <div>
-                <HeaderComponent onHome={false} navBarBrand = "Perfil de Usuario"/>
+                <HeaderComponent onHome={false} navBarBrand = "User Profile"/>
                 <ModalComponent
-                    modalTitle={<h4>Esta seguro de borrar el usuario "{user.userName}"</h4>}
-                    modalBody="Si elimina el usuario, todos sus datos se perderán también."
+                    modalTitle={<h4>Are you sure to delete the user "{user.userName}"</h4>}
+                    modalBody="If you delete the user, all your data will be lost as well."
                     show = {modalShow}
                     closeAction = {() => handleModalClose}
                     onConfirm = {() => {
@@ -67,22 +67,22 @@ const ProfileComponent = (props) => {
                             />
                         <hr className="mx-5"/>
                         <div className="mx-5">
-                            <h5><strong>Id de Usuario: </strong>{user.userId}</h5>
-                            <h5><strong>Nombres: </strong>{user.firstName} {user.secondName}</h5>
-                            <h5><strong>Apellidos: </strong>{user.paternalLastName} {user.maternalLastName}</h5>
-                            <h5><strong>Nombre de usuario: </strong>{user.userName}</h5>
-                            <h5><strong>Cantidad de Casos de Prueba: </strong>{user.testCases.length}</h5>
+                            <h5><strong>User Id: </strong>{user.userId}</h5>
+                            <h5><strong>Names: </strong>{user.firstName} {user.secondName}</h5>
+                            <h5><strong>Last Names: </strong>{user.paternalLastName} {user.maternalLastName}</h5>
+                            <h5><strong>User Name: </strong>{user.userName}</h5>
+                            <h5><strong>Number of Test Cases: </strong>{user.testCases.length}</h5>
                         </div>
                         <br/>
                         <Link
                             className="btn btn-success mx-auto d-block my-2"
                             to = "/updateinfo"
-                        > Actualizar Datos Usuario</Link>
+                        > Update User Information</Link>
                         {/*
                         <buttom
                             className="btn btn-danger mx-auto d-block my-2"
                             onClick = {() => handleModalOpen()}
-                        > Eliminar Usuario</buttom>
+                        > Delete User</buttom>
                         */}
                         </div>
                     </div>

@@ -61,18 +61,18 @@ const TestElementComponent = (props) => {
     }
 
     let field_map = {
-        testElementId: document.getElementById("idElemento"),
-        field: document.getElementById("campo"),
-        value: document.getElementById("valor"),
-        scenario: document.getElementById("escenario"),
-        expectedResponse: document.getElementById("respuestaApp"),
-        systemResponse: document.getElementById("respuestaSistema"),
-        matching: document.getElementById("coincide"),
+        testElementId: document.getElementById("elementId"),
+        field: document.getElementById("field"),
+        value: document.getElementById("value"),
+        scenario: document.getElementById("scenario"),
+        expectedResponse: document.getElementById("expectedResponse"),
+        systemResponse: document.getElementById("systemResponse"),
+        matching: document.getElementById("matching"),
     }
 
     const cleanInputFields = () => {
         Object.values(field_map).map((field) => {
-            if(field.nodeName === "SELECT") field.value = "[Seleccionar Opción]"
+            if(field.nodeName === "SELECT") field.value = "[Select Option]"
             else field.value = "";
         });
     }
@@ -82,13 +82,13 @@ const TestElementComponent = (props) => {
            {!props.view &&
             <div className = "card mb-3">
                 <div className = "card-body border">
-                    <h5 className = "text-center mb-3">Datos de Entrada</h5>
+                    <h5 className = "text-center mb-3">Input Data</h5>
                     <form>
                         <div className = "row">
                             <div className = "col-sm-1">
                                 <p className = "form-label text-center">ID</p>
                                 <input
-                                    id = "idElemento"
+                                    id = "elementId"
                                     type = "text"
                                     disabled = {true}
                                     placeholder = "Auto"
@@ -98,39 +98,39 @@ const TestElementComponent = (props) => {
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Campo</p>
+                                <p className = "form-label text-center">Field</p>
                                 <textarea
-                                    id = "campo"
+                                    id = "field"
                                     type = "text"
                                     rows = {1}
                                     maxLength = {150}
-                                    placeholder = "Ingresa Campo"
+                                    placeholder = "Enter a Field"
                                     name = "test-case-field"
                                     className = {`form-control`}
                                     onChange = {(e) => {setField(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Valor</p>
+                                <p className = "form-label text-center">Value</p>
                                 <textarea
-                                    id = "valor"
+                                    id = "value"
                                     type = "text"
                                     rows = {1}
                                     maxLength = {150}
-                                    placeholder = "Ingresa Valor"
+                                    placeholder = "Enter a Value"
                                     name = "test-case-value"
                                     className = {`form-control`}
                                     onChange = {(e) => {setValue(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Tipo de Esecenario</p>
+                                <p className = "form-label text-center">Type of Scenario</p>
                                 <textarea
-                                    id = "escenario"
+                                    id = "scenario"
                                     type = "text"
                                     rows = {1}
                                     maxLength = {150}
-                                    placeholder = "Ingresa Tipo de Escenario"
+                                    placeholder = "Enter a Typo of Scenario"
                                     name = "test-case-scenario"
                                     className = {`form-control`}
                                     onChange = {(e) => {setScenario(e.target.value)}}
@@ -139,22 +139,22 @@ const TestElementComponent = (props) => {
                         </div>
                         <div className = "row">
                             <div className = "col">
-                                <p className = "form-label text-center">Respuesta Eseperada de la Aplicación</p>
+                                <p className = "form-label text-center">Expected Response</p>
                                 <textarea
-                                    id = "respuestaApp"
+                                    id = "expectedResponse"
                                     type = "text"
                                     rows = {1}
                                     maxLength = {150}
-                                    placeholder = "Ingresa Respuesta Esperada de la Aplicación"
+                                    placeholder = "Enter an Expected Response"
                                     name = "test-case-app-ans"
                                     className = {`form-control`}
                                     onChange = {(e) => {setExpectedResponse(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Coincide</p>
+                                <p className = "form-label text-center">Matching</p>
                                 <select
-                                    id = "coincide"
+                                    id = "matching"
                                     className="form-select"
                                     aria-label="TestCase-selection"
                                     onChange = {(e) => {
@@ -162,19 +162,19 @@ const TestElementComponent = (props) => {
                                         setMatching(e.target.value == "true")
                                     }}
                                 >
-                                  <option className = "text-center">[Seleccionar Opción]</option>
-                                  <option value={true}>Si</option>
+                                  <option className = "text-center">[Select Option]</option>
+                                  <option value={true}>Yes</option>
                                   <option value={false}>No</option>
                                 </select>
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Repuesta del Sistema</p>
+                                <p className = "form-label text-center">System Response</p>
                                 <textarea
-                                    id = "respuestaSistema"
+                                    id = "systemResponse"
                                     type = "text"
                                     rows = {1}
                                     maxLength = {150}
-                                    placeholder = "Ingresa Respuesta del Sistema"
+                                    placeholder = "Enter System Response"
                                     name = "test-case-system-ans"
                                     className = {`form-control`}
                                     onChange = {(e) => {setSystemResponse(e.target.value)}}
@@ -202,14 +202,14 @@ const TestElementComponent = (props) => {
                                     }
                                 }
                             }
-                        >{modifying ? "Modificar": "Agregar"}</button>
+                        >{modifying ? "Modify": "Add"}</button>
                         <button
                             className = "btn btn-danger"
                             onClick = {() => {
                                 cleanInputFields()
                                 setModifying(false)
                             }}
-                        >{modifying ? "Cancelar" : "Limpiar" }</button>
+                        >{modifying ? "Cancel" : "Clean" }</button>
                     </div>
                 </div>
             </div>
@@ -220,14 +220,14 @@ const TestElementComponent = (props) => {
                     <thead>
                         <tr>
                             <th className = "text-center">Id</th>
-                            <th className = "text-center">Campo</th>
-                            <th className = "text-center">Valor</th>
-                            <th className = "text-center">Tipo de Esecenario</th>
-                            <th className = "text-center">Respuesta Esperada de la Aplicación</th>
-                            <th className = "text-center">Coincide</th>
-                            <th className = "text-center">Respuesta del Sistema</th>
+                            <th className = "text-center">Field</th>
+                            <th className = "text-center">Value</th>
+                            <th className = "text-center">Type of Scenario</th>
+                            <th className = "text-center">Expected Response</th>
+                            <th className = "text-center">Matching</th>
+                            <th className = "text-center">System Response</th>
                             {!props.view &&
-                            <th className = "text-center">Acciones</th>
+                            <th className = "text-center">Actions</th>
                             }
                         </tr>
                     </thead>
@@ -245,7 +245,7 @@ const TestElementComponent = (props) => {
                                     <td>{row.value}</td>
                                     <td>{row.scenario}</td>
                                     <td>{row.expectedResponse}</td>
-                                    <td>{row.matching ? "Si" : "No" }</td>
+                                    <td>{row.matching ? "Yes" : "No" }</td>
                                     <td>{row.systemResponse}</td>
                                     {!props.view &&
                                         <>
@@ -263,7 +263,7 @@ const TestElementComponent = (props) => {
                                                 field_map.matching.value = row.matching;
                                                 setModifying(true)
                                             }}
-                                        >Editar</button>
+                                        >Edit</button>
                                         <button
                                             className = "btn btn-danger m-1"
                                             onClick = {() => {
@@ -275,7 +275,7 @@ const TestElementComponent = (props) => {
                                                     }))
                                                 }
                                             }}
-                                        >Eliminar</button>
+                                        >Delete</button>
                                     </td>
                                     </>
                                     }
@@ -289,11 +289,11 @@ const TestElementComponent = (props) => {
                 </table>
             </div>
             {rows.length === 0 &&
-            <p className = "text-center text-muted fst-italic">No Hay Elementos Para Mostrar</p>
+            <p className = "text-center text-muted fst-italic">There is nothing to show</p>
             }
             <ModalComponent
-                modalTitle  = {<h4>Eliminar Elemento de Prueba</h4>}
-                modalBody = "Si elimina el elemento de prueba, toda la información relacionada a el se borrara también."
+                modalTitle  = {<h4>Delete Test Element</h4>}
+                modalBody = "If you delete the test item, all information related to it will be deleted as well."
                 show = {modalShow}
                 closeAction = {() => handleModalClose}
                 onConfirm = {() => {

@@ -32,7 +32,7 @@ const LoginComponent = (props) => {
         <div>
             <header>
                 <nav className = "navbar navbar-expand-md navbar-dark bg-dark">
-                    <h2 style={{color: "White", margin: "auto"}}>Ingreso al Sistema</h2>
+                    <h2 style={{color: "White", margin: "auto"}}>System Login</h2>
                 </nav>
             </header>
             <br/>
@@ -42,11 +42,11 @@ const LoginComponent = (props) => {
             <div className="card col-md-6 offset-md-3">
                 <div className = "card-body border">
                     {!userFound &&
-                    <div className="alert alert-danger"> Usuario No Encontrado </div>
+                    <div className="alert alert-danger"> User Not Found </div>
                     }
                     <form>
                       <div className="mb-3">
-                        <label htmlFor="userName" className="form-label">Nombre de Usuario</label>
+                        <label htmlFor="userName" className="form-label">User Name</label>
                         <input
                             type="text"
                             className="form-control"
@@ -54,7 +54,7 @@ const LoginComponent = (props) => {
                         />
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="userPassword" className="form-label">Contraseña</label>
+                        <label htmlFor="userPassword" className="form-label">Password</label>
                         <input
                             type="password"
                             className="form-control"
@@ -65,14 +65,14 @@ const LoginComponent = (props) => {
                             type="submit"
                             className="btn btn-primary mb-3"
                             onClick = {(e) => findUser(e)}
-                      >Ingresar</button>
+                      >Login</button>
                       <Link
                             to="/user-register"
                             type="submit"
                             className="btn btn-success mb-3 mx-2"
-                      >Crear Usuario</Link>
+                      >Create User</Link>
                     </form>
-                    <Link to="/updatepassword"> Olvidaste la Contraseña? </Link>
+                    <Link to="/updatepassword"> you forgot the password? </Link>
                 </div>
             </div>
         </div>

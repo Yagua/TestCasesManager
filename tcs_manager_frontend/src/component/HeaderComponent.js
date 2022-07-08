@@ -5,7 +5,7 @@ const HeaderComponent = (props) => {
         <div className="sticky-top">
             <nav className = "navbar navbar-dark bg-dark">
                 <h3 className="navbar-brand justify-content-start mx-3"
-                >{props.navBarBrand ? props.navBarBrand : "Gestor de Casos de Pruebas"}</h3>
+                >{props.navBarBrand ? props.navBarBrand : "Test Case Manager"}</h3>
 
                 <ul className="nav mx-3">
                   {props.onHome &&
@@ -16,7 +16,7 @@ const HeaderComponent = (props) => {
 
                     <div className="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Opciones
+                        Options
                       </button>
 
                       <ul className="dropdown-menu dropdown-menu-sm-end">
@@ -25,7 +25,7 @@ const HeaderComponent = (props) => {
                             <Link
                                 to = "/home"
                                 className="dropdown-item"
-                            >Atras</Link>
+                            >Back</Link>
                         </li>
                       :
                           <>
@@ -33,7 +33,7 @@ const HeaderComponent = (props) => {
                                 <Link
                                     to = "/profile"
                                     className="dropdown-item"
-                                >Perfil</Link>
+                                >Profile</Link>
                             </li>
                           </>
                       }
@@ -46,7 +46,7 @@ const HeaderComponent = (props) => {
                                     localStorage.removeItem("isAthenticated")
                                     localStorage.removeItem("userName")
                                 }}
-                            >Salir</Link>
+                            >Log Out</Link>
                           </li>
                       </ul>
                     </div>

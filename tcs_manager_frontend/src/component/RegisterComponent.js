@@ -74,7 +74,7 @@ const RegisterCompenent = (props) => {
                <nav className = "navbar navbar-dark bg-dark">
                    <h3 className="navbar-brand justify-content-start"
                        style={{marginLeft:"20px"}}
-                   >Registro de Usuario</h3>
+                   >User Registration</h3>
                </nav>
                }
            </div>
@@ -83,13 +83,13 @@ const RegisterCompenent = (props) => {
                aria-labelledby="contained-modal-title-vcenter"
                centered
            >
-               <ModalHeader>Registro de Usuario</ModalHeader>
+               <ModalHeader>User Registration</ModalHeader>
                <ModalBody>{modalBody}</ModalBody>
                <ModalFooter>
                    <button
                        className="btn btn-secondary"
                        onClick = {() => setShowModal(false)}
-                   >Cerrar</button>
+                   >Exit</button>
                </ModalFooter>
            </Modal>
            <div className = "container my-4">
@@ -98,11 +98,11 @@ const RegisterCompenent = (props) => {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Nombre de Usuario</label>
+                                    <label className = "form-label"> User Name</label>
                                     <input
                                         type = "text"
                                         maxLength = {20}
-                                        placeholder = "Ingresa Nombre de usuario"
+                                        placeholder = "Enter User Name"
                                         className = {`form-control ${validUserName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -113,11 +113,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Primer Nombre</label>
+                                    <label className = "form-label"> First Name</label>
                                     <input
                                         type = "text"
                                         maxLength = {20}
-                                        placeholder = "Ingresa Primer Nombre"
+                                        placeholder = "Enter First Name"
                                         className = {`form-control ${validFirstName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -127,11 +127,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Segundo Nombre</label>
+                                    <label className = "form-label"> Second Name</label>
                                     <input
                                         type = "text"
                                         maxLength = {20}
-                                        placeholder = "Ingrese Segundo Nombre"
+                                        placeholder = "Enter Second Name"
                                         className = {`form-control ${validSecondName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -142,11 +142,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Apellido Paterno</label>
+                                    <label className = "form-label"> Paternal Last Name</label>
                                     <input
                                         type = "text"
                                         maxLength = {20}
-                                        placeholder = "Ingresa Apellido Paterno"
+                                        placeholder = "Enter Paternal Last Name"
                                         className = {`form-control ${validPaternalLastName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -157,11 +157,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Apellido Materno</label>
+                                    <label className = "form-label"> Maternal Last Name</label>
                                     <input
                                         type = "text"
                                         maxLength = {20}
-                                        placeholder = "Ingrese Apellido Materno"
+                                        placeholder = "Enter Maternal Last Name"
                                         className = {`form-control ${validMaternalLastName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -172,11 +172,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Nueva Contraseña</label>
+                                    <label className = "form-label"> New Password</label>
                                     <input
                                         type = "password"
                                         maxLength = {50}
-                                        placeholder = "Ingresa Contraseña"
+                                        placeholder = "Enter New Password"
                                         className = {`form-control ${validPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -187,11 +187,11 @@ const RegisterCompenent = (props) => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Confirmar Contraseña</label>
+                                    <label className = "form-label"> Confirm Password</label>
                                     <input
                                         type = "password"
                                         maxLength = {50}
-                                        placeholder = "Ingresa Contraseña"
+                                        placeholder = "Confirm Password"
                                         className = {`form-control ${validConfirmedPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -207,8 +207,8 @@ const RegisterCompenent = (props) => {
                                 <buttom
                                     className={`btn ${isValidRequest ? "btn-success" : "btn-secondary"}`}
                                     onClick = {isValidRequest ? () => {registerUser()} : null}
-                                > Registrar</buttom>
-                                <Link to="/login" className="btn btn-danger m-2"> Cancelar </Link>
+                                > Register</buttom>
+                                <Link to="/login" className="btn btn-danger m-2"> Cancel </Link>
                             </form>
                         </div>
                     </div>

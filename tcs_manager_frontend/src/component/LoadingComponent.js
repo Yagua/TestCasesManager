@@ -4,7 +4,7 @@ const LoadingComponent = (props) => {
             <nav className = "navbar navbar-dark bg-dark">
                <h3 className="navbar-brand"
                    style={{marginLeft:"20px"}}
-               >Cargando...</h3>
+               >Loading...</h3>
             </nav>
             <div style={{marginTop: "10%"}}>
                 <div className="spinner-border text-muted mx-auto d-block"

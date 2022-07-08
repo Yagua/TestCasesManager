@@ -70,7 +70,7 @@ const TesterComponent = (props) => {
 
     const cleanInputFields = () => {
         Object.values(field_map).map((field) => {
-            if(field.nodeName === "SELECT") field.value = "[Seleccionar Opción]"
+            if(field.nodeName === "SELECT") field.value = "[Select Option]"
             else field.value = "";
         });
     }
@@ -81,13 +81,12 @@ const TesterComponent = (props) => {
         setModalShow(true)
     }
 
-    //TODO: change the lenth of the fields
     return (
         <div>
            {!props.view &&
             <div className = "card mb-3">
                 <div className = "card-body border">
-                    <h5 className = "text-center mb-3">Datos de Entrada</h5>
+                    <h5 className = "text-center mb-3">Input Data</h5>
                     <form>
                         <div className = "row">
                             <div className = "col-sm-1">
@@ -103,24 +102,24 @@ const TesterComponent = (props) => {
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Primer Nombre</p>
+                                <p className = "form-label text-center">First Name</p>
                                 <input
                                     id = "first_name"
                                     type = "text"
                                     maxLength = {20}
-                                    placeholder = "Ingresa Primer Nombre"
+                                    placeholder = "Enter First Name"
                                     name = "tester-first-name"
                                     className = {`form-control`}
                                     onChange = {(e) => {setFirstName(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Segundo Nombre</p>
+                                <p className = "form-label text-center">Second Name</p>
                                 <input
                                     id = "second_name"
                                     type = "text"
                                     maxLength = {20}
-                                    placeholder = "Ingresa Segundo Nombre"
+                                    placeholder = "Enter Second Name"
                                     name = "tester-second-name"
                                     className = {`form-control`}
                                     onChange = {(e) => {setSecondName(e.target.value)}}
@@ -129,36 +128,36 @@ const TesterComponent = (props) => {
                         </div>
                         <div className = "row">
                             <div className = "col">
-                                <p className = "form-label text-center">Apellido Paterno</p>
+                                <p className = "form-label text-center">Paternal Last Name</p>
                                 <input
                                     id = "parternal_lastname"
                                     type = "text"
                                     maxLength = {20}
-                                    placeholder = "Ingresa Apellido Paterno"
+                                    placeholder = "Enter Paternal Last Name"
                                     name = "tester-paternal-lastname"
                                     className = {`form-control`}
                                     onChange = {(e) => {setPaternalLastName(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Apellido Materno</p>
+                                <p className = "form-label text-center">Maternal Last Name</p>
                                 <input
                                     id = "maternal_lastname"
                                     type = "text"
                                     maxLength = {20}
-                                    placeholder = "Ingresa Apellido Materno"
+                                    placeholder = "Enter Maternal Last Name"
                                     name = "tester-maternal-lastname"
                                     className = {`form-control`}
                                     onChange = {(e) => {setMaternalLastName(e.target.value)}}
                                 />
                             </div>
                             <div className = "col">
-                                <p className = "form-label text-center">Firma</p>
+                                <p className = "form-label text-center">Sign</p>
                                 <input
                                     id = "tester_sing"
                                     type = "text"
                                     maxLength = {20}
-                                    placeholder = "Ingresa Firma"
+                                    placeholder = "Enter Sign"
                                     name = "tester-sign"
                                     className = {`form-control`}
                                     onChange = {(e) => {setSing(e.target.value)}}
@@ -185,14 +184,14 @@ const TesterComponent = (props) => {
                               setRows([... rows])
                             }
                             }
-                        >{modifying ? "Modificar": "Agregar"}</button>
+                        >{modifying ? "Modify": "Add"}</button>
                         <button
                             className = "btn btn-danger"
                             onClick = {() => {
                                 cleanInputFields()
                                 setModifying(false)
                             }}
-                        >{modifying ? "Cancelar" : "Limpiar" }</button>
+                        >{modifying ? "Cancel" : "Clean" }</button>
                     </div>
                 </div>
             </div>
@@ -202,13 +201,13 @@ const TesterComponent = (props) => {
                     <thead>
                         <tr>
                             <th className = "text-center">Id</th>
-                            <th className = "text-center">Primer Nombre</th>
-                            <th className = "text-center">Segundo Nombre</th>
-                            <th className = "text-center">Apellido Paterno</th>
-                            <th className = "text-center">Apellido Materno</th>
-                            <th className = "text-center">Firma</th>
+                            <th className = "text-center">First Name</th>
+                            <th className = "text-center">Second Name</th>
+                            <th className = "text-center">Paternal Last Name</th>
+                            <th className = "text-center">Maternal Last Name</th>
+                            <th className = "text-center">Sign</th>
                             {!props.view &&
-                            <th className = "text-center">Acciones</th>
+                            <th className = "text-center">Actions</th>
                             }
                         </tr>
                     </thead>
@@ -242,7 +241,7 @@ const TesterComponent = (props) => {
                                                     field_map.sing.value = row.sing
                                                     setModifying(true)
                                                 }}
-                                            >Editar</button>
+                                            >Edit</button>
                                             <button
                                                 className = "btn btn-danger m-1"
                                                 onClick = {() => {
@@ -254,7 +253,7 @@ const TesterComponent = (props) => {
                                                         }))
                                                     }
                                                 }}
-                                            >Eliminar</button>
+                                            >Delete</button>
                                         </td>
                                         </>
                                         }
@@ -267,11 +266,11 @@ const TesterComponent = (props) => {
                 </table>
             </div>
             {rows.length === 0 &&
-            <p className = "text-center text-muted fst-italic">No Hay Elementos Para Mostrar</p>
+            <p className = "text-center text-muted fst-italic">There is nothing to show</p>
             }
             <ModalComponent
-                modalTitle  = {<h4>Eliminar Probador</h4>}
-                modalBody = "Si elimina el probador, toda la información relacionada a el se borrara también."
+                modalTitle  = {<h4>Delete Tester</h4>}
+                modalBody = "If you delete the tester, all information related to it will be deleted as well."
                 show = {modalShow}
                 closeAction = {() => handleModalClose}
                 onConfirm = {() => {

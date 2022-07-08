@@ -97,44 +97,44 @@ const TestCaseComponent = () => {
                     onHome = {false}
                     navBarBrand = "Creación de Casos de Prueba"
                 />
-                <h2 className = "text-center text-muted m-3">{view ? `Caso de uso #${tcId}` : "Agregar Nuevo Caso de Prueba"}</h2>
+                <h2 className = "text-center text-muted m-3">{view ? `Test Case #${tcId}` : "Add New Test Case"}</h2>
                 <div className = "card m-4">
                     <div className = "card-body border">
                         <div className = {`${view && "overlay"}`}>
-                            <p className = "text-center h5 mt-2 alert alert-secondary">Información Global</p>
+                            <p className = "text-center h5 mt-2 alert alert-secondary">Global Information</p>
                             <div className = "mx-5">
                                 <form className = "was-validate">
                                     <div className = "row">
                                         <div className = "col">
-                                            <p className = "form-label text-center">Nombre Caso de Prueba</p>
+                                            <p className = "form-label text-center">Test Case Name</p>
                                             <input
                                                 type = "text"
                                                 defaultValue = {testCaseName}
                                                 maxLength = {40}
-                                                placeholder = "Ingresa Nombre de Caso de Prueba"
+                                                placeholder = "Enter Test Case Name"
                                                 name = "test-case-name"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestCaseName(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Versión Caso de Prueba</p>
+                                            <p className = "form-label text-center">Test Case Version</p>
                                             <input
                                                 type = "text"
                                                 defaultValue = {testCaseVersion}
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Version"
+                                                placeholder = "Enter Version"
                                                 name = "test-case-version"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestCaseVersion(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Fecha Ejecución</p>
+                                            <p className = "form-label text-center">Execution Date</p>
                                             <input
                                                 type = "date"
                                                 defaultValue = {executionDate}
-                                                placeholder = "Ingresa Fecha Ejecución"
+                                                placeholder = "Enter Execution Date"
                                                 name = "test-case-execution-date"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setExecutionDate(e.target.value)}}
@@ -143,25 +143,25 @@ const TestCaseComponent = () => {
                                     </div>
                                     <div className = "row mt-3">
                                         <div className = "col">
-                                            <p className = "form-label text-center">Módulo del Sistema</p>
+                                            <p className = "form-label text-center">System Module</p>
                                             <input
                                                 type = "text"
                                                 defaultValue = {systemModule}
                                                 maxLength = {80}
-                                                placeholder = "Ingresa Módulo del Sistema"
+                                                placeholder = "Enter System Module"
                                                 name = "test-system-module"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setSystemModule(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Descripción del Caso de Prueba</p>
+                                            <p className = "form-label text-center">Test Case Description</p>
                                             <textarea
                                                 type = "text"
                                                 defaultValue = {testCaseDescription}
                                                 rows = {1}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Descripción"
+                                                placeholder = "Enter Test Case Description"
                                                 name = "test-case-name"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestCaseDescription(e.target.value)}}
@@ -171,44 +171,44 @@ const TestCaseComponent = () => {
                                 </form>
                             </div>
 
-                            <p className = "text-center h5 mt-4 alert alert-secondary"> Caso de Prueba</p>
+                            <p className = "text-center h5 mt-4 alert alert-secondary"> Test Case</p>
                             <div className = "mx-5">
                                 <form>
                                     <div className = "row">
                                         <div className = "col">
-                                            <p className = "form-label text-center">Precondiciones</p>
+                                            <p className = "form-label text-center">Preconditions</p>
                                             <textarea
                                                 type = "text"
                                                 rows = {4}
                                                 defaultValue = {preconditions}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Precondiciones"
+                                                placeholder = "Enter Preconditions"
                                                 name = "test-case-preconditions"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setPreconditions(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Pasos de la Prueba</p>
+                                            <p className = "form-label text-center">Test Steps</p>
                                             <textarea
                                                 type = "text"
                                                 defaultValue = {testSteps}
                                                 rows = {4}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Pasos de la Prueba"
+                                                placeholder = "Enter Test Case Steps"
                                                 name = "test-case-steps"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setTestSteps(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Postcondiciones</p>
+                                            <p className = "form-label text-center">Postcondition</p>
                                             <textarea
                                                 type = "text"
                                                 defaultValue = {postconditions}
                                                 rows = {4}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Postcondiciones"
+                                                placeholder = "Enter Postcondition"
                                                 name = "test-case-postconditions"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setPostconditions(e.target.value)}}
@@ -218,13 +218,13 @@ const TestCaseComponent = () => {
                                 </form>
                             </div>
 
-                            <p className = "text-center h5 mt-4 alert alert-secondary"> Elementos de Prueba</p>
+                            <p className = "text-center h5 mt-4 alert alert-secondary"> Test Elements</p>
                             <div className = "mx-5">
                                 <div class="accordion" id="accordionExample">
                                     <div class="accordion-item">
                                        <h2 class="accordion-header" id="headingOne">
                                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Desplegar Contenido
+                                            View Content
                                          </button>
                                        </h2>
                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -240,44 +240,44 @@ const TestCaseComponent = () => {
                                 </div>
                             </div>
 
-                            <p className = "text-center h5 mt-4 alert alert-secondary">Resultados</p>
+                            <p className = "text-center h5 mt-4 alert alert-secondary">Results</p>
                             <div className = "mx-5">
                                 <form>
                                     <div className = "row">
                                         <div className = "col">
-                                            <p className = "form-label text-center">Defectos y Desviaciones</p>
+                                            <p className = "form-label text-center">Defects y Deviations</p>
                                             <textarea
                                                 type = "text"
                                                 defaultValue = {defectsAndDesviations}
                                                 rows = {4}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Defectos y Desviaciones"
+                                                placeholder = "Enter Defects y Deviations"
                                                 name = "test-case-defects"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setDefectsAndDesviations(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Veredicto</p>
+                                            <p className = "form-label text-center">Veredict</p>
                                             <textarea
                                                 type = "text"
                                                 defaultValue = {veredict}
                                                 rows = {4}
                                                 maxLength = {100}
-                                                placeholder = "Ingresa Veredicto"
+                                                placeholder = "Enter Veredict"
                                                 name = "test-case-veredict"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setVeredict(e.target.value)}}
                                             />
                                         </div>
                                         <div className = "col">
-                                            <p className = "form-label text-center">Observaciones</p>
+                                            <p className = "form-label text-center">Observations</p>
                                             <textarea
                                                 type = "text"
                                                 rows = {4}
                                                 defaultValue = {observations}
                                                 maxLength = {150}
-                                                placeholder = "Ingresa Observaciones"
+                                                placeholder = "Enter Observations"
                                                 name = "test-case-observations"
                                                 className = {`form-control`}
                                                 onChange = {(e) => {setObservations(e.target.value)}}
@@ -287,13 +287,13 @@ const TestCaseComponent = () => {
                                 </form>
                             </div>
 
-                            <p className = "text-center h5 mt-4 alert alert-secondary">Probadores</p>
+                            <p className = "text-center h5 mt-4 alert alert-secondary">Testers</p>
                             <div className = "mx-5">
                                 <div class="accordion mb-3" id="testersAcorddion">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
                                           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                            Desplegar Contenido
+                                            View Content
                                           </button>
                                         </h2>
                                         <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -317,13 +317,13 @@ const TestCaseComponent = () => {
                                 <button
                                     className = "btn btn-success mx-3"
                                     onClick = {() => { readyToUpdate ? updateTestCase() : createTestCase()}}
-                                >{readyToUpdate ? "Finalizar" : "Crear"}</button>
+                                >{readyToUpdate ? "Confirm" : "Cancel"}</button>
                                 <button
                                     className = "btn btn-danger"
                                     onClick = {() => {
                                         handleModalOpen()
                                     }}
-                                >Cancelar</button>
+                                >Cancel</button>
                             </>
                                 :
                             <>
@@ -334,18 +334,18 @@ const TestCaseComponent = () => {
                                         setReadyToUpdate(true)
                                         setSearchParams({tcId, view})
                                     }}
-                                >Modificar</button>
+                                >Modify</button>
                                 <button
                                     className = "btn btn-secondary"
                                     onClick = {() => navigate("/home")}
-                                >Regresar</button>
+                                >Go Back</button>
                             </>
                             }
                         </div>
                     </div>
                   <ModalComponent
-                      modalTitle  = {<h4>Cancelar Operación sobre Caso de Prueba</h4>}
-                      modalBody = "Si cancela el proceso, la información consignada hasta ahora se perderá."
+                      modalTitle  = {<h4>Cancel Operation on Test Case</h4>}
+                      modalBody = "If you cancel the process, the information entered so far will be lost."
                       show = {modalShow}
                       closeAction = {() => handleModalClose}
                       onConfirm = {() => {

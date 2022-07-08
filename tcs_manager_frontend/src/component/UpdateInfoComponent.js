@@ -53,7 +53,7 @@ const UpdateInfoComponent = () => {
         });
 
         if(isThereEmptyFields) {
-            alert("No pueden haber campos vacios!")
+            alert("There cannot be empty fields")
             return
         }
 
@@ -62,7 +62,7 @@ const UpdateInfoComponent = () => {
                 navigate("/home")
             })
             .catch(error => {
-                alert(`Un usuario con el user name "${userName}" ya existe!`)
+                alert(`The user "${userName}" already exist!`)
                 console.error(error)
             })
     }
@@ -72,7 +72,7 @@ const UpdateInfoComponent = () => {
         return (
             <div>
                 <HeaderComponent
-                    navBarBrand="Actualización de Información"
+                    navBarBrand="Update Information"
                     onHome={false}
                 />
                 <div>
@@ -82,11 +82,11 @@ const UpdateInfoComponent = () => {
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group mb-2">
-                                            <label className = "form-label"> Primer Nombre</label>
+                                            <label className = "form-label"> First Name</label>
                                             <input
                                                 type = "text"
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Primer Nombre"
+                                                placeholder = "Enter First Name"
                                                 name = "firstName"
                                                 className = "form-control"
                                                 value = {firstName}
@@ -95,11 +95,11 @@ const UpdateInfoComponent = () => {
                                             </input>
                                         </div>
                                         <div className = "form-group mb-2">
-                                            <label className = "form-label"> Segundo Nombre</label>
+                                            <label className = "form-label"> Second Name</label>
                                             <input
                                                 type = "text"
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Segundo Nombre"
+                                                placeholder = "Enter Second Name"
                                                 name = "firstName"
                                                 className = "form-control"
                                                 value = {secondName}
@@ -108,11 +108,11 @@ const UpdateInfoComponent = () => {
                                             </input>
                                         </div>
                                         <div className = "form-group mb-2">
-                                            <label className = "form-label"> Apellido Paterno</label>
+                                            <label className = "form-label"> Paternal Last Name</label>
                                             <input
                                                 type = "text"
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Apellido Paterno"
+                                                placeholder = "Enter Paternal Last Name"
                                                 name = "lastName"
                                                 className = "form-control"
                                                 value = {paternalLastName}
@@ -121,11 +121,11 @@ const UpdateInfoComponent = () => {
                                             </input>
                                         </div>
                                         <div className = "form-group mb-2">
-                                            <label className = "form-label"> Apellido Materno</label>
+                                            <label className = "form-label"> Maternal Last Name</label>
                                             <input
                                                 type = "text"
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Apellido Materno"
+                                                placeholder = "Enter Maternal Last Name"
                                                 name = "lastName"
                                                 className = "form-control"
                                                 value = {maternalLastName}
@@ -134,11 +134,11 @@ const UpdateInfoComponent = () => {
                                             </input>
                                         </div>
                                         <div className = "form-group mb-2">
-                                            <label className = "form-label"> Nombre de Usuario</label>
+                                            <label className = "form-label"> User Name</label>
                                             <input
                                                 type = "text"
                                                 maxLength = {20}
-                                                placeholder = "Ingresa Nombre de usuario"
+                                                placeholder = "Enter User Name"
                                                 name = "userName"
                                                 className = "form-control"
                                                 value = {userName}
@@ -149,10 +149,10 @@ const UpdateInfoComponent = () => {
                                         <buttom
                                             className="btn btn-success"
                                             onClick = {() => {updateInformation()}}
-                                        > Aceptar </buttom>
-                                        <Link to="/home" className="btn btn-danger m-2"> Cancelar </Link>
+                                        > Accept </buttom>
+                                        <Link to="/home" className="btn btn-danger m-2"> Cancel </Link>
                                     </form>
-                                    <Link to="/updatepassword"> Cambiar Contraseña </Link>
+                                    <Link to="/updatepassword"> Change Password </Link>
                                 </div>
                             </div>
                         </div>

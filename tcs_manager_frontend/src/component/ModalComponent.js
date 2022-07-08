@@ -14,12 +14,12 @@ const ModalComponent = (props) => {
                 <button
                     className="btn btn-secondary"
                     onClick = {props.closeAction()}
-                >Cerrar</button>
+                >Exit</button>
             {!props.isAlert &&
                 <button
                     className="btn btn-primary"
                     onClick = {() => props.onConfirm()}
-                >Aceptar</button>
+                >Accept</button>
             }
             </ModalFooter>
         </Modal>

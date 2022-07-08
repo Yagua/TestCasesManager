@@ -26,7 +26,7 @@ const ChangePasswordComponent = () => {
         }
 
         if(password !== confirmedPassword){
-            setErrorMessage("Las Contraseña no Coinciden")
+            setErrorMessage("Passwords do not match")
             setValidPassword(false)
             setValidConfirmedPassword(false)
             return
@@ -36,7 +36,7 @@ const ChangePasswordComponent = () => {
         UserService.updatePassword(userTemplate)
             .then(_ => { navigate("/home")})
             .catch(error => {
-                setModalBody(`El usuario "${userName}" no existe.`)
+                setModalBody(`The user "${userName}" does not exist`)
                 setValidUserName(false)
                 setShowModal(true)
                 console.error(error)
@@ -48,14 +48,14 @@ const ChangePasswordComponent = () => {
             <nav className = "navbar navbar-dark bg-dark">
                 <h3 className="navbar-brand justify-content-start"
                     style={{marginLeft:"20px"}}
-                >Restablecimiento de Contraseña</h3>
+                >Password Reset</h3>
             </nav>
             <Modal
                 show = {showModal}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <ModalHeader>Restablecimiento de Contraseña</ModalHeader>
+                <ModalHeader>Password Reset</ModalHeader>
                 <ModalBody>{modalBody}</ModalBody>
                 <ModalFooter>
                     <button
@@ -70,11 +70,11 @@ const ChangePasswordComponent = () => {
                         <div className = "card-body">
                             <form className = "was-validate">
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Nombre de Usuario</label>
+                                    <label className = "form-label"> User Name</label>
                                     <input
                                         type = "text"
-                                        placeholder = "Ingresa Nombre de usuario"
-                                        name = "nombre_usuario"
+                                        placeholder = "Enter the user name"
+                                        name = "user_name"
                                         className = {`form-control ${validUserName ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
                                             let value = e.target.value
@@ -86,10 +86,10 @@ const ChangePasswordComponent = () => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Nueva Contraseña</label>
+                                    <label className = "form-label"> New Password</label>
                                     <input
                                         type = "password"
-                                        placeholder = "Ingresa Contraseña"
+                                        placeholder = "Enter new password"
                                         name = "new_password"
                                         className = {`form-control ${validPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -102,10 +102,10 @@ const ChangePasswordComponent = () => {
                                     </input>
                                 </div>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Confirmar Contraseña</label>
+                                    <label className = "form-label"> Confirm Password</label>
                                     <input
                                         type = "password"
-                                        placeholder = "Ingresa Contraseña"
+                                        placeholder = "Confirm Password"
                                         name = "confirm_new_password"
                                         className = {`form-control ${validConfirmedPassword ? "is-valid" : "is-invalid"}`}
                                         onChange = {(e) => {
@@ -123,11 +123,11 @@ const ChangePasswordComponent = () => {
                                 <buttom
                                     className={`btn ${isValidRequest ? "btn-success" : "btn-secondary"}`}
                                     onClick = {isValidRequest ? () => {updatePassword()} : null}
-                                > Aceptar </buttom>
+                                > Accept </buttom>
                                 <Link
                                     to={localStorage.getItem("isAthenticated") ? "/home" : "/login"}
                                     className="btn btn-danger m-2"
-                                > Cancelar </Link>
+                                > Cancel </Link>
                             </form>
                         </div>
                     </div>
