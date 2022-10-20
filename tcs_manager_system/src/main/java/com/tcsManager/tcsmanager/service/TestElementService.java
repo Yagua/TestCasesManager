@@ -14,23 +14,20 @@ import org.springframework.http.ResponseEntity;
  */
 public interface TestElementService {
 
-    TestElement getTestElement(long testElementId)
-            throws TestElementNotFoundException;
+    ResponseEntity<TestElement> getTestElement(long testElementId) throws TestElementNotFoundException;
 
-    TestElement createTestElement(TestElement testElement, long testCaseId)
+    ResponseEntity<TestElement> createTestElement(TestElement testElement, long testCaseId)
             throws TestCaseNotFoundException;
 
-    List<TestElement> getAllTestElements();
+    ResponseEntity<List<TestElement>> getAllTestElements();
 
-    List<TestElement> getTestElementsByTestCaseId(long testCaseId)
-            throws TestCaseNotFoundException;
+    ResponseEntity<List<TestElement>> getTestElementsByTestCaseId(long testCaseId) throws TestCaseNotFoundException;
 
-    TestElement updateTestElement(long testElementId, TestElement testElementUpdated)
+    ResponseEntity<TestElement> updateTestElement(long testElementId, TestElement testElementUpdated)
             throws TestElementNotFoundException;
 
-    TestElement partialUpdateTestElement(long testElementId,
-            Map<Object, Object> fields) throws TestElementNotFoundException;
-
-    ResponseEntity<String> deleteTestElement(long testElementId)
+    ResponseEntity<TestElement> partialUpdateTestElement(long testElementId, Map<Object, Object> fields)
             throws TestElementNotFoundException;
+
+    ResponseEntity<?> deleteTestElement(long testElementId) throws TestElementNotFoundException;
 }

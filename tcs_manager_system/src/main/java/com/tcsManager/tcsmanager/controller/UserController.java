@@ -37,35 +37,35 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable long userId) throws UserNotFoundException {
+    public ResponseEntity<User> getUserById(@PathVariable long userId) throws UserNotFoundException {
         return userService.getUserById(userId);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody User newUser) {
+    public ResponseEntity<User> createUser(@RequestBody User newUser) {
         return userService.createUser(newUser);
     }
 
     @PutMapping("/{userId}")
-    public User updateUser(@PathVariable long userId, @RequestBody User userUpdated)
+    public ResponseEntity<User> updateUser(@PathVariable long userId, @RequestBody User userUpdated)
         throws UserNotFoundException {
         return userService.updateUser(userId, userUpdated);
     }
 
     @PatchMapping("/{userId}")
-    public User partialUpdateUser(@PathVariable long userId,
+    public ResponseEntity<User> partialUpdateUser(@PathVariable long userId,
             @RequestBody Map<Object, Object> fields) throws UserNotFoundException {
         return userService.partialUpdateUser(userId, fields);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable long userId)
+    public ResponseEntity<?> deleteUser(@PathVariable long userId)
         throws UserNotFoundException {
         return userService.deleteUser(userId);
     }

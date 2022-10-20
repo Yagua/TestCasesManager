@@ -10,7 +10,6 @@ import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.repository.UserRepository;
 import com.tcsManager.tcsmanager.service.UserService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -29,14 +28,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long userId) throws UserNotFoundException {
-        return userRepository.findById(userId)
+    public ResponseEntity<User> getUserById(long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found", userId)));
+
+        return ResponseEntity.ok(user);
     }
 
     @Override
-    public User createUser(User user) {
+    public ResponseEntity<User> createUser(User user) {
         List<TestCase> testsCases = user.getTestCases();
         testsCases.forEach((testCase) -> {
             testCase.setUser(user);
@@ -45,16 +46,20 @@ public class UserServiceImpl implements UserService {
                 testElement.setTestCase(testCase);
             });
         });
-        return userRepository.save(user);
+
+        User newUser = userRepository.save(user);
+
+        return ResponseEntity.ok(newUser);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 
     @Override
-    public User updateUser(long userId, User userUpdated)
+    public ResponseEntity<User> updateUser(long userId, User userUpdated)
             throws UserNotFoundException {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
@@ -75,11 +80,13 @@ public class UserServiceImpl implements UserService {
         user.setTimeStamp(userUpdated.getTimeStamp());
         user.setTestCases(userUpdated.getTestCases());
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        return ResponseEntity.ok(savedUser);
     }
 
     @Override
-    public User partialUpdateUser(long userId, Map<Object, Object> fields)
+    public ResponseEntity<User> partialUpdateUser(long userId, Map<Object, Object> fields)
         throws UserNotFoundException {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
@@ -92,38 +99,42 @@ public class UserServiceImpl implements UserService {
             ReflectionUtils.setField(field, user, value);
         });
 
-        return userRepository.save(user);
+        User updateUser = userRepository.save(user);
+
+        return ResponseEntity.ok(updateUser);
     }
 
     @Override
-    public ResponseEntity<String> deleteUser(long id) throws UserNotFoundException {
+    public ResponseEntity<?> deleteUser(long id) throws UserNotFoundException {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found", id)));
         userRepository.delete(user);
 
-        return new ResponseEntity<String>(
-                String.format("User identified with ID::%d deleted successfully",
-                    id), HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
-    public User loginUser(String userName, String userPassword)
+    public ResponseEntity<User> loginUser(String userName, String userPassword)
         throws UserNotFoundException {
         User user = userRepository.findByUserNameAndPassword(userName, userPassword)
             .orElseThrow(() -> new UserNotFoundException(
                 String.format("User Not found")));
-        return user;
+
+        return ResponseEntity.ok(user);
     }
 
     @Override
-    public User updatePassword(String userName, String userPassword)
+    public ResponseEntity<User> updatePassword(String userName, String userPassword)
             throws UserNotFoundException {
             User user = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new UserNotFoundException(String.format(
                             "User indentified with user name %s does not exists",
                             userName)));
             user.setPassword(userPassword);
-            return userRepository.save(user);
+
+            User savedUser = userRepository.save(user);
+
+            return ResponseEntity.ok(savedUser);
     }
 }

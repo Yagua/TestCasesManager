@@ -14,20 +14,18 @@ import org.springframework.http.ResponseEntity;
  */
 public interface TesterService {
 
-    Tester getTester(long testerId) throws TesterNotFoundException;
+    ResponseEntity<Tester> getTester(long testerId) throws TesterNotFoundException;
 
-    Tester createTester(Tester tester, long testCaseId)
-            throws TestCaseNotFoundException;
+    ResponseEntity<Tester> createTester(Tester tester, long testCaseId) throws TestCaseNotFoundException;
 
-    List<Tester> getAllTesters();
+    ResponseEntity<List<Tester>> getAllTesters();
 
-    Tester updateTester(long testerId, Tester testerUpdated)
+    ResponseEntity<Tester> updateTester(long testerId, Tester testerUpdated) throws TesterNotFoundException;
+
+    ResponseEntity<Tester> partialUpdateTester(long testerId, Map<Object, Object> fields)
             throws TesterNotFoundException;
 
-    Tester partialUpdateTester(long testerId, Map<Object, Object> fields)
-            throws TesterNotFoundException;
-
-    ResponseEntity<String> deleteTester(long testerId, long testCaseId)
+    ResponseEntity<?> deleteTester(long testerId, long testCaseId)
             throws TesterNotFoundException, TestCaseNotFoundException;
 
 }

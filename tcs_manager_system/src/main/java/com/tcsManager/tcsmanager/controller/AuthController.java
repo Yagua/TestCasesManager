@@ -5,6 +5,7 @@ import com.tcsManager.tcsmanager.exception.UserNotFoundException;
 import com.tcsManager.tcsmanager.payload.UserDTO;
 import com.tcsManager.tcsmanager.service.UserService;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,14 +29,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User loginUser(@RequestBody UserDTO loginDTO)
+    public ResponseEntity<User> loginUser(@RequestBody UserDTO loginDTO)
         throws UserNotFoundException {
         return userService.loginUser(loginDTO.getUserName(),
                 loginDTO.getUserPassword());
     }
 
     @PatchMapping("/update-password")
-    public User changePassword(@RequestBody UserDTO user)
+    public ResponseEntity<User> changePassword(@RequestBody UserDTO user)
         throws UserNotFoundException {
         return userService.updatePassword(
                 user.getUserName(), user.getUserPassword());

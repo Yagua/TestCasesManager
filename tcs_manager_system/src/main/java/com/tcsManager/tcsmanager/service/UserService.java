@@ -13,23 +13,20 @@ import org.springframework.http.ResponseEntity;
  */
 public interface UserService {
 
-    User getUserById(long id) throws UserNotFoundException;
+    ResponseEntity<User> getUserById(long id) throws UserNotFoundException;
 
-    User loginUser(String userName, String userPassword)
-                throws UserNotFoundException;
+    ResponseEntity<User> loginUser(String userName, String userPassword) throws UserNotFoundException;
 
-    User createUser(User user);
+    ResponseEntity<User> createUser(User user);
 
-    List<User> getAllUsers();
+    ResponseEntity<List<User>> getAllUsers();
 
-    User updateUser(long userId, User userUpdated) throws UserNotFoundException;
+    ResponseEntity<User> updateUser(long userId, User userUpdated) throws UserNotFoundException;
 
-    User partialUpdateUser(long userId, Map<Object, Object> fields)
-            throws UserNotFoundException;
+    ResponseEntity<User> partialUpdateUser(long userId, Map<Object, Object> fields) throws UserNotFoundException;
 
-    ResponseEntity<String> deleteUser(long id) throws UserNotFoundException;
+    ResponseEntity<?> deleteUser(long id) throws UserNotFoundException;
 
     // temporal, just for testing
-    User updatePassword(String userName, String userPassword)
-            throws UserNotFoundException;
+    ResponseEntity<User> updatePassword(String userName, String userPassword) throws UserNotFoundException;
 }

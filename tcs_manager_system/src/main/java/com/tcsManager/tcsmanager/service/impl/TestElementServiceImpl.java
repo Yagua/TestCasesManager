@@ -12,7 +12,6 @@ import com.tcsManager.tcsmanager.repository.TestCaseRepository;
 import com.tcsManager.tcsmanager.repository.TestElementRepository;
 import com.tcsManager.tcsmanager.service.TestElementService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -33,18 +32,20 @@ public class TestElementServiceImpl implements TestElementService {
     }
 
     @Override
-    public TestElement getTestElement(long testElementId)
+    public ResponseEntity<TestElement> getTestElement(long testElementId)
         throws TestElementNotFoundException {
 
-        return testElementRepository.findById(testElementId)
+        TestElement testElement = testElementRepository.findById(testElementId)
             .orElseThrow(() -> new TestElementNotFoundException(
                         String.format(
                             "Test Element identified with ID::%d not found",
                             testElementId)));
+
+        return ResponseEntity.ok(testElement);
     }
 
     @Override
-    public TestElement createTestElement(TestElement testElement, long testCaseId)
+    public ResponseEntity<TestElement> createTestElement(TestElement testElement, long testCaseId)
         throws TestCaseNotFoundException {
 
         TestCase testCase = testCaseRepository.findById(testCaseId)
@@ -56,26 +57,30 @@ public class TestElementServiceImpl implements TestElementService {
         testElement.setTestCase(testCase);
         testCase.getTestElements().add(testElement);
 
-        return testElementRepository.save(testElement);
+        TestElement newTestElement = testElementRepository.save(testElement);
+
+        return ResponseEntity.ok(newTestElement);
     }
 
     @Override
-    public List<TestElement> getAllTestElements() {
-        return testElementRepository.findAll();
+    public ResponseEntity<List<TestElement>> getAllTestElements() {
+        List<TestElement> testElements = testElementRepository.findAll();
+        return ResponseEntity.ok(testElements);
     }
 
     @Override
-    public List<TestElement> getTestElementsByTestCaseId(long testCaseId)
+    public ResponseEntity<List<TestElement>> getTestElementsByTestCaseId(long testCaseId)
         throws TestCaseNotFoundException {
         TestCase testCase = testCaseRepository.findById(testCaseId)
             .orElseThrow(() -> new TestCaseNotFoundException(String.format(
                             "Test Case identified with ID::%d not found",
                             testCaseId)));
-        return testCase.getTestElements();
+        List<TestElement> testElements = testCase.getTestElements();
+        return ResponseEntity.ok(testElements);
     }
 
     @Override
-    public TestElement updateTestElement(long testElementId, TestElement testElementUpdated)
+    public ResponseEntity<TestElement> updateTestElement(long testElementId, TestElement testElementUpdated)
             throws TestElementNotFoundException {
 
         TestElement testElement = testElementRepository.findById(testElementId)
@@ -91,11 +96,13 @@ public class TestElementServiceImpl implements TestElementService {
         testElement.setMatching(testElementUpdated.isMatching());
         testElement.setSystemResponse(testElementUpdated.getSystemResponse());
 
-        return testElementRepository.save(testElement);
+        TestElement savedTestElement = testElementRepository.save(testElement);
+
+        return ResponseEntity.ok(savedTestElement);
     }
 
     @Override
-    public TestElement partialUpdateTestElement(long testElementId,
+    public ResponseEntity<TestElement> partialUpdateTestElement(long testElementId,
             Map<Object, Object> fields) throws TestElementNotFoundException {
 
         TestElement testElement = testElementRepository.findById(testElementId)
@@ -110,11 +117,13 @@ public class TestElementServiceImpl implements TestElementService {
             ReflectionUtils.setField(field, testElement, value);
         });
 
-        return testElementRepository.save(testElement);
+        TestElement updatedTestElement = testElementRepository.save(testElement);
+
+        return ResponseEntity.ok(updatedTestElement);
     }
 
     @Override
-    public ResponseEntity<String> deleteTestElement(long testElementId)
+    public ResponseEntity<?> deleteTestElement(long testElementId)
         throws TestElementNotFoundException {
 
         TestElement testElement = testElementRepository.findById(testElementId)
@@ -123,9 +132,7 @@ public class TestElementServiceImpl implements TestElementService {
                             "Test Element identified with ID::%d not found",
                             testElementId)));
         testElementRepository.delete(testElement);
-        return new ResponseEntity<String>(
-                String.format("Test Element identified with ID::%d deleted successfully",
-                    testElementId), HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 
 }

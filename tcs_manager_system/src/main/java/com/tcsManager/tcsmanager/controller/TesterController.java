@@ -38,37 +38,37 @@ public class TesterController {
     }
 
     @GetMapping
-    public List<Tester> getAllTesters() {
+    public ResponseEntity<List<Tester>> getAllTesters() {
         return testerService.getAllTesters();
     }
 
     @GetMapping("/{testerId}")
-    public Tester getTester(@PathVariable long testerId)
+    public ResponseEntity<Tester> getTester(@PathVariable long testerId)
         throws TesterNotFoundException {
         return testerService.getTester(testerId);
     }
 
     @PostMapping("/tc/{testCaseId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Tester createTester(@RequestBody Tester tester,
+    public ResponseEntity<Tester> createTester(@RequestBody Tester tester,
             @PathVariable long testCaseId) throws TestCaseNotFoundException {
         return testerService.createTester(tester, testCaseId);
     }
 
     @PutMapping("/{testerId}")
-    public Tester updateTester( @PathVariable long testerId,
+    public ResponseEntity<Tester> updateTester( @PathVariable long testerId,
             @RequestBody Tester tester) throws TesterNotFoundException {
         return testerService.updateTester(testerId, tester);
     }
 
     @PatchMapping("/{testerId}")
-    public Tester partialUpdateTester( @PathVariable long testerId,
+    public ResponseEntity<Tester> partialUpdateTester( @PathVariable long testerId,
             @RequestBody Map<Object, Object> fields) throws TesterNotFoundException {
         return testerService.partialUpdateTester(testerId, fields);
     }
 
     @DeleteMapping("/{testerId}/tc/{testCaseId}")
-    public ResponseEntity<String> deleteTester(@PathVariable long testerId,
+    public ResponseEntity<?> deleteTester(@PathVariable long testerId,
             @PathVariable long testCaseId) throws TesterNotFoundException,
             TestCaseNotFoundException {
         return testerService.deleteTester(testerId, testCaseId);

@@ -38,43 +38,43 @@ public class TestElementController {
     }
 
     @GetMapping
-    public List<TestElement> getAllTestElements() {
+    public ResponseEntity<List<TestElement>> getAllTestElements() {
         return testElementService.getAllTestElements();
     }
 
     @GetMapping("/{testElementId}")
-    public TestElement getTestElement(@PathVariable long testElementId)
+    public ResponseEntity<TestElement> getTestElement(@PathVariable long testElementId)
         throws TestElementNotFoundException {
         return testElementService.getTestElement(testElementId);
     }
 
     @GetMapping("/tc/{testCaseId}")
-    public List<TestElement> getTestElementsByTestCaseId(
+    public ResponseEntity<List<TestElement>> getTestElementsByTestCaseId(
             @PathVariable long testCaseId) throws TestCaseNotFoundException {
         return testElementService.getTestElementsByTestCaseId(testCaseId);
     }
 
     @PostMapping("/tc/{testCaseId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public TestElement createTestElement(@RequestBody TestElement testElement,
+    public ResponseEntity<TestElement> createTestElement(@RequestBody TestElement testElement,
             @PathVariable long testCaseId) throws TestCaseNotFoundException {
         return testElementService.createTestElement(testElement, testCaseId);
     }
 
     @PutMapping("/{testElementId}")
-    public TestElement updateTestElement(@PathVariable long testElementId,
+    public ResponseEntity<TestElement> updateTestElement(@PathVariable long testElementId,
             @RequestBody TestElement testElement) throws TestElementNotFoundException {
         return testElementService.updateTestElement(testElementId, testElement);
     }
 
     @PatchMapping("/{testElementId}")
-    public TestElement partialUpdateTestElement(@PathVariable long testElementId,
+    public ResponseEntity<TestElement> partialUpdateTestElement(@PathVariable long testElementId,
             @RequestBody Map<Object, Object> fields) throws TestElementNotFoundException {
         return testElementService.partialUpdateTestElement(testElementId, fields);
     }
 
     @DeleteMapping("/{testElementId}")
-    public ResponseEntity<String> deleteTestElement(@PathVariable long testElementId)
+    public ResponseEntity<?> deleteTestElement(@PathVariable long testElementId)
         throws TestElementNotFoundException {
         return testElementService.deleteTestElement(testElementId);
     }

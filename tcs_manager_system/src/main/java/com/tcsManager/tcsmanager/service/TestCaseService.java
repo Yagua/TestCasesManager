@@ -14,20 +14,18 @@ import org.springframework.http.ResponseEntity;
  */
 public interface TestCaseService {
 
-    TestCase getTestCase(long testCaseId) throws TestCaseNotFoundException;
+    ResponseEntity<TestCase> getTestCase(long testCaseId) throws TestCaseNotFoundException;
 
-    TestCase createTestCase(TestCase testCase, long userId) throws UserNotFoundException;
+    ResponseEntity<TestCase> createTestCase(TestCase testCase, long userId) throws UserNotFoundException;
 
-    List<TestCase> getAllTestCases();
+    ResponseEntity<List<TestCase>> getAllTestCases();
 
-    List<TestCase> getTestCasesByUserId(long userId) throws UserNotFoundException;
+    ResponseEntity<List<TestCase>> getTestCasesByUserId(long userId) throws UserNotFoundException;
 
-    TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
+    ResponseEntity<TestCase> updateTestCase(long testCaseId, TestCase testCaseUpdated) throws TestCaseNotFoundException;
+
+    ResponseEntity<TestCase> partialUpdateTestCase(long testCaseId, Map<Object, Object> fields)
             throws TestCaseNotFoundException;
 
-    TestCase partialUpdateTestCase(long testCaseId,
-            Map<Object, Object> fields) throws TestCaseNotFoundException;
-
-    ResponseEntity<String> deleteTestCase(long testCaseId)
-            throws TestCaseNotFoundException;
+    ResponseEntity<?> deleteTestCase(long testCaseId) throws TestCaseNotFoundException;
 }

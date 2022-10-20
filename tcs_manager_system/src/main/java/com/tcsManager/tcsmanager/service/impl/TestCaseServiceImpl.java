@@ -14,7 +14,6 @@ import com.tcsManager.tcsmanager.repository.TestCaseRepository;
 import com.tcsManager.tcsmanager.repository.UserRepository;
 import com.tcsManager.tcsmanager.service.TestCaseService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -35,15 +34,16 @@ public class TestCaseServiceImpl implements TestCaseService {
     }
 
     @Override
-    public TestCase getTestCase(long id) throws TestCaseNotFoundException {
-        return testCaseRepository.findById(id)
+    public ResponseEntity<TestCase> getTestCase(long id) throws TestCaseNotFoundException {
+        TestCase testCase =  testCaseRepository.findById(id)
             .orElseThrow(() -> new TestCaseNotFoundException(
                         String.format(
                             "Test Case identified with ID::%d not found", id)));
+        return ResponseEntity.ok(testCase);
     }
 
     @Override
-    public TestCase createTestCase(TestCase testCase, long userId)
+    public ResponseEntity<TestCase> createTestCase(TestCase testCase, long userId)
         throws UserNotFoundException {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
@@ -54,25 +54,29 @@ public class TestCaseServiceImpl implements TestCaseService {
 
         testCase.setUser(user);
         user.getTestCases().add(testCase);
-        return testCaseRepository.save(testCase);
+        TestCase newTestCase = testCaseRepository.save(testCase);
+
+        return ResponseEntity.ok(newTestCase);
     }
 
     @Override
-    public List<TestCase> getAllTestCases() {
-        return testCaseRepository.findAll();
+    public ResponseEntity<List<TestCase>> getAllTestCases() {
+        List<TestCase> testCases = testCaseRepository.findAll();
+        return ResponseEntity.ok(testCases);
     }
 
     @Override
-    public List<TestCase> getTestCasesByUserId(long userId)
+    public ResponseEntity<List<TestCase>> getTestCasesByUserId(long userId)
         throws UserNotFoundException {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(
                         String.format("User identified with ID::%d not found", userId)));
-        return user.getTestCases();
+        List<TestCase> testCases = user.getTestCases();
+        return ResponseEntity.ok(testCases);
     }
 
     @Override
-    public TestCase updateTestCase(long testCaseId, TestCase testCaseUpdated)
+    public ResponseEntity<TestCase> updateTestCase(long testCaseId, TestCase testCaseUpdated)
             throws TestCaseNotFoundException {
 
         TestCase testCase = testCaseRepository.findById(testCaseId)
@@ -100,11 +104,13 @@ public class TestCaseServiceImpl implements TestCaseService {
         testCase.setTestElements(testCaseUpdated.getTestElements());
         testCase.setTimeStamp(testCaseUpdated.getTimeStamp());
 
-        return testCaseRepository.save(testCase);
+        TestCase savedTestCase = testCaseRepository.save(testCase);
+
+        return ResponseEntity.ok(savedTestCase);
     }
 
     @Override
-    public TestCase partialUpdateTestCase(long testCaseId, Map<Object, Object> fields)
+    public ResponseEntity<TestCase> partialUpdateTestCase(long testCaseId, Map<Object, Object> fields)
             throws TestCaseNotFoundException {
 
         // TODO: improve the parcial change implementation
@@ -119,19 +125,18 @@ public class TestCaseServiceImpl implements TestCaseService {
             ReflectionUtils.setField(field, testCase, value);
         });
 
-        return testCaseRepository.save(testCase);
+        TestCase updatedTestCase = testCaseRepository.save(testCase);
+
+        return ResponseEntity.ok(updatedTestCase);
     }
 
     @Override
-    public ResponseEntity<String> deleteTestCase(long testCaseId) throws TestCaseNotFoundException {
+    public ResponseEntity<?> deleteTestCase(long testCaseId) throws TestCaseNotFoundException {
         TestCase testCase = testCaseRepository.findById(testCaseId)
             .orElseThrow(() -> new TestCaseNotFoundException(
                         String.format(
                             "Test Case identified with ID::%d not found", testCaseId)));
         testCaseRepository.delete(testCase);
-
-        return new ResponseEntity<String>(
-                String.format("Test Case identified with ID::%d deleted successfully",
-                    testCaseId), HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }

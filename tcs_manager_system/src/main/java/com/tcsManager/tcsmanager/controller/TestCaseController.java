@@ -38,31 +38,31 @@ public class TestCaseController {
     }
 
     @GetMapping
-    public List<TestCase> getAllTestCases() {
+    public ResponseEntity<List<TestCase>> getAllTestCases() {
         return testCaseService.getAllTestCases();
     }
 
     @GetMapping("/u/{userId}")
-    public List<TestCase> getTestCasesByUserId(@PathVariable long userId)
+    public ResponseEntity<List<TestCase>> getTestCasesByUserId(@PathVariable long userId)
         throws UserNotFoundException {
         return testCaseService.getTestCasesByUserId(userId);
     }
 
     @GetMapping("/{testCaseId}")
-    public TestCase getTestCase(@PathVariable long testCaseId)
+    public ResponseEntity<TestCase> getTestCase(@PathVariable long testCaseId)
         throws TestCaseNotFoundException {
         return testCaseService.getTestCase(testCaseId);
     }
 
     @PostMapping("/u/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public TestCase createTestCase(@RequestBody TestCase newTestCase,
+    public ResponseEntity<TestCase> createTestCase(@RequestBody TestCase newTestCase,
             @PathVariable long userId) throws UserNotFoundException {
         return testCaseService.createTestCase(newTestCase, userId);
     }
 
     @PutMapping("/{testCaseId}")
-    public TestCase updateTestCase(
+    public ResponseEntity<TestCase> updateTestCase(
             @PathVariable long testCaseId,
             @RequestBody TestCase TestCaseUpdated)
             throws TestCaseNotFoundException {
@@ -71,7 +71,7 @@ public class TestCaseController {
     }
 
     @PatchMapping("/{testCaseId}")
-    public TestCase partialUpdateTestCase(
+    public ResponseEntity<TestCase> partialUpdateTestCase(
             @PathVariable long testCaseId,
             @RequestBody Map<Object, Object> fields)
             throws TestCaseNotFoundException {
@@ -80,7 +80,7 @@ public class TestCaseController {
     }
 
     @DeleteMapping("/{testCaseId}")
-    public ResponseEntity<String> deleteTestCase(@PathVariable long testCaseId)
+    public ResponseEntity<?> deleteTestCase(@PathVariable long testCaseId)
         throws TestCaseNotFoundException {
         return testCaseService.deleteTestCase(testCaseId);
     }

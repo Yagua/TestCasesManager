@@ -12,7 +12,6 @@ import com.tcsManager.tcsmanager.repository.TestCaseRepository;
 import com.tcsManager.tcsmanager.repository.TesterRepository;
 import com.tcsManager.tcsmanager.service.TesterService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -33,30 +32,35 @@ public class TesterServiceImpl implements TesterService {
     }
 
     @Override
-    public Tester getTester(long testerId) throws TesterNotFoundException {
-        return testerRepository.findById(testerId)
+    public ResponseEntity<Tester> getTester(long testerId) throws TesterNotFoundException {
+        Tester tester = testerRepository.findById(testerId)
             .orElseThrow(() -> new TesterNotFoundException(String.format(
                             "Tester identified with ID::%d not found", testerId)));
+        return ResponseEntity.ok(tester);
     }
 
     @Override
-    public Tester createTester(Tester tester, long testCaseId)
+    public ResponseEntity<Tester> createTester(Tester tester, long testCaseId)
         throws TestCaseNotFoundException {
 
         TestCase testCase = testCaseRepository.findById(testCaseId)
             .orElseThrow(() -> new TestCaseNotFoundException(String.format(
                         "TestCase identified with ID::%d not found", testCaseId)));
         testCase.getTesters().add(tester);
-        return testerRepository.save(tester);
+
+        Tester newTester = testerRepository.save(tester);
+
+        return ResponseEntity.ok(newTester);
     }
 
     @Override
-    public List<Tester> getAllTesters() {
-        return testerRepository.findAll();
+    public ResponseEntity<List<Tester>> getAllTesters() {
+        List<Tester> testers = testerRepository.findAll();
+        return ResponseEntity.ok(testers);
     }
 
     @Override
-    public Tester updateTester(long testerId, Tester testerUpdated)
+    public ResponseEntity<Tester> updateTester(long testerId, Tester testerUpdated)
         throws TesterNotFoundException {
 
         Tester tester = testerRepository.findById(testerId)
@@ -69,11 +73,13 @@ public class TesterServiceImpl implements TesterService {
         tester.setMaternalLastName(testerUpdated.getMaternalLastName());
         tester.setSing(testerUpdated.getSing());
 
-        return testerRepository.save(tester);
+        Tester savedTester = testerRepository.save(tester);
+
+        return ResponseEntity.ok(savedTester);
     }
 
     @Override
-    public Tester partialUpdateTester(long testerId, Map<Object, Object> fields)
+    public ResponseEntity<Tester> partialUpdateTester(long testerId, Map<Object, Object> fields)
         throws TesterNotFoundException {
         Tester tester = testerRepository.findById(testerId)
             .orElseThrow(() -> new TesterNotFoundException(String.format(
@@ -84,11 +90,13 @@ public class TesterServiceImpl implements TesterService {
             field.setAccessible(true);
             ReflectionUtils.setField(field, tester, value);
         });
-        return testerRepository.save(tester);
+        Tester updatedTester = testerRepository.save(tester);
+
+        return ResponseEntity.ok(updatedTester);
     }
 
     @Override
-    public ResponseEntity<String> deleteTester(long testerId, long testCaseId)
+    public ResponseEntity<?> deleteTester(long testerId, long testCaseId)
         throws TesterNotFoundException, TestCaseNotFoundException {
 
         Tester tester = testerRepository.findById(testerId)
@@ -102,8 +110,6 @@ public class TesterServiceImpl implements TesterService {
         testCase.getTesters().remove(tester);
         testerRepository.delete(tester);
 
-        return new ResponseEntity<String>(
-                String.format("Tester identified with ID::%d deleted successfully",
-                    testCaseId), HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 }
